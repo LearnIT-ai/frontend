@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-clr: #1d1d1f;
+  --bg-clr: #f0f0f0;
+  --primary-clr: #0066ff;
+  --secondary-crl: #f5f5f7;
+  --secondary-dark-clr: #0d1119;
+}
+
+body {
+  background-color: var(--bg-crl);
+}
+
+h1 {
+  color: var(--font-clr);
+}
