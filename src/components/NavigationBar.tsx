@@ -8,13 +8,13 @@ export default function NavigationBar() {
       <div className="h-16 flex justify-center items-center w-full px-20">
         <ul className="flex flex-row gap-4 flex-1 justify-start">
           <li className="hover:font-medium duration-300 ease-in-out text-sm">
-            <Link to="/">About us</Link>
+            <Link to="/">Про нас</Link>
           </li>
           <li className="hover:font-medium duration-300 ease-in-out text-sm">
-            <Link to="/">Our products</Link>
+            <Link to="/">Наші послуги</Link>
           </li>
           <li className="hover:font-medium duration-300 ease-in-out text-sm">
-            <Link to="/">Contacts</Link>
+            <Link to="/">Контакти</Link>
           </li>
         </ul>
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
@@ -23,14 +23,14 @@ export default function NavigationBar() {
         <div className="flex flex-row flex-1 gap-4 justify-end">
           <Button
             params={{
-              content: "Log In",
+              content: "Увійти",
               className: "text-sm",
               onClickFunction: () => navigate("login"),
             }}
           />
           <Button
             params={{
-              content: "Sign Up",
+              content: "Створити профіль",
               className: "text-sm",
               onClickFunction: () => navigate("signup"),
             }}

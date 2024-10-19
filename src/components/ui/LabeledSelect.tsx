@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { selectContentType } from "../../lib/selectContentType";
+import { selectContentType } from "../../interfaces/selectContentType";
 
 interface LabeledSelectProps {
   labelParams: {
@@ -34,7 +34,7 @@ export default function LabeledSelect({
   } = selectParams;
 
   return (
-    <div className="mb-5 text-left">
+    <div className="mb-5 text-left w-full">
       <label
         htmlFor={id}
         className={`${labelClassName}block mb-2 text-sm font-medium text-gray-900`}

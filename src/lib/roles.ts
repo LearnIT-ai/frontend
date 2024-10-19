@@ -1,4 +1,4 @@
-import { selectContentType } from "./selectContentType";
+import { selectContentType } from "../interfaces/selectContentType";
 
 export const roles: selectContentType[] = [
   { id: 0, value: "Professor" },

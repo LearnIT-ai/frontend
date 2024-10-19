@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, FormEvent } from "react";
+import axios from "axios";
 
 import LabeledInput from "../components/ui/LabeledInput";
 import LabeledSelect from "../components/ui/LabeledSelect";
@@ -8,151 +9,149 @@ import Button from "../components/ui/Button";
 import hiddenPassword from "../assets/icons/hidden-password.svg";
 import shownPassword from "../assets/icons/shown-password.svg";
 
-import axios from "axios";
+import { SignUpUserDataTypes } from "../interfaces/signupContentType";
 
-import { changePasswordVisibility } from "../functions/changePassword";
+import { changePasswordVisibility } from "../methods/changePasswordVisibility";
+import { inputsValidation } from "../methods/inputsValidation";
+import { validateData } from "../methods/inputsValidation";
 
-import { countries } from "../lib/counties";
 import { cities } from "../lib/cities";
 import { roles } from "../lib/roles";
 
 export default function Signup() {
+  const navigate = useNavigate();
+
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
 
   const url = "http://localhost:8080/";
 
-  interface SignUpUserDataTypes {
-    firstName: string;
-    lastName: string;
-    country: string;
-    city: string;
-    profileType: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }
+  const [passwordVisibility, setPasswordVisibility] = useState<Boolean>(false);
 
   const [inputsData, setInputsData] = useState<SignUpUserDataTypes>({
-    firstName: "",
     lastName: "",
-    country: "",
+    firstName: "",
+    fatherName: "",
     city: "",
     profileType: "",
     email: "",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
-
-  const [passwordVisibility, setPasswordVisibility] = useState<Boolean>(false);
-
-  const [passwordError, setPasswordError] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setInputsData((data) => ({ ...data, [name]: value }));
+    inputsValidation(name, value, setInputsData);
   };
 
   useEffect(() => {
     console.log("State updated:", inputsData);
   }, [inputsData]);
 
-  const validatePassword = () => {
-    if (inputsData.confirmPassword !== inputsData.password) {
-      setPasswordError(true);
-      return passwordError;
-    } else return passwordError;
-  };
-
   const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
-    if (validatePassword()) {
-      alert("The passwords do not match!");
-      return;
+    const error = validateData(inputsData);
+    if (error) {
+      alert(error);
+    } else {
+      axios
+        .post(`${url}`, {
+          fullName:
+            inputsData.lastName +
+            " " +
+            inputsData.firstName +
+            " " +
+            inputsData.fatherName,
+          city: inputsData.city,
+          profileType: inputsData.profileType,
+          email: inputsData.email,
+          password: inputsData.password,
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/");
+        })
+        .catch((e) => {
+          console.error(e.message);
+        });
     }
-
-    axios
-      .post(`${url}`, {
-        firstName: inputsData.firstName,
-        lastName: inputsData.lastName,
-        country: inputsData.country,
-        city: inputsData.city,
-        profileType: inputsData.profileType,
-        email: inputsData.email,
-        password: inputsData.password,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.error(e.message);
-      });
   };
 
   return (
     <div className="flex flex-col gap-10 justify-center items-center w-full h-screen">
-      <h1 className="text-4xl">Sign up page</h1>
+      <h1 className="text-4xl">Реєстрація</h1>
       <form className="sm:w-[60%] md:w-[40%] lg:w-[20%]">
+        <LabeledInput
+          labelParams={{
+            content: "Прізвище",
+          }}
+          inputParams={{
+            id: "last-name",
+            value: inputsData.lastName,
+            type: "text",
+            inputName: "lastName",
+            functionName: handleChange,
+            isRequired: true,
+          }}
+        />
+        <LabeledInput
+          labelParams={{
+            content: "Ім'я",
+          }}
+          inputParams={{
+            id: "first-name",
+            value: inputsData.firstName,
+            type: "text",
+            inputName: "firstName",
+            functionName: handleChange,
+            isRequired: true,
+          }}
+        />
+        <LabeledInput
+          labelParams={{
+            content: "По батькові",
+          }}
+          inputParams={{
+            id: "father-name",
+            value: inputsData.fatherName,
+            type: "text",
+            inputName: "fatherName",
+            functionName: handleChange,
+            isRequired: true,
+          }}
+        />
+
         <div className="flex flex-row gap-5">
-          <LabeledInput
+          <LabeledSelect
             labelParams={{
-              content: "First Name",
+              content: "Оберіть місто",
             }}
-            inputParams={{
-              id: "first-name",
-              value: inputsData.firstName,
-              type: "text",
-              inputName: "firstName",
+            selectParams={{
+              id: "cities",
+              value: inputsData.city,
+              selectName: "city",
               functionName: handleChange,
-              placeholderText: "John",
               isRequired: true,
+              optionsContent: cities,
             }}
           />
-          <LabeledInput
+          <LabeledSelect
             labelParams={{
-              content: "Last Name",
+              content: "Тип профілю",
             }}
-            inputParams={{
-              id: "last-name",
-              value: inputsData.lastName,
-              type: "text",
-              inputName: "lastName",
+            selectParams={{
+              id: "roles",
+              value: inputsData.profileType,
+              selectName: "profileType",
               functionName: handleChange,
-              placeholderText: "Doe",
               isRequired: true,
+              optionsContent: roles,
             }}
           />
         </div>
-
-        <LabeledSelect
-          labelParams={{
-            content: "Select your city",
-          }}
-          selectParams={{
-            id: "cities",
-            value: inputsData.city,
-            selectName: "city",
-            functionName: handleChange,
-            isRequired: true,
-            optionsContent: cities,
-          }}
-        />
-        <LabeledSelect
-          labelParams={{
-            content: "Select profile type",
-          }}
-          selectParams={{
-            id: "roles",
-            value: inputsData.profileType,
-            selectName: "profileType",
-            functionName: handleChange,
-            isRequired: true,
-            optionsContent: roles,
-          }}
-        />
-
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pt-6 pointer-events-none">
             <svg
@@ -168,7 +167,7 @@ export default function Signup() {
           </div>
           <LabeledInput
             labelParams={{
-              content: "Your email",
+              content: "Електронна пошта",
             }}
             inputParams={{
               id: "email-address",
@@ -182,11 +181,40 @@ export default function Signup() {
             }}
           />
         </div>
+        <div className="relative">
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pt-6 pointer-events-none">
+            <svg
+              className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 16"
+            >
+              <path d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+            </svg>
+          </div>
+          <LabeledInput
+            labelParams={{
+              content: "Номер телефону",
+            }}
+            inputParams={{
+              id: "phone-number",
+              value: inputsData.phoneNumber,
+              type: "text",
+              inputName: "phoneNumber",
+              functionName: handleChange,
+              placeholderText: "+38-ХХХ-ХХХ-ХХХХ",
+              inputClassName: "pl-10",
+              isRequired: true,
+              length: 16,
+            }}
+          />
+        </div>
 
         <div className="flex flex-row gap-5 items-center">
           <LabeledInput
             labelParams={{
-              content: "Password",
+              content: "Пароль",
             }}
             inputParams={{
               id: "password",
@@ -200,7 +228,7 @@ export default function Signup() {
           />
           <LabeledInput
             labelParams={{
-              content: "Confirm password",
+              content: "Підтвердіть пароль",
             }}
             inputParams={{
               id: "confirm-password",
@@ -226,15 +254,15 @@ export default function Signup() {
         </div>
         <Button
           params={{
-            content: "Submit",
+            content: "Створити профіль",
             onClickFunction: handleSignUp,
           }}
         />
       </form>
       <p>
-        Already have an account?
+        Вже маєте створений профіль?
         <Link to="/login">
-          <b> Log in</b>
+          <b> Увійти</b>
         </Link>
       </p>
     </div>

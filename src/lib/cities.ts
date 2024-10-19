@@ -1,4 +1,4 @@
-import { selectContentType } from "./selectContentType";
+import { selectContentType } from "../interfaces/selectContentType";
 
 export const cities: selectContentType[] = [
   { id: 1, value: "Lviv" },

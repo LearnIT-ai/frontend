@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useRef } from "react";
+import axios from "axios";
 
 import LabeledInput from "../components/ui/LabeledInput";
 import Button from "../components/ui/Button";
@@ -7,9 +8,9 @@ import Button from "../components/ui/Button";
 import hiddenPassword from "../assets/icons/hidden-password.svg";
 import shownPassword from "../assets/icons/shown-password.svg";
 
-import axios from "axios";
+import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
 
-import { changePasswordVisibility } from "../functions/changePassword";
+import { changePasswordVisibility } from "../methods/changePasswordVisibility";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,17 +19,18 @@ export default function Login() {
 
   const url = "http://localhost:8080/";
 
-  interface LoginUserDataTypes {
-    email: string;
-    password: string;
-  }
-
   const [inputsData, setInputsData] = useState<LoginUserDataTypes>({
     email: "",
     password: "",
   });
 
   const [passwordVisibility, setPasswordVisibility] = useState<Boolean>(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputsData((data) => ({ ...data, [name]: value }));
+    console.log(inputsData);
+  };
 
   const handleLogIn = async () => {
     await axios
@@ -45,15 +47,9 @@ export default function Login() {
       });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputsData((data) => ({ ...data, [name]: value }));
-    console.log(inputsData);
-  };
-
   return (
     <div className="flex flex-col gap-10 justify-center items-center h-screen w-full">
-      <h1 className="text-4xl">Log in page</h1>
+      <h1 className="text-4xl">Увійти</h1>
       <form className="sm:w-[60%] md:w-[40%] lg:w-[20%]">
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pt-6 pointer-events-none">
@@ -70,7 +66,7 @@ export default function Login() {
           </div>
           <LabeledInput
             labelParams={{
-              content: "Your email",
+              content: "Електронна пошта",
             }}
             inputParams={{
               id: "email-address",
@@ -87,7 +83,7 @@ export default function Login() {
         <div className="flex flex-row gap-5 items-center w-full">
           <LabeledInput
             labelParams={{
-              content: "Password",
+              content: "Пароль",
             }}
             inputParams={{
               id: "password",
@@ -113,15 +109,15 @@ export default function Login() {
         </div>
         <Button
           params={{
-            content: "Submit",
+            content: "Увійти",
             onClickFunction: handleLogIn,
           }}
         />
       </form>
       <p>
-        Are you new?
+        Не маєте створеного профілю?
         <Link to="/signup">
-          <b> Sign up</b>
+          <b> Зареєструйтеся</b>
         </Link>
       </p>
     </div>

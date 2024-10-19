@@ -16,6 +16,7 @@ interface LabeledInputProps {
     isRequired: boolean;
     placeholderText?: string;
     ref?: RefObject<HTMLInputElement>;
+    length?: number;
   };
 }
 
@@ -34,6 +35,7 @@ export default function LabeledInput({
     isRequired,
     placeholderText,
     ref,
+    length,
   } = inputParams;
 
   return (
@@ -55,6 +57,7 @@ export default function LabeledInput({
         required={isRequired}
         placeholder={placeholderText}
         ref={ref}
+        maxLength={length}
       />
     </div>
   );
