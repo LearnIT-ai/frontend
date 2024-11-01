@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import Button from "./ui/Button";
+import Button from "./Button";
 
 export default function NavigationBar() {
   const navigate = useNavigate();
   return (
     <div
-      className="h-[var(--navbar-height)] flex justify-center w-full fixed 
+      className="h-[var(--navbar-height)] flex justify-center w-screen fixed 
                     backdrop-blur-md bg-[var(--navbar-clr)] top-0 left-0 text-white 
                     z-50 border-b-2 border-[var(--border-clr)]"
     >
