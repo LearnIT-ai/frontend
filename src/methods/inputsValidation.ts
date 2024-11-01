@@ -6,7 +6,7 @@ export const inputsValidation = (
   setInputsData: React.Dispatch<React.SetStateAction<SignUpUserDataTypes>>
 ) => {
   if (name === "lastName" || name === "firstName" || name === "fatherName") {
-    const letters = value.replace(/[^a-zA-Z]/g, "");
+    const letters = value.replace(/[^а-яА-ЯіїєґІЇЄҐ]/g, "");
     const capitalized = letters.charAt(0).toUpperCase() + letters.slice(1);
     setInputsData((data) => ({ ...data, [name]: capitalized }));
   } else if (name === "phoneNumber") {
