@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import ellipsLg from "../assets/images/ellipse-lg.png";
 import ellipsMd from "../assets/images/ellipse-md.png";
 import ellipsSm from "../assets/images/ellipse-sm.png";
@@ -10,8 +8,6 @@ import HeroHeading from "../components/ui/HeroHeading";
 import SectionHeading from "../components/ui/SectionHeading";
 
 export default function Home() {
-  const navigate = useNavigate();
-
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
       <section className="flex w-full mt-[calc(var(--navbar-height)+40px)] h-[calc(100vh-var(--navbar-height)-80px)] mb-[40px]">
