@@ -10,7 +10,7 @@ import SectionHeading from "../components/ui/SectionHeading";
 export default function Home() {
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      <section className="flex w-full mt-[calc(var(--navbar-height)+40px)] h-[calc(100vh-var(--navbar-height)-80px)] mb-[40px]">
+      <section className="flex w-full h-[calc(100vh-var(--navbar-height)-80px)] mb-[40px]">
         <div className="relative flex flex-col w-full gap-4 justify-center items-center rounded-3xl border-2 border-[var(--border-clr)]">
           <img
             className="animate-orbit transition-transform opacity-[80%]

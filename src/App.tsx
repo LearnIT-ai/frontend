@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import "./App.css";
+import DemoDocument from "./pages/DemoDocument";
 
 function App() {
   const location = useLocation();
@@ -20,11 +21,12 @@ function App() {
       <header>
         <NavigationBar />
       </header>
-      <main className="w-[100vw]">
+      <main className="w-[100vw] mt-[calc(var(--navbar-height)+40px)]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/document" element={<DemoDocument />} />
         </Routes>
       </main>
       {showFooter && (

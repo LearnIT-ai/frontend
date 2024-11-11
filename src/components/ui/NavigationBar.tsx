@@ -38,6 +38,9 @@ export default function NavigationBar() {
           <li className="hover:font-medium duration-300 ease-in-out text-sm">
             <Link to="/">Контакти</Link>
           </li>
+          <li className="hover:font-medium duration-300 ease-in-out text-sm">
+            <Link to="/document">Документ</Link>
+          </li>
         </ul>
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">LearnIT</Link>
