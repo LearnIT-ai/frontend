@@ -1,14 +1,14 @@
 import { FormEvent, ChangeEventHandler, useState, useRef } from "react";
 
-import Input from "./Input";
-import Button from "./Button";
+import Input from "./ui/Input";
+import Button from "./ui/Button";
 
-import { LoginUserDataTypes } from "../../interfaces/loginContentTypes";
+import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
 
-import hiddenPassword from "../../assets/icons/hidden-password.svg";
-import shownPassword from "../../assets/icons/shown-password.svg";
+import hiddenPassword from "../assets/icons/hidden-password.svg";
+import shownPassword from "../assets/icons/shown-password.svg";
 
-import { changePasswordVisibility } from "../../methods/changePasswordVisibility";
+import { changePasswordVisibility } from "../methods/changePasswordVisibility";
 
 interface LoginFormProps {
   params: {
@@ -20,7 +20,7 @@ interface LoginFormProps {
 
 export default function LoginForm({ params }: LoginFormProps) {
   const passwordInputRef = useRef<HTMLInputElement>(null);
-  const [passwordVisibility, setPasswordVisibility] = useState<Boolean>(false);
+  const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   return (
     <form className="w-full md:w-[60%] lg:w-full flex flex-col gap-4">
       <div className="relative">
@@ -75,9 +75,9 @@ export default function LoginForm({ params }: LoginFormProps) {
       </div>
       <Button
         params={{
-          content: "Увійти",
+          content: "Log In",
           onClickFunction: params.handleLogIn,
-          className: "mx-auto mt-6",
+          className: "btn-primary mx-auto mt-6",
         }}
       />
     </form>

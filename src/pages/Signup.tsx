@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, FormEvent } from "react";
 import axios from "axios";
 
-import SignUpForm from "../components/ui/SignUpForm";
+import SignUpForm from "../components/SignUpForm";
 
 import { SignUpUserDataTypes } from "../interfaces/signupContentType";
 
@@ -72,7 +72,7 @@ export default function Signup() {
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)] mt-[var(--navbar-height)]"
       >
-        <h1 className="text-4xl">Реєстрація</h1>
+        <h1 className="text-4xl">Sign Up</h1>
         <SignUpForm
           params={{
             inputsData: inputsData,
@@ -81,13 +81,13 @@ export default function Signup() {
           }}
         />
         <p className="text-[var(--input-text-clr)]">
-          Вже маєте створений профіль? <span> </span>
+          Already have an account? <span> </span>
           <Link to="/login" className="underline">
-            <b>Увійти</b>
+            <b>Log In</b>
           </Link>
         </p>
         <p className="text-[var(--input-text-clr)]">
-          Реєструючись, ви погоджуєтеся з Умовами використання{" "}
+          By registering, you agree to the Terms of Use{" "}
           <span className="underline">Learn.it</span>
         </p>
       </div>

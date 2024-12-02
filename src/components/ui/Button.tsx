@@ -13,9 +13,10 @@ export default function Button({ params }: ButtonProps) {
 
   return (
     <button
-      className={`${className} text-white bg-[#0066ff] duration-300 
+      className={`${className} text-white
       hover:ring-2 hover:ring-blue-300 font-medium rounded-lg 
-      px-3 md:px-4 py-2 text-center hover:text-blue-300 w-fit`}
+      px-3 md:px-4 py-2 text-center hover:text-blue-300 w-fit
+      uppercase`}
       onClick={onClickFunction}
     >
       {content}
