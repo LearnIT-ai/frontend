@@ -1,0 +1,27 @@
+interface FeatureCardProps {
+  params: {
+    heading: string;
+    content: string;
+    logo: string;
+  };
+}
+
+export default function FeatureCard({ params }: FeatureCardProps) {
+  return (
+    <div
+      className="feature-card bg-[var(--dark-clr)] flex flex-col w-full h-64 md:h-80 items-start justify-between
+                    rounded-xl p-4 lg:p-6 border-2 border-[var(--border-clr)]"
+    >
+      <img className="h-12 w-auto" src={params.logo} alt="Feature Icon" />
+      <div className="flex flex-col gap-8 items-start text-left">
+        <div className="flex flex-col gap-2 items-start">
+          <p className="uppercase font-semibold">{params.heading}</p>
+          <p className="text-xs">{params.content}</p>
+        </div>
+        <a href="#" className="text-sm uppercase">
+          Find out more
+        </a>
+      </div>
+    </div>
+  );
+}
