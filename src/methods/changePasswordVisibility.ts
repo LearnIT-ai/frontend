@@ -3,8 +3,8 @@ import { RefObject } from "react";
 export const changePasswordVisibility = (
   refs: RefObject<HTMLInputElement>[],
   [visibility, setVisibility]: [
-    Boolean,
-    React.Dispatch<React.SetStateAction<Boolean>>
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
   ]
 ) => {
   refs.forEach((ref) => {

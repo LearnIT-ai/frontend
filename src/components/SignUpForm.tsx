@@ -1,18 +1,18 @@
 import { FormEvent, ChangeEventHandler, useState, useRef } from "react";
 
-import Input from "./Input";
-import Select from "./Select";
-import Button from "./Button";
+import Input from "./ui/Input";
+import Select from "./ui/Select";
+import Button from "./ui/Button";
 
-import { SignUpUserDataTypes } from "../../interfaces/signupContentType";
+import { SignUpUserDataTypes } from "../interfaces/signupContentType";
 
-import hiddenPassword from "../../assets/icons/hidden-password.svg";
-import shownPassword from "../../assets/icons/shown-password.svg";
+import hiddenPassword from "../assets/icons/hidden-password.svg";
+import shownPassword from "../assets/icons/shown-password.svg";
 
-import { changePasswordVisibility } from "../../methods/changePasswordVisibility";
+import { changePasswordVisibility } from "../methods/changePasswordVisibility";
 
-import { cities } from "../../lib/cities";
-import { roles } from "../../lib/roles";
+import { cities } from "../lib/cities";
+import { roles } from "../lib/roles";
 
 interface SignUpFormProps {
   params: {
@@ -26,7 +26,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
 
-  const [passwordVisibility, setPasswordVisibility] = useState<Boolean>(false);
+  const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   return (
     <form className="w-full md:w-[60%] lg:w-full flex flex-col gap-4">
       <Input
@@ -35,7 +35,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
           value: params.inputsData.lastName,
           type: "text",
           inputName: "lastName",
-          placeholderText: "Прізвище",
+          placeholderText: "Last Name",
           functionName: params.handleChange,
           isRequired: true,
         }}
@@ -46,7 +46,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
           value: params.inputsData.firstName,
           type: "text",
           inputName: "firstName",
-          placeholderText: "Ім'я",
+          placeholderText: "First Name",
           functionName: params.handleChange,
           isRequired: true,
         }}
@@ -57,7 +57,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
           value: params.inputsData.fatherName,
           type: "text",
           inputName: "fatherName",
-          placeholderText: "По батькові",
+          placeholderText: "Father Name",
           functionName: params.handleChange,
           isRequired: true,
         }}
@@ -145,7 +145,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
             value: params.inputsData.password,
             type: "password",
             inputName: "password",
-            placeholderText: "Пароль",
+            placeholderText: "Password",
             functionName: params.handleChange,
             isRequired: true,
             ref: passwordInputRef,
@@ -157,7 +157,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
             value: params.inputsData.confirmPassword,
             type: "password",
             inputName: "confirmPassword",
-            placeholderText: "Повторіть пароль",
+            placeholderText: "Confirm Password",
             functionName: params.handleChange,
             isRequired: true,
             ref: confirmPasswordInputRef,
@@ -177,9 +177,9 @@ export default function SignUpForm({ params }: SignUpFormProps) {
       </div>
       <Button
         params={{
-          content: "Створити профіль",
+          content: "Sign Up",
           onClickFunction: params.handleSignUp,
-          className: "mx-auto mt-6",
+          className: "btn-primary mx-auto mt-6",
         }}
       />
     </form>

@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-import LoginForm from "../components/ui/LoginForm";
+import LoginForm from "../components/LoginForm";
 
 import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
 
@@ -46,7 +46,7 @@ export default function Login() {
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]"
       >
-        <h1 className="text-4xl">Увійти</h1>
+        <h1 className="text-4xl">Log In</h1>
         <LoginForm
           params={{
             inputsData: inputsData,
@@ -55,9 +55,9 @@ export default function Login() {
           }}
         />
         <p className="text-[var(--input-text-clr)]">
-          Не маєте створеного профілю? <span> </span>
+          Don't have an account? <span> </span>
           <Link to="/signup" className="underline">
-            <b>Зареєструйтеся</b>
+            <b>Sign Up</b>
           </Link>
         </p>
       </div>

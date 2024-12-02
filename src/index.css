@@ -6,15 +6,16 @@
   --font-clr: #ffffff;
   --bg-clr: #191d25;
   --navbar-clr: #0a0d139a;
-  --footer-clr: #0a0d139a;
+  --dark-clr: #0e1118;
   --primary-clr: #0066ff;
-  --secondary-crl: #f5f5f7;
+  --secondary-clr: #f5f5f7;
   --secondary-dark-clr: #0d1119;
   --input-clr: #444b58;
   --input-focus-clr: #0066ff;
   --input-text-clr: #bcbcbc;
   --input-text-focus-clr: #ebe8e8;
   --border-clr: #2b3544;
+  --yellow-clr: #ffa500;
 
   --sm-px: 8%;
   --md-px: 10%;
@@ -30,14 +31,16 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  color: var(--font-clr);
   line-height: 1.5;
   font-family: "Tektur", sans-serif;
+  transition: all 0.3s ease-in-out;
 }
 
 body {
   background-color: var(--bg-clr);
-  color: var(--font-clr);
   overflow-x: hidden;
+  transition: none;
 }
 
 input,
@@ -49,6 +52,14 @@ select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+.btn-primary {
+  background-color: var(--primary-clr);
+}
+
+.btn-secondary {
+  border: 2px solid var(--primary-clr);
 }
 
 .bg {
@@ -65,7 +76,7 @@ select {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-clr);
+  background: var(--dark-clr);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -92,4 +103,57 @@ select {
   100% {
     transform: rotate(-360deg);
   }
+}
+
+.feature-card-container {
+  perspective: 2000px;
+}
+
+.feature-card {
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.feature-card:hover {
+  transform: rotateY(15deg) rotateX(10deg);
+  border: 2px solid var(--primary-clr);
+}
+
+.feature-card a {
+  transition: 0.3s ease-in-out;
+}
+
+.feature-card:hover a {
+  color: #0066ff;
+}
+
+.team-cards > div {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 45%;
+}
+
+.courses > div:nth-child(1n) .decoration {
+  background-color: var(--primary-clr);
+}
+
+.courses > div:nth-child(2n) .decoration {
+  background-color: var(--secondary-clr);
+  color: black;
+}
+
+.courses > div:nth-child(3n) .decoration {
+  background-color: var(--yellow-clr);
+}
+
+.courses > div {
+  transform-style: preserve-3d;
+}
+
+.courses {
+  perspective: 2000px;
+}
+
+.courses > div:hover {
+  transform: rotateY(15deg) rotateX(10deg);
 }
