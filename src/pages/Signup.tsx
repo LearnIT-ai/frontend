@@ -67,7 +67,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] mb-[var(--navbar-height)] md:mb-0 mt-[var(--navbar-height)] justify-center">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] mb-[var(--navbar-height)] md:mb-0 justify-center">
       <div
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)] mt-[var(--navbar-height)]"

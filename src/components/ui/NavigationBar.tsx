@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import NavbarLink from "./NavbarLink";
 
+import { navLinks } from "../../lib/navLinks";
+
 import logo from "../../assets/logo_horizontal.svg";
 import { useState } from "react";
 
@@ -35,9 +37,9 @@ export default function NavigationBar() {
           className={`${
             sidebarVisibility
               ? "translate-x-0"
-              : "translate-x-[-24rem] lg:translate-x-[-32rem]"
+              : "translate-x-[-28rem] lg:translate-x-[-32rem]"
           } 
-          duration-500 ease-in-out w-[24rem] lg:w-[32rem] flex absolute top-0 left-0 mt-[var(--navbar-height)] 
+          duration-500 ease-in-out w-[28rem] lg:w-[32rem] flex absolute top-0 left-0 mt-[var(--navbar-height)] 
           bg-[var(--dark-clr)] pl-[var(--sm-px)] md:pl-[var(--md-px)] lg:pl-[var(--lg-px)]
           border-r-[var(--border-clr)] border-r-2 h-[calc(100vh-var(--navbar-height))]`}
         >
@@ -45,39 +47,26 @@ export default function NavigationBar() {
             className={`flex flex-col gap-6 flex-2 text-left justify-start text-xs 
               font-medium mt-6`}
           >
-            <NavbarLink
-              params={{
-                content: "About Us",
-                link: "/",
-                onClick: () => setSidebarVisibility(false),
-              }}
-            />
-            <NavbarLink
-              params={{
-                content: "Our Services",
-                link: "/",
-                onClick: () => setSidebarVisibility(false),
-              }}
-            />
-            <NavbarLink
-              params={{
-                content: "Courses",
-                link: "/courses",
-                onClick: () => setSidebarVisibility(false),
-              }}
-            />
-            <NavbarLink
-              params={{
-                content: "Contacts",
-                link: "/",
-                onClick: () => setSidebarVisibility(false),
-              }}
-            />
+            {navLinks.map((link) => (
+              <NavbarLink
+                params={{
+                  content: link.content,
+                  link: link.link,
+                  onClick: () => setSidebarVisibility(false),
+                }}
+                key={link.id}
+              />
+            ))}
           </ul>
         </div>
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">
-            <img className="h-12 w-auto mx-auto" src={logo} alt="logo" />
+            <img
+              className="h-12 w-auto mx-auto"
+              src={logo}
+              alt="logo"
+              onClick={() => setSidebarVisibility(false)}
+            />
           </Link>
         </div>
         <div className="flex flex-row flex-2 gap-4 justify-end">

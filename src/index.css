@@ -16,6 +16,7 @@
   --input-text-focus-clr: #ebe8e8;
   --border-clr: #2b3544;
   --yellow-clr: #ffa500;
+  --grey-clr: #6d788a;
 
   --sm-px: 8%;
   --md-px: 10%;
@@ -146,6 +147,11 @@ select {
   background-color: var(--yellow-clr);
 }
 
+.courses > div:nth-child(4n) .decoration {
+  background-color: var(--grey-clr);
+  color: white;
+}
+
 .courses > div {
   transform-style: preserve-3d;
 }
@@ -156,4 +162,8 @@ select {
 
 .courses > div:hover {
   transform: rotateY(15deg) rotateX(10deg);
+}
+
+.document-link:hover svg {
+  transform: rotate(-45deg);
 }

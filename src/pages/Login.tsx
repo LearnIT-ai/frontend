@@ -38,7 +38,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] mt-[var(--navbar-height)] justify-center">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] justify-center">
       <div className="hidden lg:flex flex-[1.5] w-full h-[calc(100vh-80px)]">
         <div className="w-full h-full bg-[var(--primary-clr)] "></div>
       </div>
