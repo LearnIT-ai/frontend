@@ -10,9 +10,9 @@ import Signup from "./pages/Signup";
 import AcademicYears from "./pages/AcademicYears";
 import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
 import PageNotFound from "./pages/PageNotFound";
-import Courses from "./pages/Courses";
 import TestCoursePage from "./pages/layouts/Course";
 import TestDocumentPreview from "./pages/layouts/Topic";
+import ProfilePage from "./pages/ProfilePage";
 
 import "./App.css";
 
@@ -59,7 +59,6 @@ function App() {
             path="/academic-years/:academicYear"
             element={<AcademicYearCourses />}
           />
-          <Route path="/courses" element={<Courses />} />
           <Route
             path="/academic-years/:academicYear/:courseName"
             element={<TestCoursePage />}
@@ -68,6 +67,7 @@ function App() {
             path="/academic-years/:academicYear/:courseName/test-document"
             element={<TestDocumentPreview />}
           />
+          <Route path="/my-account" element={<ProfilePage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>

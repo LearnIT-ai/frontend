@@ -9,6 +9,9 @@ import { SignUpUserDataTypes } from "../interfaces/signupContentType";
 import { inputsValidation } from "../methods/inputsValidation";
 import { validateData } from "../methods/inputsValidation";
 
+import bot from "../assets/images/baby_bot.png";
+import triangle from "../assets/icons/polygon.svg";
+
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -91,8 +94,38 @@ export default function Signup() {
           <span className="underline">Learn.it</span>
         </p>
       </div>
-      <div className="hidden lg:flex flex-1 w-full h-[calc(100vh-80px)]">
-        <div className="w-full h-full bg-[var(--primary-clr)] "></div>
+      <div className="hidden lg:flex flex-1 w-full h-[calc(100vh-80px)] p-2 pb-4">
+        <div
+          className="relative flex items-center w-full h-full bg-[var(--navbar-clr)]
+        rounded-xl overflow-hidden border-2 border-[var(--border-clr)]"
+        >
+          <p
+            className="absolute xl:text-[110px] text-start lg:text-[110px] leading-[80%] xl:leading-[90%] font-black
+           text-[var(--bg-clr)] uppercase top-5 left-5 z-0 break-words"
+          >
+            Learn.it Learn.it Learn.it Learn.it Learn.it Learn.it Learn.it
+            Learn.it Learn.it Learn.it Learn.it
+          </p>
+          <div className="relative flex justify-center xl:justify-end items-center w-full">
+            <div className="absolute flex-row items-center z-20 top-[28%] left-[8%] hidden xl:flex">
+              <div
+                className="bg-white text-black 
+                          p-4 rounded-xl uppercase font-bold text-sm"
+              >
+                Let's study together!
+              </div>
+              <img
+                src={triangle}
+                className="absolute h-6 w-6 scale-x-[-1] rotate-90 right-[-20px]"
+              ></img>
+            </div>
+            <img
+              src={bot}
+              alt="Bot image"
+              className="z-10 h-auto xl:w-[60%] lg:w-[60%] xl:mr-5"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

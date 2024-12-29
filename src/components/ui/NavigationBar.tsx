@@ -24,7 +24,7 @@ export default function NavigationBar() {
         className="h-[var(--navbar-height)] flex justify-center items-center w-full 
                     px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]"
       >
-        <div>
+        <div className="flex-1">
           <img
             src={list}
             className={`${
@@ -37,15 +37,16 @@ export default function NavigationBar() {
           className={`${
             sidebarVisibility
               ? "translate-x-0"
-              : "translate-x-[-28rem] lg:translate-x-[-32rem]"
+              : "translate-x-[-28rem] lg:translate-x-[-32rem] xl:translate-x-[-36rem]"
           } 
-          duration-500 ease-in-out w-[28rem] lg:w-[32rem] flex absolute top-0 left-0 mt-[var(--navbar-height)] 
+          duration-500 ease-in-out w-[28rem] lg:w-[32rem] xl:w-[36rem] flex absolute top-0 left-0 mt-[var(--navbar-height)] 
           bg-[var(--dark-clr)] pl-[var(--sm-px)] md:pl-[var(--md-px)] lg:pl-[var(--lg-px)]
-          border-r-[var(--border-clr)] border-r-2 h-[calc(100vh-var(--navbar-height))]`}
+          border-r-[var(--border-clr)] border-r-2 h-[calc(100vh-var(--navbar-height))]
+          flex-col gap-10 pt-14`}
         >
           <ul
-            className={`flex flex-col gap-6 flex-2 text-left justify-start text-xs 
-              font-medium mt-6`}
+            className="flex flex-col gap-6 flex-2 text-left justify-start text-xs 
+              font-medium"
           >
             {navLinks.map((link) => (
               <NavbarLink
@@ -58,6 +59,26 @@ export default function NavigationBar() {
               />
             ))}
           </ul>
+          <div className="border-b-2 border-[var(--border-clr)] w-[16rem]"></div>
+          <ul
+            className="flex flex-col gap-6 flex-2 text-left justify-start text-xs 
+              font-medium"
+          >
+            <Button
+              params={{
+                content: "Log In",
+                className: "text-xs btn-secondary",
+                onClickFunction: () => navigate("login"),
+              }}
+            />
+            <Button
+              params={{
+                content: "Sign Up",
+                className: "text-xs btn-primary",
+                onClickFunction: () => navigate("signup"),
+              }}
+            />
+          </ul>
         </div>
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">
@@ -69,7 +90,7 @@ export default function NavigationBar() {
             />
           </Link>
         </div>
-        <div className="flex flex-row flex-2 gap-4 justify-end">
+        <div className="flex flex-row flex-1 gap-4 justify-end">
           <Button
             params={{
               content: "Log In",

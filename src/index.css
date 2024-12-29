@@ -120,6 +120,10 @@ select {
   border: 2px solid var(--primary-clr);
 }
 
+.feature-card:hover .logo-container {
+  filter: invert(1);
+}
+
 .feature-card a {
   transition: 0.3s ease-in-out;
 }
