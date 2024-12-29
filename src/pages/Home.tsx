@@ -17,47 +17,50 @@ import TeamCard from "../components/TeamCard";
 export default function Home() {
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      <section className="flex w-full mt-[calc(var(--navbar-height)+40px)] h-[calc(100vh-var(--navbar-height)-80px)] mb-[40px]">
-        <div className="relative flex flex-col w-full gap-4 justify-center items-center rounded-3xl border-2 border-[var(--border-clr)]">
+      <section className="flex w-full mt-[40px] h-[calc(100vh-var(--navbar-height)-80px)] mb-[40px]">
+        <div className="relative flex flex-col w-full justify-center items-center rounded-3xl border-2 border-[var(--border-clr)]">
           <img
             className="animate-orbit transition-transform opacity-[80%]
-            absolute top-[-5%] left-[-25%] xl:left-[-15%] w-auto h-[40%] lg:h-[50%] xl:h-[55%]"
+            absolute top-[-5%] left-[-25%] xl:left-[-15%] w-auto h-[25%] md:h-[40%] lg:h-[40%] xl:h-[50%]"
             src={ellipsLg}
             alt="Ellips Large"
           />
           <img
             className="animate-orbit-reverse transition-transform 
-            absolute bottom-[-5%] right-[-20%] xl:right-[-10%] w-auto"
+            absolute bottom-[-5%] right-[-20%] xl:right-[-10%] w-auto h-[20%] md:h-[35%] lg:h-[30%] xl:h-[45%]"
             src={ellipsMd}
             alt="Ellips Medium"
           />
           <img
             className="animate-orbit-reverse transition-transform 
-            absolute bottom-[50%] right-[-20%] xl:right-[-15%] w-auto"
+            absolute bottom-[75%] md:bottom-[50%] right-[-20%] xl:right-[-15%] w-auto h-[15%] md:h-[20%] lg:h-[25%] xl:h-[35%]"
             src={ellipsSm}
             alt="Ellips Small"
           />
           <img
             className="animate-orbit transition-transform 
-            absolute bottom-[35%] left-[-10%] xl:bottom-[15%] w-auto"
+            absolute bottom-[15%] left-[-5%] xl:bottom-[5%] w-auto h-[10%] md:h-[20%] lg:h-[25%] xl:h-[35%]"
             src={ellipsXs}
             alt="Ellips Xs"
           />
-          <HeroHeading
-            params={{
-              content: "Learn more effectively with AI",
-            }}
-          />
-          <p className="w-[70%] xl:w-[35%] text-[var(--input-text-clr)]">
-            Upload your work and get access to a wide range of study materials.
-            Let AI guide your learning and help you excel in your studies
-          </p>
-          <Button
-            params={{
-              content: "Start working 👾",
-              className: "mt-6 btn-primary",
-            }}
-          />
+          <div className="flex flex-col gap-2 md:gap-4 justify-center items-center">
+            <HeroHeading
+              params={{
+                content: "Learn more effectively with AI",
+              }}
+            />
+            <p className="w-[70%] xl:w-[50%] text-sm md:text-lg text-[var(--input-text-clr)]">
+              Upload your work and get access to a wide range of study
+              materials. Let AI guide your learning and help you excel in your
+              studies
+            </p>
+            <Button
+              params={{
+                content: "Start working 👾",
+                className: "mt-6 btn-primary",
+              }}
+            />
+          </div>
         </div>
       </section>
 
@@ -99,6 +102,14 @@ export default function Home() {
             }}
           />
         </div>
+      </section>
+
+      <section className="w-full flex flex-col mt-20 items-center">
+        <SectionHeading
+          params={{
+            content: "Courses",
+          }}
+        />
       </section>
 
       <section className="w-full flex flex-col mt-20 items-center">

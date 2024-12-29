@@ -1,18 +1,15 @@
 import { useRef } from "react";
-import doc from "../lib/testDocuments/IntroToBasicAI.pdf";
+import doc from "../../lib/testDocuments/IntroToBasicAI.pdf";
 
-import Breadcrumbs from "../components/ui/Breadcrumbs";
-import HeroHeading from "../components/ui/HeroHeading";
+import Breadcrumbs from "../../components/ui/Breadcrumbs";
+import HeroHeading from "../../components/ui/HeroHeading";
 
 export default function TestDocumenPreview() {
   const chatInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      <div
-        className="mt-[calc(var(--navbar-height)+40px)] h-full w-full 
-      flex items-start text-left flex-col"
-      >
+      <div className="mt-[40px] h-full w-full flex items-start text-left flex-col">
         <Breadcrumbs />
         <HeroHeading params={{ content: "Intro to Basic AI" }} />
         <div className="w-full h-[100vh] lg:h-[80vh] flex flex-col lg:flex-row gap-6">

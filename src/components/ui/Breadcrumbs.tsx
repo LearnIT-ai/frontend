@@ -5,7 +5,7 @@ export default function Breadcrumbs() {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
   return (
-    <ul className="mb-4 flex flex-row gap-4 uppercase text-xs font-medium">
+    <ul className="mb-10 flex flex-row gap-4 uppercase text-xs font-medium">
       <li>
         <Link to="/">Home</Link>
       </li>
