@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import NavigationBar from "./components/ui/NavigationBar";
 import Footer from "./components/ui/Footer";
 
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import OurServices from "./pages/OurServices";
+import AboutUs from "./pages/AboutUs";
+import Contacts from "./pages/Contacts";
 import AcademicYears from "./pages/AcademicYears";
 import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
 import PageNotFound from "./pages/PageNotFound";
@@ -54,6 +57,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/our-services" element={<OurServices />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contacts" element={<Contacts />} />
           <Route path="/academic-years" element={<AcademicYears />} />
           <Route
             path="/academic-years/:academicYear"

@@ -14,16 +14,17 @@ interface CourseCardProps {
 export default function CourseCard({ params }: CourseCardProps) {
   return (
     <div
-      className="bg-[var(--dark-clr)] flex flex-col w-full h-full items-start justify-between
-                    rounded-xl border-2 border-[var(--border-clr)] overflow-hidden"
+      className={`bg-[var(--dark-clr)] flex flex-col w-full h-full items-start justify-between
+                    rounded-xl border-2 border-[var(--border-clr)] overflow-hidden
+                    ${params.className}`}
     >
       <Link
         to={`/academic-years/${params.year}/${params.link}`}
         className="flex flex-col items-start text-left h-full w-full"
       >
         <div
-          className="decoration text-white p-4 lg:p-6 text-[150px] md:text-[100px]
-        lg:text-[70px] xl:text-[95px] leading-[80%] font-black uppercase h-48 flex items-end w-full
+          className="decoration text-white p-4 lg:p-6 text-[80px] md:text-[100px]
+        lg:text-[65px] xl:text-[95px] leading-[80%] font-black uppercase h-48 flex items-end w-full
         break-all"
         >
           {params.decoration}

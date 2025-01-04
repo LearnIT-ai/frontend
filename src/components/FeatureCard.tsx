@@ -3,6 +3,7 @@ interface FeatureCardProps {
     heading: string;
     content: string;
     logo: string;
+    delay: number;
   };
 }
 

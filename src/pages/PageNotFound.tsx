@@ -10,7 +10,7 @@ export default function PageNotFound() {
       <p>The page you are looking for was not found 😣</p>
       <Button
         params={{
-          content: "Return to Home Page",
+          content: "Return to Home Page 🏠",
           onClickFunction: () => navigate("/"),
           className: "btn-primary mt-6",
         }}
