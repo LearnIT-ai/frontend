@@ -22,7 +22,7 @@ export default function Footer() {
         </Link>
         <div className="border-t-2 border-[var(--border-clr)]"></div>
       </div>
-      <div className="flex gap-20">
+      <div className="flex gap-20 flex-col md:flex-row items-start">
         <div className="flex flex-1 flex-col gap-6 items-start text-left">
           <h3 className="uppercase font-semibold">Information</h3>
           <div className="text-sm">

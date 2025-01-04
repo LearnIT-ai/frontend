@@ -10,6 +10,15 @@ export default {
       animation: {
         orbit: "orbit 40s linear infinite",
         "orbit-reverse": "orbit-reverse 40s linear infinite",
+        "custom-bounce": "custom-bounce 0.5s ease-out forwards",
+      },
+      keyframes: {
+        "custom-bounce": {
+          "0%": { transform: "scale(1)" },
+          "33%": { transform: "scale(0.95)" },
+          "66%": { transform: "scale(1.02)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       backgroundImage: {
         "anastasia-img": "url('assets/images/team/anastasia.jpg')",

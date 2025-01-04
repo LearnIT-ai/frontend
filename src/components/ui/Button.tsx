@@ -15,7 +15,7 @@ export default function Button({ params }: ButtonProps) {
     <button
       className={`${className} text-white
       hover:ring-2 hover:ring-blue-300 font-medium rounded-lg 
-      px-3 md:px-4 py-2 text-center hover:text-blue-300 w-fit
+      px-3 md:px-4 py-2 text-center w-fit
       uppercase text-xs md:text-sm lg:text-lg`}
       onClick={onClickFunction}
     >
