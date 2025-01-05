@@ -53,14 +53,14 @@ export default function TeamSection() {
         >
           <img
             className="animate-orbit transition-transform absolute 
-                       top-[15%] left-[35%] md:left-[60%] lg:left-[60%] xl:right-[10%] 
+                       top-[15%] right-[45%] md:right-[60%] lg:left-[5%] 
                        h-auto w-[100%] md:w-[60%] lg:w-[35%] xl:w-[25%]"
             src={letters}
             alt="Learn.it"
           />
           <img
-            className="animate-orbit transition-transform absolute 
-                       bottom-[5%] right-[45%] md:right-[60%] lg:left-[-15%]
+            className="animate-orbit-reverse transition-transform absolute 
+                       bottom-[10%] left-[35%] md:left-[60%] lg:left-[70%] xl:right-[10%]
                        h-auto w-[85%] md:w-[70%] lg:w-[45%] xl:w-[35%]"
             src={letters}
             alt="Learn.it"

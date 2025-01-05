@@ -28,7 +28,7 @@ export default function NavigationBar() {
           <img
             src={list}
             className={`${
-              sidebarVisibility ? "rotate-90" : ""
+              sidebarVisibility ? "rotate-90 filter-yellow" : ""
             } invert-[1] w-8 h-8 cursor-pointer`}
             onClick={() => setSidebarVisibility(!sidebarVisibility)}
           ></img>
@@ -37,9 +37,9 @@ export default function NavigationBar() {
           className={`${
             sidebarVisibility
               ? "translate-x-0"
-              : "translate-x-[-28rem] lg:translate-x-[-32rem] xl:translate-x-[-36rem]"
+              : "translate-x-[-100vw] lg:translate-x-[-50vw] xl:translate-x-[-40vw]"
           } 
-          duration-500 ease-in-out w-[28rem] lg:w-[32rem] xl:w-[36rem] flex absolute top-0 left-0 mt-[var(--navbar-height)] 
+          duration-500 ease-in-out w-[100vw] lg:w-[50vw] xl:w-[40vw] flex absolute top-0 left-0 mt-[var(--navbar-height)] 
           bg-[var(--dark-clr)] pl-[var(--sm-px)] md:pl-[var(--md-px)] lg:pl-[var(--lg-px)]
           border-r-[var(--border-clr)] border-r-2 h-[calc(100vh-var(--navbar-height))]
           flex-col gap-10 pt-14`}
@@ -67,14 +67,14 @@ export default function NavigationBar() {
             <Button
               params={{
                 content: "Log In",
-                className: "text-xs btn-secondary",
+                className: "btn-secondary",
                 onClickFunction: () => navigate("login"),
               }}
             />
             <Button
               params={{
                 content: "Sign Up",
-                className: "text-xs btn-primary",
+                className: "btn-primary",
                 onClickFunction: () => navigate("signup"),
               }}
             />

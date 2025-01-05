@@ -4,12 +4,12 @@ import ellipsLg from "../../assets/images/ellipse-lg.png";
 import ellipsMd from "../../assets/images/ellipse-md.png";
 import letters from "../../assets/images/letters.svg";
 
-import HeroHeading from "../../components/ui/HeroHeading";
 import Button from "../../components/ui/Button";
 
 import FeaturesSection from "./Sections/FeaturesSection";
 import CoursesSection from "./Sections/CoursesSection";
 import TeamSection from "./Sections/TeamSection";
+import ContactsSection from "./Sections/ContactsSection";
 
 export default function Home() {
   return (
@@ -57,12 +57,16 @@ export default function Home() {
             alt="Learn.it"
           />
           <div className="flex flex-col gap-2 md:gap-4 justify-center items-center">
-            <HeroHeading
-              params={{
-                content: "Learn more effectively with AI",
-              }}
-            />
-            <p className="w-[80%] md:w-[70%] xl:w-[60%] text-sm md:text-base text-[var(--input-text-clr)]">
+            <h1
+              className="text-[30px] md:text-[60px] lg:text-[68px] xl:text-[75px]
+                           uppercase font-bold mb-4 leading-tight"
+            >
+              Learn more
+              <br />
+              effectively with <br />
+              <span className="text-[var(--yellow-clr)]">AI Assistant</span>
+            </h1>
+            <p className="w-[80%] md:w-[70%] xl:w-[60%] text-sm md:text-lg text-[var(--input-text-clr)]">
               Upload your work and get access to a wide range of study
               materials. Let AI guide your learning and help you excel in your
               studies
@@ -80,6 +84,7 @@ export default function Home() {
       <FeaturesSection />
       <CoursesSection />
       <TeamSection />
+      <ContactsSection />
     </div>
   );
 }
