@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { motion } from "motion/react";
 
 import LoginForm from "../components/LoginForm";
 
@@ -40,7 +41,16 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] justify-center">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.4, ease: "easeInOut" },
+      }}
+      viewport={{ once: true }}
+      className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] justify-center"
+    >
       <div className="hidden lg:flex flex-[1.5] w-full h-[calc(100vh-80px)] p-2 pb-4">
         <div
           className="relative flex justify-center items-end w-full h-full bg-[var(--navbar-clr)] 
@@ -80,6 +90,6 @@ export default function Login() {
           </Link>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }

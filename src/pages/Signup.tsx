@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, FormEvent } from "react";
 import axios from "axios";
+import { motion } from "motion/react";
 
 import SignUpForm from "../components/SignUpForm";
 
@@ -70,7 +71,16 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] mb-[var(--navbar-height)] md:mb-0 justify-center">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.4, ease: "easeInOut" },
+      }}
+      viewport={{ once: true }}
+      className="flex flex-col md:flex-row h-[calc(100vh-var(--navbar-height))] mb-[var(--navbar-height)] md:mb-0 justify-center"
+    >
       <div
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)] mt-[var(--navbar-height)]"
@@ -127,6 +137,6 @@ export default function Signup() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
