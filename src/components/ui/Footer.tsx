@@ -45,16 +45,16 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-1 flex-col gap-6 items-center">
+        <div className="flex flex-1 flex-col gap-6 items-center text-[var(--grey-clr)]">
           <h3 className="uppercase font-semibold">Navigation</h3>
           <ul className="list-disc text-sm flex flex-col items-start gap-2">
-            <li>
+            <li className="text-[var(--grey-clr)]">
               <Link to="/">About Us</Link>
             </li>
-            <li>
+            <li className="text-[var(--grey-clr)]">
               <Link to="/">Our Services</Link>
             </li>
-            <li>
+            <li className="text-[var(--grey-clr)]">
               <Link to="/">Contacts</Link>
             </li>
           </ul>

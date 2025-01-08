@@ -1,17 +1,28 @@
+import { motion } from "motion/react";
+
 import Breadcrumbs from "../components/ui/Breadcrumbs";
-import HeroHeading from "../components/ui/HeroHeading";
+import SectionHeading from "../components/ui/SectionHeading";
 
 import AcademicYearCard from "../components/AcademicYearCard";
 
 export default function AcademicYears() {
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      <div
+      <motion.div
+        initial={{ opacity: 0, translateY: 60 }}
+        whileInView={{
+          opacity: 1,
+          translateY: 0,
+          transition: { duration: 0.4, ease: "easeInOut" },
+        }}
+        viewport={{ once: true }}
         className="mt-[40px] w-full flex flex-col 
       text-left items-start"
       >
         <Breadcrumbs />
-        <HeroHeading params={{ content: "Academic Years" }} />
+
+        <SectionHeading params={{ content: "Academic Years" }} />
+
         <div
           className="courses w-full grid grid-rows-auto grid-cols-1 md:grid-cols-2 
         lg:grid-cols-3 gap-8 md:gap-4 lg:gap-10"
@@ -31,7 +42,7 @@ export default function AcademicYears() {
             }}
           />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

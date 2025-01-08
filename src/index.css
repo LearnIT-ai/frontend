@@ -57,6 +57,7 @@ select {
 
 .btn-primary {
   background-color: var(--primary-clr);
+  border: 2px solid var(--primary-clr);
 }
 
 .btn-secondary {
@@ -175,4 +176,19 @@ select {
 .filter-yellow {
   filter: brightness(0) saturate(100%) invert(71%) sepia(12%) saturate(6735%)
     hue-rotate(358deg) brightness(101%) contrast(103%);
+}
+
+.chat-textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-textarea::-webkit-scrollbar-track {
+  background: var(--input-clr);
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.chat-textarea::-webkit-scrollbar-thumb {
+  background: var(--border-clr);
+  border-radius: 12px;
 }
