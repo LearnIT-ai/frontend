@@ -3,6 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import { motion } from "motion/react";
 
+import SocialAppButton from "../components/ui/SocialAppButton";
+
+import google from "../assets/icons/google_login.svg";
+import facebook from "../assets/icons/facebook_login.svg";
+import instagram from "../assets/icons/instagram_login.svg";
+
 import LoginForm from "../components/LoginForm";
 
 import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
@@ -12,7 +18,7 @@ import bot from "../assets/images/bot.png";
 export default function Login() {
   const navigate = useNavigate();
 
-  const url = "http://localhost:8080/";
+  const url = import.meta.env.URL;
 
   const [inputsData, setInputsData] = useState<LoginUserDataTypes>({
     email: "",
@@ -89,6 +95,11 @@ export default function Login() {
             <b>Sign Up</b>
           </Link>
         </p>
+        <div className="flex flex-row gap-6 mx-auto mt-4">
+          <SocialAppButton params={{ content: google }} />
+          <SocialAppButton params={{ content: facebook }} />
+          <SocialAppButton params={{ content: instagram }} />
+        </div>
       </div>
     </motion.div>
   );

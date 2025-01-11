@@ -3,6 +3,12 @@ import { useState, useEffect, FormEvent } from "react";
 import axios from "axios";
 import { motion } from "motion/react";
 
+import SocialAppButton from "../components/ui/SocialAppButton";
+
+import google from "../assets/icons/google_login.svg";
+import facebook from "../assets/icons/facebook_login.svg";
+import instagram from "../assets/icons/instagram_login.svg";
+
 import SignUpForm from "../components/SignUpForm";
 
 import { SignUpUserDataTypes } from "../interfaces/signupContentType";
@@ -16,7 +22,7 @@ import triangle from "../assets/icons/polygon.svg";
 export default function Signup() {
   const navigate = useNavigate();
 
-  const url = "http://localhost:8080/";
+  const url = import.meta.env.URL;
 
   const [inputsData, setInputsData] = useState<SignUpUserDataTypes>({
     lastName: "",
@@ -93,15 +99,17 @@ export default function Signup() {
             handleChange: handleInputChange,
           }}
         />
+
+        <div className="flex flex-row gap-6 mx-auto mt-4">
+          <SocialAppButton params={{ content: google }} />
+          <SocialAppButton params={{ content: facebook }} />
+          <SocialAppButton params={{ content: instagram }} />
+        </div>
         <p className="text-[var(--input-text-clr)]">
           Already have an account? <span> </span>
           <Link to="/login" className="underline">
             <b>Log In</b>
           </Link>
-        </p>
-        <p className="text-[var(--input-text-clr)]">
-          By registering, you agree to the Terms of Use{" "}
-          <span className="underline">Learn.it</span>
         </p>
       </div>
       <div className="hidden lg:flex flex-1 w-full h-[calc(100vh-80px)] p-2 pb-4">

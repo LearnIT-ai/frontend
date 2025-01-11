@@ -2,16 +2,11 @@ import { FormEvent, ChangeEventHandler, useState, useRef } from "react";
 
 import Input from "./ui/Input";
 import Button from "./ui/Button";
-import SocialAppButton from "./ui/SocialAppButton";
 
 import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
 
 import hiddenPassword from "../assets/icons/hidden-password.svg";
 import shownPassword from "../assets/icons/shown-password.svg";
-
-import google from "../assets/icons/google_login.svg";
-import facebook from "../assets/icons/facebook_login.svg";
-import instagram from "../assets/icons/instagram_login.svg";
 
 import { changePasswordVisibility } from "../methods/changePasswordVisibility";
 
@@ -27,7 +22,7 @@ export default function LoginForm({ params }: LoginFormProps) {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   return (
-    <form className="w-full md:w-[60%] lg:w-full flex flex-col gap-4">
+    <form className="w-full md:w-[60%] lg:w-[80%] flex flex-col gap-4">
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
           <svg
@@ -50,7 +45,7 @@ export default function LoginForm({ params }: LoginFormProps) {
             functionName: params.handleChange,
             placeholderText: "address@email.com",
             inputClassName: "pl-10",
-            isRequired: true,
+            isRequired: false,
           }}
         />
       </div>
@@ -60,9 +55,10 @@ export default function LoginForm({ params }: LoginFormProps) {
             id: "password",
             value: params.inputsData.password,
             type: "password",
+            placeholderText: "Password",
             inputName: "password",
             functionName: params.handleChange,
-            isRequired: true,
+            isRequired: false,
             ref: passwordInputRef,
           }}
         />
@@ -77,11 +73,6 @@ export default function LoginForm({ params }: LoginFormProps) {
           alt="Show/hide password"
           className="cursor-pointer h-5 w-auto invert-[1]"
         />
-      </div>
-      <div className="flex flex-row gap-6 mx-auto mt-4">
-        <SocialAppButton params={{ content: google }} />
-        <SocialAppButton params={{ content: facebook }} />
-        <SocialAppButton params={{ content: instagram }} />
       </div>
       <Button
         params={{

@@ -14,7 +14,7 @@ import AcademicYears from "./pages/AcademicYears";
 import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
 import PageNotFound from "./pages/PageNotFound";
 import TestCoursePage from "./pages/layouts/Course";
-import TestDocumentPreview from "./pages/layouts/Topic";
+import TestDocumentPreview from "./pages/layouts/Topic/Topic";
 import ProfilePage from "./pages/ProfilePage";
 
 import "./App.css";

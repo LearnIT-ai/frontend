@@ -18,6 +18,7 @@ export default function Button({ params }: ButtonProps) {
       px-3 md:px-4 py-2 text-center w-fit
       uppercase text-lg md:text-sm lg:text-lg`}
       onClick={onClickFunction}
+      type="button"
     >
       {content}
     </button>
