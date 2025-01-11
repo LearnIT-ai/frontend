@@ -1,10 +1,12 @@
+import { MouseEventHandler } from "react";
+
 interface ChatButtonProps {
   params: {
     path: string;
     size: number;
     ref?: React.RefObject<HTMLButtonElement>;
     className?: string;
-    onClickFunction?: () => void;
+    onClickFunction?: MouseEventHandler<HTMLButtonElement>;
   };
 }
 
@@ -13,7 +15,7 @@ export default function ChatButton({ params }: ChatButtonProps) {
 
   return (
     <button
-      className="hover:ring-2 hover:ring-blue-300 rounded-xl text-center h-12 w-12
+      className="hover:ring-2 hover:ring-blue-300 rounded-xl text-center w-12 h-12 lg:h-10 xl:h-12 lg:w-10 xl:w-12
                            btn-primary flex justify-center items-center aspect-square"
       onClick={onClickFunction}
       ref={ref}
