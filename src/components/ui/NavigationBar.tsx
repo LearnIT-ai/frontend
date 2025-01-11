@@ -95,14 +95,20 @@ export default function NavigationBar() {
             params={{
               content: "Log In",
               className: "hidden md:block text-xs btn-secondary",
-              onClickFunction: () => navigate("login"),
+              onClickFunction: () => {
+                navigate("login");
+                setSidebarVisibility(false);
+              },
             }}
           />
           <Button
             params={{
               content: "Sign Up",
               className: "hidden md:block text-xs btn-primary",
-              onClickFunction: () => navigate("signup"),
+              onClickFunction: () => {
+                navigate("signup");
+                setSidebarVisibility(false);
+              },
             }}
           />
         </div>

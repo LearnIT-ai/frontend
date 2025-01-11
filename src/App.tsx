@@ -18,6 +18,7 @@ import TestDocumentPreview from "./pages/layouts/Topic/Topic";
 import ProfilePage from "./pages/ProfilePage";
 
 import "./App.css";
+import PersonalProfile from "./components/PersonalProfile";
 
 function App() {
   const [isErrorPage, setIsErrorPage] = useState<boolean>(false);
@@ -57,6 +58,20 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/personal-profile"
+            element={
+              <PersonalProfile
+                params={{
+                  lastName: "Surname",
+                  firstName: "Name",
+                  fatherName: "Father's name",
+                  email: "address@gmail.com",
+                  phoneNumber: "+(380) 67 192 1385",
+                }}
+              />
+            }
+          />
           <Route path="/our-services" element={<OurServices />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contacts" element={<Contacts />} />
@@ -77,7 +92,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
-      {showFooter && !isErrorPage && (
+      {showFooter && !isErrorPage && !PersonalProfile && (
         <footer>
           <Footer />
         </footer>
