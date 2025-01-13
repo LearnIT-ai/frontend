@@ -1,26 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
-import Breadcrumbs from "./ui/Breadcrumbs";
-import SectionHeading from "./ui/SectionHeading";
-import ProfileTab from "./ui/ProfileTab";
-import Button from "./ui/Button";
+import Breadcrumbs from "../components/ui/Breadcrumbs";
+import SectionHeading from "../components/ui/SectionHeading";
+import ProfileTab from "../components/ui/ProfileTab";
+import Button from "../components/ui/Button";
+
+import { getUserData } from "../methods/getUserData";
+import { UserDataTypes } from "../interfaces/userDataTypes";
 
 import bot from "../assets/images/bot.png";
 
-interface PersonalProfileProps {
-  params: {
-    type?: "student" | "professor";
-    firstName: string;
-    lastName: string;
-    fatherName: string;
-    email: string;
-    phoneNumber: string;
-  };
-}
-
-export default function PersonalProfile({ params }: PersonalProfileProps) {
+export default function PersonalProfile() {
   const [tab, setTab] = useState<number>(0);
+
+  const [user, setUser] = useState<UserDataTypes | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserData();
+
+      setUser(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="flex flex-row">
@@ -88,18 +92,18 @@ export default function PersonalProfile({ params }: PersonalProfileProps) {
               <div className="w-52 h-52 rounded-xl border-2 border-[var(--border-clr)] bg-[var(--primary-clr)] overflow-hidden">
                 <img src={bot} alt="" />
               </div>
-              <div className="flex flex-col gap-4 justify-center">
-                <p className="font-bold text-xl">
-                  {params.lastName +
-                    " " +
-                    params.firstName +
-                    " " +
-                    params.fatherName}
-                </p>
-                <p className="font-semibold text-[var(--grey-clr)]">Student</p>
-                <p>{params.email}</p>
-                <p>{params.phoneNumber}</p>
-              </div>
+              {user ? (
+                <div className="flex flex-col gap-4 justify-center">
+                  <p className="font-bold text-xl">{user.full_name}</p>
+                  <p className="font-semibold text-[var(--grey-clr)]">
+                    {user.role}
+                  </p>
+                  <p>{user.email}</p>
+                  <p>{user.phone_number}</p>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

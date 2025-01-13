@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import axios from "axios";
+// import axios from "axios";
 
 import Breadcrumbs from "../../../components/ui/Breadcrumbs";
 import ChatButton from "../../../components/ui/chat_ui/ChatButton";
@@ -11,7 +11,7 @@ import Chat from "./Chat";
 import DocViewer from "./DocViewer";
 
 export default function TestDocumentPreview() {
-  const url = import.meta.env.URL;
+  // const url = import.meta.env.URL;
 
   const buttonsRef = useRef<HTMLInputElement>(null);
   const toggleChatRef = useRef<HTMLButtonElement>(null);
@@ -101,25 +101,6 @@ export default function TestDocumentPreview() {
       }, 1000);
     }
   }, [clicked]);
-
-  // Fetch messages (with axios and polling)
-
-  const fetchResponse = async () => {
-    await axios
-      .get(`${url}`)
-      .then((res) => {
-        if (res.data.message) {
-          setMessagesArray((prev) => [
-            ...prev,
-            { id: prev.length, type: "bot", message: res.data.message },
-          ]);
-          setIsWaitingForResponse(false);
-        }
-      })
-      .catch((e) => {
-        console.error(e.message);
-      });
-  };
 
   // ==========================================================================
 

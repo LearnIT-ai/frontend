@@ -15,17 +15,18 @@ import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
 import PageNotFound from "./pages/PageNotFound";
 import TestCoursePage from "./pages/layouts/Course";
 import TestDocumentPreview from "./pages/layouts/Topic/Topic";
-import ProfilePage from "./pages/ProfilePage";
 
 import "./App.css";
-import PersonalProfile from "./components/PersonalProfile";
+import PersonalProfile from "./pages/PersonalProfile";
 
 function App() {
   const [isErrorPage, setIsErrorPage] = useState<boolean>(false);
   const location = useLocation();
 
   const showFooter =
-    location.pathname !== "/login" && location.pathname !== "/signup";
+    location.pathname !== "/login" &&
+    location.pathname !== "/signup" &&
+    location.pathname !== "/personal-profile";
 
   useEffect(() => {
     const errorPage = document.querySelector(".error-page");
@@ -58,20 +59,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/personal-profile"
-            element={
-              <PersonalProfile
-                params={{
-                  lastName: "Surname",
-                  firstName: "Name",
-                  fatherName: "Father's name",
-                  email: "address@gmail.com",
-                  phoneNumber: "+(380) 67 192 1385",
-                }}
-              />
-            }
-          />
+          <Route path="/personal-profile" element={<PersonalProfile />} />
           <Route path="/our-services" element={<OurServices />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contacts" element={<Contacts />} />
@@ -88,11 +76,10 @@ function App() {
             path="/academic-years/:academicYear/:courseName/test-document"
             element={<TestDocumentPreview />}
           />
-          <Route path="/my-account" element={<ProfilePage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
-      {showFooter && !isErrorPage && !PersonalProfile && (
+      {showFooter && !isErrorPage && (
         <footer>
           <Footer />
         </footer>

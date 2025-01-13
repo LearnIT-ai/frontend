@@ -4,7 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import NavbarLink from "./NavbarLink";
 
+import bot from "../../assets/images/bot.png";
+
 import { navLinks } from "../../lib/navLinks";
+
+import { getToken } from "../../methods/getUserData";
 
 import logo from "../../assets/logo_horizontal.svg";
 import { useState } from "react";
@@ -13,6 +17,8 @@ export default function NavigationBar() {
   const navigate = useNavigate();
 
   const [sidebarVisibility, setSidebarVisibility] = useState<boolean>(false);
+
+  const token = getToken();
 
   return (
     <div
@@ -60,25 +66,39 @@ export default function NavigationBar() {
             ))}
           </ul>
           <div className="border-b-2 border-[var(--border-clr)] w-[16rem]"></div>
-          <ul
-            className="flex flex-col gap-6 flex-2 text-left justify-start text-xs 
-              font-medium"
-          >
+          {token && (
             <Button
               params={{
-                content: "Log In",
-                className: "btn-secondary",
-                onClickFunction: () => navigate("login"),
-              }}
-            />
-            <Button
-              params={{
-                content: "Sign Up",
+                content: "Log Out",
                 className: "btn-primary",
-                onClickFunction: () => navigate("signup"),
+                onClickFunction: () => {
+                  document.cookie = "token=; path=/";
+                  window.location.reload();
+                },
               }}
             />
-          </ul>
+          )}
+          {!token && (
+            <ul
+              className="flex flex-col gap-6 flex-2 text-left justify-start text-xs 
+              font-medium"
+            >
+              <Button
+                params={{
+                  content: "Log In",
+                  className: "btn-secondary",
+                  onClickFunction: () => navigate("login"),
+                }}
+              />
+              <Button
+                params={{
+                  content: "Sign Up",
+                  className: "btn-primary",
+                  onClickFunction: () => navigate("signup"),
+                }}
+              />
+            </ul>
+          )}
         </div>
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">
@@ -90,28 +110,41 @@ export default function NavigationBar() {
             />
           </Link>
         </div>
-        <div className="flex flex-row flex-1 gap-4 justify-end">
-          <Button
-            params={{
-              content: "Log In",
-              className: "hidden md:block text-xs btn-secondary",
-              onClickFunction: () => {
-                navigate("login");
-                setSidebarVisibility(false);
-              },
-            }}
-          />
-          <Button
-            params={{
-              content: "Sign Up",
-              className: "hidden md:block text-xs btn-primary",
-              onClickFunction: () => {
-                navigate("signup");
-                setSidebarVisibility(false);
-              },
-            }}
-          />
-        </div>
+
+        {token && (
+          <div className="flex flex-1 justify-end">
+            <div
+              className="border-2 border-[var(--border-clr)] w-12 h-12 bg-[var(--primary-clr)] overflow-hidden rounded-full cursor-pointer"
+              onClick={() => navigate("/personal-profile")}
+            >
+              <img src={bot} alt="" />
+            </div>
+          </div>
+        )}
+        {!token && (
+          <div className="flex flex-row flex-1 gap-4 justify-end">
+            <Button
+              params={{
+                content: "Log In",
+                className: "hidden md:block text-xs btn-secondary",
+                onClickFunction: () => {
+                  navigate("login");
+                  setSidebarVisibility(false);
+                },
+              }}
+            />
+            <Button
+              params={{
+                content: "Sign Up",
+                className: "hidden md:block text-xs btn-primary",
+                onClickFunction: () => {
+                  navigate("signup");
+                  setSidebarVisibility(false);
+                },
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

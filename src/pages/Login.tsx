@@ -33,12 +33,13 @@ export default function Login() {
 
   const handleLogIn = async () => {
     await axios
-      .post(`${url}`, {
+      .post(`http://localhost:5050/api/users/login`, {
         email: inputsData.email,
         password: inputsData.password,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        document.cookie = `token=${JSON.stringify(res.data.token)}; path=/`;
         navigate("/");
       })
       .catch((e) => {
