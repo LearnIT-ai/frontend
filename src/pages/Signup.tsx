@@ -22,7 +22,7 @@ import triangle from "../assets/icons/polygon.svg";
 export default function Signup() {
   const navigate = useNavigate();
 
-  const url = import.meta.env.URL;
+  // const url = import.meta.env.URL;
 
   const [inputsData, setInputsData] = useState<SignUpUserDataTypes>({
     lastName: "",
@@ -43,9 +43,7 @@ export default function Signup() {
     inputsValidation(name, value, setInputsData);
   };
 
-  useEffect(() => {
-    console.log("State updated:", inputsData);
-  }, [inputsData]);
+  useEffect(() => {}, [inputsData]);
 
   const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
@@ -54,20 +52,22 @@ export default function Signup() {
       alert(error);
     } else {
       axios
-        .post(`${url}`, {
-          fullName:
+        .post(`http://localhost:5050/api/users/register`, {
+          email: inputsData.email,
+          password: inputsData.password,
+          full_name:
             inputsData.lastName +
             " " +
             inputsData.firstName +
             " " +
             inputsData.fatherName,
           city: inputsData.city,
-          profileType: inputsData.profileType,
-          email: inputsData.email,
-          password: inputsData.password,
+          role: inputsData.profileType,
+          phone_number: inputsData.phoneNumber,
         })
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
+          document.cookie = `token=${JSON.stringify(res.data.token)}; path=/`;
           navigate("/");
         })
         .catch((e) => {

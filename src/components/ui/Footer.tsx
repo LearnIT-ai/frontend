@@ -48,13 +48,13 @@ export default function Footer() {
         <div className="flex flex-1 flex-col gap-6 items-center text-[var(--grey-clr)]">
           <h3 className="uppercase font-semibold">Navigation</h3>
           <ul className="list-disc text-sm flex flex-col items-start gap-2">
-            <li className="text-[var(--grey-clr)]">
+            <li className="">
               <Link to="/">About Us</Link>
             </li>
-            <li className="text-[var(--grey-clr)]">
+            <li className="">
               <Link to="/">Our Services</Link>
             </li>
-            <li className="text-[var(--grey-clr)]">
+            <li className="">
               <Link to="/">Contacts</Link>
             </li>
           </ul>
@@ -72,6 +72,11 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="border-t-2 border-[var(--border-clr)]"></div>
+      <div className="text-sm text-[var(--grey-clr)]">
+        All images were generated with{" "}
+        <a href="https://leonardo.ai/">Leonardo.ai</a>
       </div>
     </div>
   );
