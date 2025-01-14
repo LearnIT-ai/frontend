@@ -18,7 +18,7 @@ import bot from "../assets/images/bot.png";
 export default function Login() {
   const navigate = useNavigate();
 
-  const url = import.meta.env.URL;
+  // const url = import.meta.env.URL;
 
   const [inputsData, setInputsData] = useState<LoginUserDataTypes>({
     email: "",
