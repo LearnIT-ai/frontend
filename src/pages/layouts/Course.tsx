@@ -32,16 +32,6 @@ export default function CoursePage() {
               content: "Basics of AI",
             }}
           />
-          <DocumentLink
-            params={{
-              content: "Data Pre-Processing",
-            }}
-          />
-          <DocumentLink
-            params={{
-              content: "Linear Regression",
-            }}
-          />
         </ul>
       </div>
     </motion.div>

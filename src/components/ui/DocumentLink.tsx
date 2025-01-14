@@ -8,7 +8,7 @@ interface DocumentLinkTypes {
 
 export default function DocumentLink({ params }: DocumentLinkTypes) {
   return (
-    <Link to={`${location.pathname}/test-document`}>
+    <Link to={`${location.pathname}/basics-of-ai`}>
       <li
         className="document-link flex flex-row gap-4 items-center 
       p-4 pl-0 border-b-[1px] hover:border-b-[var(--primary-clr)]"

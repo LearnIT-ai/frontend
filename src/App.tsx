@@ -73,7 +73,7 @@ function App() {
             element={<TestCoursePage />}
           />
           <Route
-            path="/academic-years/:academicYear/:courseName/test-document"
+            path="/academic-years/:academicYear/:courseName/basics-of-ai"
             element={<TestDocumentPreview />}
           />
           <Route path="*" element={<PageNotFound />} />
