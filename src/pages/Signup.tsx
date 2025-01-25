@@ -18,9 +18,12 @@ import { validateData } from "../methods/inputsValidation";
 
 import bot from "../assets/images/baby_bot.png";
 import triangle from "../assets/icons/polygon.svg";
+import { useTranslation, Trans } from "react-i18next";
 
 export default function Signup() {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   // const url = import.meta.env.URL;
 
@@ -91,7 +94,7 @@ export default function Signup() {
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)] mt-[var(--navbar-height)]"
       >
-        <h1 className="text-4xl">Sign Up</h1>
+        <h1 className="text-4xl">{t("account:signup.title")}</h1>
         <SignUpForm
           params={{
             inputsData: inputsData,
@@ -106,10 +109,16 @@ export default function Signup() {
           <SocialAppButton params={{ content: instagram }} />
         </div>
         <p className="text-[var(--input-text-clr)]">
-          Already have an account? <span> </span>
-          <Link to="/login" className="underline">
-            <b>Log In</b>
-          </Link>
+          <Trans
+            i18nKey={t("account:signup.link")}
+            values={{
+              channel: "RoadsideCoder",
+            }}
+            components={{
+              1: <Link to="/login" className="underline" />,
+              2: <b />,
+            }}
+          />
         </p>
       </div>
       <div className="hidden lg:flex flex-1 w-full h-[calc(100vh-80px)] p-2 pb-4">

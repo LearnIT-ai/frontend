@@ -1,0 +1,24 @@
+{
+  "login": {
+    "title": "Log In",
+    "button": "Log In",
+    "form": {
+      "password": "Password"
+    },
+    "link": "Don't have an account? <1><2>Sign Up</2></1>"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "nextButton": "Next",
+    "backButton": "Go Back",
+    "form": {
+      "lastName": "Last Name",
+      "firstName": "First Name",
+      "fatherName": "Father Name",
+      "password": "Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "button": "Sign Up",
+    "link": "Already have an account? <1><2>Log In</2></1>"
+  }
+}
