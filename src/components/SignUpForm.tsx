@@ -1,5 +1,7 @@
 import { FormEvent, ChangeEventHandler, useState, useRef } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Button from "./ui/Button";
@@ -29,6 +31,8 @@ export default function SignUpForm({ params }: SignUpFormProps) {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   const [isFirstPage, setIsFirstPage] = useState<boolean>(true);
 
+  const { t } = useTranslation();
+
   return (
     <form className="w-full md:w-[60%] lg:w-[80%] flex flex-col gap-4">
       <div className={`${isFirstPage ? "flex" : "hidden"} flex-col gap-4`}>
@@ -38,7 +42,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
             value: params.inputsData.lastName,
             type: "text",
             inputName: "lastName",
-            placeholderText: "Last Name",
+            placeholderText: t("account:signup.form.lastName"),
             functionName: params.handleChange,
             isRequired: false,
           }}
@@ -49,7 +53,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
             value: params.inputsData.firstName,
             type: "text",
             inputName: "firstName",
-            placeholderText: "First Name",
+            placeholderText: t("account:signup.form.firstName"),
             functionName: params.handleChange,
             isRequired: false,
           }}
@@ -60,7 +64,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
             value: params.inputsData.fatherName,
             type: "text",
             inputName: "fatherName",
-            placeholderText: "Father Name",
+            placeholderText: t("account:signup.form.fatherName"),
             functionName: params.handleChange,
             isRequired: false,
           }}
@@ -91,7 +95,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
 
         <Button
           params={{
-            content: "Next",
+            content: t("account:signup.nextButton"),
             onClickFunction: () => setIsFirstPage(false),
             className: "btn-primary mx-auto mt-6",
           }}
@@ -158,7 +162,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
               value: params.inputsData.password,
               type: "password",
               inputName: "password",
-              placeholderText: "Password",
+              placeholderText: t("account:signup.form.password"),
               functionName: params.handleChange,
               isRequired: false,
               ref: passwordInputRef,
@@ -170,7 +174,7 @@ export default function SignUpForm({ params }: SignUpFormProps) {
               value: params.inputsData.confirmPassword,
               type: "password",
               inputName: "confirmPassword",
-              placeholderText: "Confirm Password",
+              placeholderText: t("account:signup.form.confirmPassword"),
               functionName: params.handleChange,
               isRequired: false,
               ref: confirmPasswordInputRef,
@@ -191,14 +195,14 @@ export default function SignUpForm({ params }: SignUpFormProps) {
         <div className="flex flex-col md:flex-row gap-3 mt-6 mx-auto">
           <Button
             params={{
-              content: "Go Back",
+              content: t("account:signup.backButton"),
               onClickFunction: () => setIsFirstPage(true),
               className: "btn-secondary",
             }}
           />
           <Button
             params={{
-              content: "Sign Up",
+              content: t("account:signup.button"),
               onClickFunction: params.handleSignUp,
               className: "btn-primary",
             }}

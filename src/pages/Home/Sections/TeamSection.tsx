@@ -7,9 +7,21 @@ import Button from "../../../components/ui/Button";
 import TeamCard from "../../../components/TeamCard";
 import SectionHeading from "../../../components/ui/SectionHeading";
 import SectionDescription from "../../../components/ui/SectionDescription";
+import { useTranslation } from "react-i18next";
 
 export default function TeamSection() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  interface Teammates {
+    role: string;
+    name: string;
+  }
+
+  const teammates = t("TeamSection.teammates", {
+    returnObjects: true,
+  }) as Teammates[];
+
   return (
     <section className="w-full flex flex-col mt-24 items-center">
       <motion.div
@@ -24,13 +36,12 @@ export default function TeamSection() {
       >
         <SectionHeading
           params={{
-            content: "Our Team",
+            content: t("TeamSection.title"),
           }}
         />
         <SectionDescription
           params={{
-            content:
-              "Meet our team! Together, we are dedicated to building the platform and implementing innovative solutions to enhance your learning experience. With passion and expertise, we are eager to make your education process more engaging, accessible, and personalized.",
+            content: t("TeamSection.description"),
             alignment: "text-center",
             className: "mb-12 md:mb-16",
           }}
@@ -68,7 +79,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Mentor",
-              name: "Anastasia Deineko",
+              name: t(teammates[0].name),
               position:
                 "lg:row-start-1 lg:row-end-2 lg:col-start-2 lg:col-end-3",
               img: "bg-anastasia-img",
@@ -78,7 +89,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Mentor",
-              name: "Denis Savenkov",
+              name: t(teammates[1].name),
               position:
                 "lg:row-start-1 lg:row-end-2 lg:col-start-3 lg:col-end-4",
               img: "bg-denis-img",
@@ -88,7 +99,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Project Manager",
-              name: "Ivanka Chuliy",
+              name: t(teammates[2].name),
               position:
                 "lg:row-start-2 lg:row-end-3 lg:col-start-1 lg:col-end-2",
               img: "bg-ivanka-img",
@@ -98,7 +109,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "NLP Engineer",
-              name: "Roman Lapiuk",
+              name: t(teammates[3].name),
               position:
                 "lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-3",
               img: "bg-roman-img",
@@ -108,7 +119,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Data Engineer",
-              name: "Khrystyna Savchyn",
+              name: t(teammates[4].name),
               position:
                 "lg:row-start-2 lg:row-end-3 lg:col-start-3 lg:col-end-4",
               img: "bg-khrystyna-img",
@@ -118,7 +129,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Data Scientist",
-              name: "Maksym Kahadii",
+              name: t(teammates[5].name),
               position:
                 "lg:row-start-2 lg:row-end-3 lg:col-start-4 lg:col-end-5",
               img: "bg-maksym-img",
@@ -128,7 +139,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Designer",
-              name: "Daryna Mamokina",
+              name: t(teammates[6].name),
               position:
                 "lg:row-start-3 lg:row-end-4 lg:col-start-1 lg:col-end-2",
               img: "bg-daryna-img",
@@ -138,7 +149,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Frontend Dev",
-              name: "Liza Humnytska",
+              name: t(teammates[7].name),
               position:
                 "lg:row-start-3 lg:row-end-4 lg:col-start-2 lg:col-end-3",
               img: "bg-liza-img",
@@ -148,7 +159,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Backend Dev",
-              name: "Svyatoslav Strubitskiy",
+              name: t(teammates[8].name),
               position:
                 "lg:row-start-3 lg:row-end-4 lg:col-start-3 lg:col-end-4",
               img: "bg-svyat-img",
@@ -158,7 +169,7 @@ export default function TeamSection() {
           <TeamCard
             params={{
               role: "Data Engineer",
-              name: "Oleksandr Prosymiak",
+              name: t(teammates[9].name),
               position:
                 "lg:row-start-3 lg:row-end-4 lg:col-start-4 lg:col-end-5",
               img: "bg-oleksandr-img",
@@ -167,7 +178,7 @@ export default function TeamSection() {
         </div>
         <Button
           params={{
-            content: "More about us 😎",
+            content: t("TeamSection.button"),
             className: "mt-12 md:mt-16 btn-primary",
             onClickFunction: () => navigate("about-us"),
           }}

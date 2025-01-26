@@ -4,12 +4,25 @@ import { motion } from "motion/react";
 import SectionHeading from "../../../components/ui/SectionHeading";
 import SectionDescription from "../../../components/ui/SectionDescription";
 import Button from "../../../components/ui/Button";
+import ContactInfo from "../../../components/ui/ContactInfo";
 
 import bot from "../../../assets/images/bot_contact.png";
 import circle from "../../../assets/images/ellipse-md.png";
+import { useTranslation } from "react-i18next";
 
 export default function ContactsSection() {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
+
+  interface Info {
+    info: string;
+  }
+
+  const info = t("ContactUsSection.contactInfo", {
+    returnObjects: true,
+  }) as Info[];
+
   return (
     <motion.section
       initial={{ opacity: 0, scale: 0.8 }}
@@ -21,7 +34,7 @@ export default function ContactsSection() {
       viewport={{ once: true }}
       className="w-full flex flex-col lg:flex-row mt-24 gap-16 xl:gap-32"
     >
-      <div className="flex flex-[1] relative order-2 lg:order-1">
+      <div className="flex-[1] relative order-2 lg:order-1 hidden lg:flex">
         <div
           className="flex justify-center items-end w-full z-10
         rounded-xl overflow-hidden border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)]"
@@ -48,68 +61,28 @@ export default function ContactsSection() {
         />
       </div>
       <div className="flex flex-[1] xl:flex-[1.2] flex-col justify-center items-start z-10 gap-10 order-1 lg:order-2">
-        <div className="flex flex-col items-start ">
+        <div className="flex flex-col items-start text-left">
           <SectionHeading
             params={{
-              content: "Got any questions?",
+              content: t("ContactUsSection.title"),
             }}
           />
           <SectionDescription
             params={{
-              content:
-                "Feel free to reach out to us via email or give us a call. We're here to assist you with any questions or concerns you may have!",
+              content: t("ContactUsSection.description"),
               alignment: "text-left",
               className: "md:w-[80%] lg:w-[100%]",
             }}
           />
         </div>
         <div className="flex flex-col gap-6 items-start font-medium text-lg">
-          <div className="flex flex-row gap-4 hover:translate-x-4 cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              className="bi bi-arrow-down-right-circle w-6 h-6 fill-[var(--input-clr)]"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
-              />
-            </svg>
-            <p>Lviv, st. Zamarstinivska, 83A</p>
-          </div>
-          <div className="flex flex-row gap-4 hover:translate-x-4 cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              className="bi bi-arrow-down-right-circle w-6 h-6 fill-[var(--input-clr)]"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
-              />
-            </svg>
-            <p>+(380) 73 610 73 88</p>
-          </div>
-          <div className="flex flex-row gap-4 hover:translate-x-4 cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              className="bi bi-arrow-down-right-circle w-6 h-6 fill-[var(--input-clr)]"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
-              />
-            </svg>
-            <p>contact@itstep.org</p>
-          </div>
+          {info.map((e) => {
+            return <ContactInfo params={{ content: e.info }} />;
+          })}
         </div>
         <Button
           params={{
-            content: "Send an email 💬",
+            content: t("ContactUsSection.button"),
             className: "btn-primary mt-6 z-10 relative",
             onClickFunction: () => navigate("/contacts"),
           }}

@@ -1,0 +1,21 @@
+{
+  "navbar": {
+    "loginButton": "Log in",
+    "signupButton": "Sign up",
+    "logoutButton": "Log out"
+  },
+  "navbarLinks": {
+    "services": "Our Services",
+    "aboutUs": "About Us",
+    "documents": "Academic Years & Courses",
+    "contacts": "Contacts"
+  },
+  "footerLinks": {
+    "info": "Information",
+    "navigation": "Navigation",
+    "contacts": "Contact Us"
+  },
+  "footerDescription": "LearnIT - upload your work and get access to a wide range of study materials. Let AI guide your learning and help you excel in your studies.",
+  "street": "Lviv, st. Zamarstinivska, 83A",
+  "additional": "All images were generated with <1>Leonardo.ai</1>"
+}

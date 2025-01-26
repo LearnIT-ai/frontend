@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface FeatureCardProps {
   params: {
     heading: string;
@@ -8,6 +10,8 @@ interface FeatureCardProps {
 }
 
 export default function FeatureCard({ params }: FeatureCardProps) {
+  const { t } = useTranslation();
+
   return (
     <div
       className="feature-card bg-[var(--dark-clr)] flex flex-col w-full h-64 md:h-80 items-start justify-between
@@ -25,7 +29,7 @@ export default function FeatureCard({ params }: FeatureCardProps) {
           <p className="text-xs">{params.content}</p>
         </div>
         <a href="#" className="text-sm uppercase">
-          Find out more
+          {t("featuresSection.featureButton")}
         </a>
       </div>
     </div>

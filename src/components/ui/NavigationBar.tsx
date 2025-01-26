@@ -6,12 +6,13 @@ import NavbarLink from "./NavbarLink";
 
 import bot from "../../assets/images/bot.png";
 
-import { navLinks } from "../../lib/navLinks";
+import { navLinkTypes } from "../../interfaces/navLinkTypes";
 
 import { getToken } from "../../methods/getUserData";
 
 import logo from "../../assets/logo_horizontal.svg";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function NavigationBar() {
   const navigate = useNavigate();
@@ -19,6 +20,25 @@ export default function NavigationBar() {
   const [sidebarVisibility, setSidebarVisibility] = useState<boolean>(false);
 
   const token = getToken();
+
+  const { i18n, t } = useTranslation();
+
+  function changeLanguage(lang: string) {
+    i18n.changeLanguage(lang).then(() => {
+      window.location.reload();
+    });
+  }
+
+  const navLinks: navLinkTypes[] = [
+    { id: 0, content: t("common:navbarLinks.services"), link: "/our-services" },
+    { id: 1, content: t("common:navbarLinks.aboutUs"), link: "/about-us" },
+    {
+      id: 2,
+      content: t("common:navbarLinks.documents"),
+      link: "/academic-years",
+    },
+    { id: 3, content: t("common:navbarLinks.contacts"), link: "/contacts" },
+  ];
 
   return (
     <div
@@ -30,7 +50,7 @@ export default function NavigationBar() {
         className="h-[var(--navbar-height)] flex justify-center items-center w-full 
                     px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]"
       >
-        <div className="flex-1">
+        <div className="flex flex-1 gap-6 flew-row items-center">
           <img
             src={list}
             className={`${
@@ -38,6 +58,28 @@ export default function NavigationBar() {
             } invert-[1] w-8 h-8 cursor-pointer`}
             onClick={() => setSidebarVisibility(!sidebarVisibility)}
           ></img>
+          <div className="flex gap-4 flew-row">
+            <button
+              onClick={() => changeLanguage("en")}
+              className={`${
+                i18n.language === "en"
+                  ? "bg-[var(--yellow-clr)] text-black"
+                  : "border-2 border-white text-white"
+              } flex font-semibold justify-center items-center text-xs w-7 h-7 rounded-lg`}
+            >
+              en
+            </button>
+            <button
+              onClick={() => changeLanguage("ua")}
+              className={`${
+                i18n.language === "ua"
+                  ? "bg-[var(--yellow-clr)] text-black"
+                  : "border-2 border-white text-white"
+              } flex font-semibold justify-center items-center text-xs w-7 h-7 rounded-lg`}
+            >
+              ua
+            </button>
+          </div>
         </div>
         <div
           className={`${
@@ -69,7 +111,7 @@ export default function NavigationBar() {
           {token && (
             <Button
               params={{
-                content: "Log Out",
+                content: t("common:navbar.logoutButton"),
                 className: "btn-primary",
                 onClickFunction: () => {
                   document.cookie = "token=; path=/";
@@ -85,14 +127,14 @@ export default function NavigationBar() {
             >
               <Button
                 params={{
-                  content: "Log In",
+                  content: t("common:navbar.loginButton"),
                   className: "btn-secondary",
                   onClickFunction: () => navigate("login"),
                 }}
               />
               <Button
                 params={{
-                  content: "Sign Up",
+                  content: t("common:navbar.signupButton"),
                   className: "btn-primary",
                   onClickFunction: () => navigate("signup"),
                 }}
@@ -103,7 +145,7 @@ export default function NavigationBar() {
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">
             <img
-              className="h-12 w-auto mx-auto"
+              className="h-10 w-auto mx-auto"
               src={logo}
               alt="logo"
               onClick={() => setSidebarVisibility(false)}
@@ -125,7 +167,7 @@ export default function NavigationBar() {
           <div className="flex flex-row flex-1 gap-4 justify-end">
             <Button
               params={{
-                content: "Log In",
+                content: t("common:navbar.loginButton"),
                 className: "hidden md:block text-xs btn-secondary",
                 onClickFunction: () => {
                   navigate("login");
@@ -135,7 +177,7 @@ export default function NavigationBar() {
             />
             <Button
               params={{
-                content: "Sign Up",
+                content: t("common:navbar.signupButton"),
                 className: "hidden md:block text-xs btn-primary",
                 onClickFunction: () => {
                   navigate("signup");

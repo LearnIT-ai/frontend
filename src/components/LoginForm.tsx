@@ -9,6 +9,7 @@ import hiddenPassword from "../assets/icons/hidden-password.svg";
 import shownPassword from "../assets/icons/shown-password.svg";
 
 import { changePasswordVisibility } from "../methods/changePasswordVisibility";
+import { useTranslation } from "react-i18next";
 
 interface LoginFormProps {
   params: {
@@ -19,8 +20,11 @@ interface LoginFormProps {
 }
 
 export default function LoginForm({ params }: LoginFormProps) {
+  const { t } = useTranslation();
+
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
+
   return (
     <form className="w-full md:w-[60%] lg:w-[80%] flex flex-col gap-4">
       <div className="relative">
@@ -55,7 +59,7 @@ export default function LoginForm({ params }: LoginFormProps) {
             id: "password",
             value: params.inputsData.password,
             type: "password",
-            placeholderText: "Password",
+            placeholderText: t("account:login.form.password"),
             inputName: "password",
             functionName: params.handleChange,
             isRequired: false,
@@ -76,7 +80,7 @@ export default function LoginForm({ params }: LoginFormProps) {
       </div>
       <Button
         params={{
-          content: "Log In",
+          content: t("account:login.button"),
           onClickFunction: params.handleLogIn,
           className: "btn-primary mx-auto mt-6",
         }}

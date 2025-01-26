@@ -1,0 +1,97 @@
+{
+  "greeting": "Hello",
+  "heroSection": {
+    "title": "Learn more<1></1> effectively with <1></1><2>AI Assistant</2>",
+    "description": "Upload your work and get access to a wide range of study materials. Let AI guide your learning and help you excel in your studies",
+    "button": "Start working... 👾"
+  },
+  "featuresSection": {
+    "title": "Why LearnIT platform is useful?",
+    "description": "LearnIT is a platform designed specifically for students. Thanks to the capabilities of Artificial Intelligence, we help students upload and check their assignments, access study materials and collaborate more effectively with teachers.",
+    "features": [
+      {
+        "heading": "Lectures explanation",
+        "description": "Get detailed explanations of lecture materials with the help of an intelligent assistant.",
+        "img": "src/assets/icons/lectures-icon.svg"
+      },
+      {
+        "heading": "Review of tasks",
+        "description": "A quick and accurate review of your completed tasks with recommendations for improvement.",
+        "img": "src/assets/icons/plagiarism-icon.svg"
+      },
+      {
+        "heading": "Plagiarism detection",
+        "description": "A tool for automatic analysis and detection of plagiarism in your works.",
+        "img": "src/assets/icons/homework-check-icon.svg"
+      }
+    ],
+    "featureButton": "Find out more",
+    "button": "More about Learn.it 🍀"
+  },
+  "CoursesSection": {
+    "title": "Courses",
+    "description": "Select from a set of subjects tailored to each academic year. Accomplish them confidently, knowing our AI assistant is here to guide you every step of the way. Stay focused, stay on track, and achieve your academic goals with ease!",
+    "tabs": [
+      { "title": "1st Year", "link": "first-year" },
+      { "title": "2nd Year", "link": "second-year" }
+    ],
+    "button": "View more subjects 📚"
+  },
+  "TeamSection": {
+    "title": "Our Team",
+    "description": "Meet our team! Together, we are dedicated to building the platform and implementing innovative solutions to enhance your learning experience. With passion and expertise, we are eager to make your education process more engaging, accessible, and personalized.",
+    "teammates": [
+      {
+        "role": "Mentor",
+        "name": "Anastasia Deineko"
+      },
+      {
+        "role": "Mentor",
+        "name": "Denis Savenkov"
+      },
+      {
+        "role": "Project Manager",
+        "name": "Ivanka Chuliy"
+      },
+      {
+        "role": "NLP Engineer",
+        "name": "Roman Lapiuk"
+      },
+      {
+        "role": "Data Engineer",
+        "name": "Khrystyna Savchyn"
+      },
+      {
+        "role": "Data Scientist",
+        "name": "Maksym Kahadii"
+      },
+      {
+        "role": "Designer",
+        "name": "Daryna Mamokina"
+      },
+      {
+        "role": "Frontend Dev",
+        "name": "Liza Humnytska"
+      },
+      {
+        "role": "Backend Dev",
+        "name": "Svyatoslav Strubitskiy"
+      },
+      {
+        "role": "Data Engineer",
+        "name": "Oleksandr Prosymiak"
+      }
+    ],
+    "button": "More about us 😎"
+  },
+  "ContactUsSection": {
+    "title": "Got any questions?",
+    "description": "Feel free to reach out to us via email or give us a call. We're here to assist you with any questions or concerns you may have!",
+    "contactInfo": [
+      { "info": "Lviv, st. Zamarstinivska, 83A" },
+      { "info": "+(380) 73 610 73 88" },
+      { "info": "contact@itstep.org" }
+    ],
+    "button": "Більше про нас 😎"
+  }
+}

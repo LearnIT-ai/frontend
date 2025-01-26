@@ -14,11 +14,13 @@ import LoginForm from "../components/LoginForm";
 import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
 
 import bot from "../assets/images/bot.png";
+import { useTranslation, Trans } from "react-i18next";
 
 export default function Login() {
   const navigate = useNavigate();
 
   // const url = import.meta.env.URL;
+  const { t } = useTranslation();
 
   const [inputsData, setInputsData] = useState<LoginUserDataTypes>({
     email: "",
@@ -82,7 +84,7 @@ export default function Login() {
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]"
       >
-        <h1 className="text-4xl">Log In</h1>
+        <h1 className="text-4xl">{t("account:login.title")}</h1>
         <LoginForm
           params={{
             inputsData: inputsData,
@@ -91,10 +93,16 @@ export default function Login() {
           }}
         />
         <p className="text-[var(--input-text-clr)]">
-          Don't have an account? <span> </span>
-          <Link to="/signup" className="underline">
-            <b>Sign Up</b>
-          </Link>
+          <Trans
+            i18nKey={t("account:login.link")}
+            values={{
+              channel: "RoadsideCoder",
+            }}
+            components={{
+              1: <Link to="/signup" className="underline" />,
+              2: <b />,
+            }}
+          />
         </p>
         <div className="flex flex-row gap-6 mx-auto mt-4">
           <SocialAppButton params={{ content: google }} />

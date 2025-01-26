@@ -10,6 +10,7 @@ import SectionDescription from "../../../components/ui/SectionDescription";
 import Button from "../../../components/ui/Button";
 import Tab from "../../../components/ui/Tab";
 import CourseCard from "../../../components/CourseCard";
+import { useTranslation } from "react-i18next";
 
 export default function CoursesSection() {
   const navigate = useNavigate();
@@ -41,6 +42,26 @@ export default function CoursesSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const { t } = useTranslation();
+
+  interface Tabs {
+    title: string;
+    link: string;
+  }
+
+  const tabs = t("CoursesSection.tabs", { returnObjects: true }) as Tabs[];
+
+  function changeActiveTab(index: number) {
+    switch (index) {
+      case 0:
+        setTab("first-year");
+        break;
+      case 1:
+        setTab("second-year");
+        break;
+    }
+  }
+
   return (
     <section className="w-full flex flex-col mt-24 items-center">
       <motion.div
@@ -55,13 +76,12 @@ export default function CoursesSection() {
       >
         <SectionHeading
           params={{
-            content: "Courses",
+            content: t("CoursesSection.title"),
           }}
         />
         <SectionDescription
           params={{
-            content:
-              "Select from a set of subjects tailored to each academic year. Accomplish them confidently, knowing our AI assistant is here to guide you every step of the way. Stay focused, stay on track, and achieve your academic goals with ease!",
+            content: t("CoursesSection.description"),
             alignment: "text-center",
             className: "mb-12 md:mb-16",
           }}
@@ -79,20 +99,17 @@ export default function CoursesSection() {
         className="flex flex-col items-center gap-12 md:gap-16"
       >
         <div className="flex flex-col w-full md:w-fit md:flex-row">
-          <Tab
-            params={{
-              content: "1st Year",
-              onClickFunction: () => setTab("first-year"),
-              isActive: tab === "first-year" ? true : false,
-            }}
-          />
-          <Tab
-            params={{
-              content: "2nd Year",
-              onClickFunction: () => setTab("second-year"),
-              isActive: tab === "second-year" ? true : false,
-            }}
-          />
+          {tabs.map((tabNav) => {
+            return (
+              <Tab
+                params={{
+                  content: tabNav.title,
+                  onClickFunction: () => changeActiveTab(tabs.indexOf(tabNav)),
+                  isActive: tab === tabNav.link ? true : false,
+                }}
+              />
+            );
+          })}
         </div>
         <div className="courses w-full grid grid-rows-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-4 lg:gap-10">
           {subjects
@@ -114,7 +131,7 @@ export default function CoursesSection() {
         </div>
         <Button
           params={{
-            content: "View more subjects 📚",
+            content: t("CoursesSection.button"),
             className: `${bounce ? "animate-custom-bounce" : ""} btn-primary`,
             onClickFunction: () => navigate(`academic-years/${tab}`),
           }}

@@ -10,8 +10,11 @@ import FeaturesSection from "./Sections/FeaturesSection";
 import CoursesSection from "./Sections/CoursesSection";
 import TeamSection from "./Sections/TeamSection";
 import ContactsSection from "./Sections/ContactsSection";
+import { useTranslation, Trans } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
       <motion.section
@@ -61,19 +64,23 @@ export default function Home() {
               className="text-[30px] md:text-[60px] lg:text-[68px] xl:text-[75px]
                            uppercase font-bold mb-4 leading-tight"
             >
-              Learn more
-              <br />
-              effectively with <br />
-              <span className="text-[var(--yellow-clr)]">AI Assistant</span>
+              <Trans
+                i18nKey={t("heroSection.title")}
+                values={{
+                  channel: "RoadsideCoder",
+                }}
+                components={{
+                  1: <br />,
+                  2: <span className="text-[var(--yellow-clr)]" />,
+                }}
+              />
             </h1>
             <p className="w-[80%] md:w-[70%] xl:w-[60%] text-sm md:text-lg text-[var(--input-text-clr)]">
-              Upload your work and get access to a wide range of study
-              materials. Let AI guide your learning and help you excel in your
-              studies
+              {t("heroSection.description")}
             </p>
             <Button
               params={{
-                content: "Start working 👾",
+                content: t("heroSection.button"),
                 className: "mt-6 btn-primary",
               }}
             />
