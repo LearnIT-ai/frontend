@@ -41,6 +41,13 @@ export default function AcademicYears() {
               link: "second-year",
             }}
           />
+          <AcademicYearCard
+            params={{
+              heading: "Junior (3rd year)",
+              decoration: "3",
+              link: "third-year",
+            }}
+          />
         </div>
       </motion.div>
     </div>

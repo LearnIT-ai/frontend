@@ -176,6 +176,10 @@ select {
   transform: rotate(-45deg);
 }
 
+.document-link:hover p {
+  color: var(--primary-clr);
+}
+
 .filter-yellow {
   filter: brightness(0) saturate(100%) invert(71%) sepia(12%) saturate(6735%)
     hue-rotate(358deg) brightness(101%) contrast(103%);
