@@ -37,7 +37,7 @@ export default function NavigationBar() {
       content: t("common:navbarLinks.documents"),
       link: "/academic-years",
     },
-    { id: 3, content: t("common:navbarLinks.upload"), link: "/upload-files" },
+    { id: 3, content: t("common:navbarLinks.upload"), link: "/upload-file" },
     { id: 4, content: t("common:navbarLinks.contacts"), link: "/contacts" },
   ];
 
