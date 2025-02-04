@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import OurServices from "./pages/OurServices";
 import AboutUs from "./pages/AboutUs";
+import UploadFile from "./pages/UploadDocs/UploadFile";
+import PreviewFile from "./pages/UploadDocs/PreviewFile";
+import SubmitPage from "./pages/UploadDocs/SubmitPage";
 import Contacts from "./pages/Contacts";
 import AcademicYears from "./pages/AcademicYears";
 import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
@@ -64,6 +67,9 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/academic-years" element={<AcademicYears />} />
+          <Route path="/upload-file" element={<UploadFile />} />
+          <Route path="/upload-file/preview" element={<PreviewFile />} />
+          <Route path="/upload-file/preview/submit" element={<SubmitPage />} />
           <Route
             path="/academic-years/:academicYear"
             element={<AcademicYearCourses />}
@@ -73,7 +79,7 @@ function App() {
             element={<TestCoursePage />}
           />
           <Route
-            path="/academic-years/:academicYear/:courseName/basics-of-ai"
+            path="/academic-years/:academicYear/:courseName/:docName"
             element={<TestDocumentPreview />}
           />
           <Route path="*" element={<PageNotFound />} />

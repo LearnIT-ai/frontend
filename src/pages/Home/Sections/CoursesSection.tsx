@@ -59,6 +59,9 @@ export default function CoursesSection() {
       case 1:
         setTab("second-year");
         break;
+      case 2:
+        setTab("third-year");
+        break;
     }
   }
 
@@ -102,6 +105,7 @@ export default function CoursesSection() {
           {tabs.map((tabNav) => {
             return (
               <Tab
+                key={tabNav.title}
                 params={{
                   content: tabNav.title,
                   onClickFunction: () => changeActiveTab(tabs.indexOf(tabNav)),

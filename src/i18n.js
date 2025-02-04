@@ -8,7 +8,7 @@ i18next
   .use(initReactI18next)
   .use(Backend)
   .init({
-    debug: true,
+    debug: false,
     fallbackLng: "en",
     returnObjects: true,
     ns: ["common", "translation", "account"],

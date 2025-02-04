@@ -61,6 +61,9 @@ export default function Footer() {
                 <Link to="/">{t("common:navbarLinks.documents")}</Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
+                <Link to="/upload-file">{t("common:navbarLinks.upload")}</Link>
+              </li>
+              <li className="hover:text-white text-[var(--grey-clr)]">
                 <Link to="/">{t("common:navbarLinks.contacts")}</Link>
               </li>
             </ul>

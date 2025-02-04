@@ -60,6 +60,7 @@ export default function FeaturesSection() {
           {features.map((feature) => {
             return (
               <FeatureCard
+                key={feature.heading}
                 params={{
                   heading: feature.heading,
                   content: feature.description,

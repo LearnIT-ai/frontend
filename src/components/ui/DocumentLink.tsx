@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 interface DocumentLinkTypes {
   params: {
     content: string;
+    link: string;
   };
 }
 
 export default function DocumentLink({ params }: DocumentLinkTypes) {
   return (
-    <Link to={`${location.pathname}/basics-of-ai`}>
+    <Link to={`${location.pathname}/${params.link}`}>
       <li
         className="document-link flex flex-row gap-4 items-center 
-      p-4 pl-0 border-b-[1px] hover:border-b-[var(--primary-clr)]"
+                    p-2 pl-0"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

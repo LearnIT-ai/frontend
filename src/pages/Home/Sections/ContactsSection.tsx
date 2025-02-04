@@ -77,7 +77,7 @@ export default function ContactsSection() {
         </div>
         <div className="flex flex-col gap-6 items-start font-medium text-lg">
           {info.map((e) => {
-            return <ContactInfo params={{ content: e.info }} />;
+            return <ContactInfo key={e.info} params={{ content: e.info }} />;
           })}
         </div>
         <Button

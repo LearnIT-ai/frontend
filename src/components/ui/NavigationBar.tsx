@@ -37,7 +37,8 @@ export default function NavigationBar() {
       content: t("common:navbarLinks.documents"),
       link: "/academic-years",
     },
-    { id: 3, content: t("common:navbarLinks.contacts"), link: "/contacts" },
+    { id: 3, content: t("common:navbarLinks.upload"), link: "/upload-file" },
+    { id: 4, content: t("common:navbarLinks.contacts"), link: "/contacts" },
   ];
 
   return (
@@ -156,7 +157,7 @@ export default function NavigationBar() {
         {token && (
           <div className="flex flex-1 justify-end">
             <div
-              className="border-2 border-[var(--border-clr)] w-12 h-12 bg-[var(--primary-clr)] overflow-hidden rounded-full cursor-pointer"
+              className="border-2 border-[var(--border-clr)] w-10 h-10 bg-[var(--primary-clr)] overflow-hidden rounded-full cursor-pointer"
               onClick={() => navigate("/personal-profile")}
             >
               <img src={bot} alt="" />

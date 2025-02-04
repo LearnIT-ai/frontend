@@ -39,18 +39,20 @@ export default function AcademicYearCourses() {
         <div className="courses w-full grid grid-rows-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-4 lg:gap-10">
           {subjects
             .filter((subject) => subject.course === yearNumber)
-            .map((subject) => (
-              <CourseCard
-                key={subject.id}
-                params={{
-                  heading: subject.fullName,
-                  year: academicYear,
-                  semester: `${subject.semester} semester`,
-                  decoration: subject.name,
-                  link: subject.fullName.toLowerCase().split(" ").join("-"),
-                }}
-              />
-            ))}
+            .map((subject) => {
+              return (
+                <CourseCard
+                  key={subject.id}
+                  params={{
+                    heading: subject.fullName,
+                    year: academicYear,
+                    semester: `${subject.semester} semester`,
+                    decoration: subject.name,
+                    link: subject.fullName.toLowerCase().split(" ").join("-"),
+                  }}
+                />
+              );
+            })}
         </div>
       </div>
     </motion.div>

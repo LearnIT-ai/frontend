@@ -33,7 +33,8 @@
     "description": "Select from a set of subjects tailored to each academic year. Accomplish them confidently, knowing our AI assistant is here to guide you every step of the way. Stay focused, stay on track, and achieve your academic goals with ease!",
     "tabs": [
       { "title": "1st Year", "link": "first-year" },
-      { "title": "2nd Year", "link": "second-year" }
+      { "title": "2nd Year", "link": "second-year" },
+      { "title": "3rd Year", "link": "third-year" }
     ],
     "button": "View more subjects 📚"
   },

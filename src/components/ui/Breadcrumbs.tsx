@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function Breadcrumbs() {
   const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => x);
+  const pathnames = decodeURIComponent(location.pathname)
+    .split("/")
+    .filter((x) => x);
   return (
     <ul className="mb-10 flex flex-wrap text-base gap-3 md:gap-4 uppercase md:text-xs font-medium">
       <li key={0}>
