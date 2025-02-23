@@ -10,8 +10,8 @@ import Signup from "./pages/Signup";
 import OurServices from "./pages/OurServices";
 import AboutUs from "./pages/AboutUs";
 import UploadFile from "./pages/UploadDocs/UploadFile";
-import PreviewFile from "./pages/UploadDocs/PreviewFile";
-import SubmitPage from "./pages/UploadDocs/SubmitPage";
+import SummaryPage from "./pages/UploadDocs/SummaryPage";
+import SubmitAssignment from "./pages/UploadDocs/SubmitAssignment";
 import Contacts from "./pages/Contacts";
 import AcademicYears from "./pages/AcademicYears";
 import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
@@ -21,6 +21,9 @@ import TestDocumentPreview from "./pages/layouts/Topic/Topic";
 
 import "./App.css";
 import PersonalProfile from "./pages/PersonalProfile";
+import UploadText from "./pages/UploadDocs/UploadText";
+import CheckAssignment from "./pages/CheckAssignment/CheckAssignment";
+import ChatBot from "./pages/ChatBot.tsx/ChatBot";
 
 function App() {
   const [isErrorPage, setIsErrorPage] = useState<boolean>(false);
@@ -50,7 +53,7 @@ function App() {
   };
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col" id="app-container">
       <ScrollToTop />
       {!isErrorPage && (
         <header>
@@ -67,9 +70,18 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/academic-years" element={<AcademicYears />} />
-          <Route path="/upload-file" element={<UploadFile />} />
-          <Route path="/upload-file/preview" element={<PreviewFile />} />
-          <Route path="/upload-file/preview/submit" element={<SubmitPage />} />
+          <Route path="/chatbot" element={<ChatBot />} />
+          <Route path="/check-assignment" element={<CheckAssignment />} />
+          <Route path="/submit-assignment" element={<SubmitAssignment />} />
+          <Route
+            path="/submit-assignment/upload-file"
+            element={<UploadFile />}
+          />
+          <Route
+            path="/submit-assignment/upload-text"
+            element={<UploadText />}
+          />
+          <Route path="/submit-assignment/summary" element={<SummaryPage />} />
           <Route
             path="/academic-years/:academicYear"
             element={<AcademicYearCourses />}

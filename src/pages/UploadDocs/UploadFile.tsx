@@ -1,17 +1,33 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 
 import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import SectionHeading from "../../components/ui/SectionHeading";
 import SectionDescription from "../../components/ui/SectionDescription";
 import Button from "../../components/ui/Button";
 import ChatButton from "../../components/ui/chat_ui/ChatButton";
-import { useNavigate } from "react-router-dom";
+import Textarea from "../../components/ui/Textarea";
 
 export default function UploadFile() {
-  const [document, setDocument] = useState<File | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const [comment, setComment] = useState<string>("");
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
+  const commentRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
+
+  const allowedFormats = ["pdf", "docx", "doc", "py"];
+
+  const [file, setFile] = useState<File | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function triggerInput() {
     if (!inputRef || !inputRef.current) return;
@@ -20,74 +36,124 @@ export default function UploadFile() {
 
   function selectDocument(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files) {
-      setDocument(e.target.files[0]);
+      const selectedDocumentFormat =
+        e.target.files[0]?.name.split(".").pop()?.toLowerCase() || "";
+      if (!allowedFormats.includes(selectedDocumentFormat)) {
+        setShowPopup(true);
+      } else {
+        setFile(e.target.files[0]);
+      }
     }
   }
+
+  useEffect(() => {
+    const topContainer = document.getElementById("app-container");
+
+    if (topContainer) {
+      if (showPopup) {
+        topContainer.style.height = "100vh";
+      } else {
+        topContainer.style.height = "auto";
+      }
+    }
+
+    return () => {
+      if (topContainer) topContainer.style.height = "auto";
+    };
+  }, [showPopup]);
 
   function deleteDocument() {
-    setDocument(null);
+    setFile(null);
   }
 
-  function previewDocument() {
-    if (document === null) {
-      alert("Please, select a file!");
-    } else {
-      const documentUrl = URL.createObjectURL(document);
-      localStorage.setItem(
-        "selectedFile",
-        JSON.stringify({
-          name: document.name,
-          type: document.type,
-          url: documentUrl,
-        })
-      );
-      navigate("/upload-file/preview");
-    }
+  function submitDocument() {
+    // axios post request
+    // await axios
+    //   .post(`http://localhost:5050/`, {
+    //     file: file,
+    //     comment: comment,
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     navigate("/submit-assignment/summary");
+    //   })
+    //   .catch((e) => {
+    //     console.error(e.message);
+    //   });
+
+    navigate("/submit-assignment/summary");
   }
 
   return (
-    <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      <div
+    <div
+      className={`${
+        showPopup ? "" : ""
+      } px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]`}
+    >
+      {showPopup && (
+        <div
+          className="w-[100vw] h-[100vh] absolute top-0 left-0 bg-[var(--popup-screen-clr)] z-50
+                      backdrop-blur-sm flex justify-center items-center"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              transition: { duration: 0.4, ease: "easeInOut" },
+            }}
+            viewport={{ once: true }}
+            className="w-[40vw] h-fit bg-[var(--bg-clr)] text-white rounded-xl border-2 border-[var(--border-clr)] 
+                      overflow-hidden relative p-6 text-center flex flex-col gap-6 items-center"
+          >
+            <div className="absolute w-full h-2 top-0 left-0 bg-[var(--yellow-clr)]"></div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-exclamation-triangle w-12 h-12 mt-2"
+              viewBox="0 0 16 16"
+            >
+              <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+              <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+            </svg>
+            {t("submitAssignment:submitFile.popup")}
+            <Button
+              params={{
+                content: t("submitAssignment:submitFile.block.errorBtn"),
+                onClickFunction: () => setShowPopup(false),
+                className: "btn-primary",
+              }}
+            />
+          </motion.div>
+        </div>
+      )}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+          transition: { duration: 0.4, ease: "easeInOut" },
+        }}
+        viewport={{ once: true }}
         className="mt-[40px] w-full flex flex-col 
           text-left items-start"
       >
         <Breadcrumbs />
-        <div
-          className="courses w-full grid grid-rows-auto grid-cols-1 md:grid-cols-2 
-                lg:grid-cols-3 gap-8 md:gap-4 lg:gap-10"
-        ></div>
         <section className="w-full flex flex-col items-start">
           <SectionHeading
             params={{
-              content: "Upload Files",
+              content: t("submitAssignment:submitFile.title"),
             }}
           />
           <SectionDescription
             params={{
-              content:
-                "Upload your hometask in PDF format and check it correctness with the AI Assistant:",
+              content: t("submitAssignment:submitFile.description"),
               alignment: "text-left",
-              className: "mb-4",
+              className: "mb-16",
             }}
           />
-          <ul className="flex flex-col gap-2 mb-16">
-            <li className="flex gap-4 items-center font-semibold">
-              <p className="text-xl">📄</p>
-              <p>Select a file</p>
-            </li>
-            <li className="flex gap-4 items-center">
-              <p className="text-xl">🤖</p>
-              <p className="text-[var(--input-text-clr)]">
-                Preview the document and talk with AI Assistant
-              </p>
-            </li>
-            <li className="flex gap-4 items-center">
-              <p className="text-xl">✅</p>
-              <p className="text-[var(--input-text-clr)]">
-                Submit the document
-              </p>
-            </li>
-          </ul>
           <div
             className="w-full rounded-xl border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)]
                           flex justify-center items-center flex-col p-10 lg:p-20 gap-6"
@@ -106,42 +172,41 @@ export default function UploadFile() {
               </svg>
             </div>
             <p className="text-xl font-semibold uppercase w-[60%] text-center">
-              Select a file from your device
+              {t("submitAssignment:submitFile.block.header")}
             </p>
-            <p className="text-[var(--input-text-clr)]">Files supported: PDF</p>
+            <p className="text-[var(--input-text-clr)]">
+              {t("submitAssignment:submitFile.block.description")}
+            </p>
             <div className="flex flex-row gap-4">
               <Button
                 params={{
-                  content: "Upload a file",
+                  content: t("submitAssignment:submitFile.block.uploadBtn"),
                   onClickFunction: triggerInput,
                   className: "btn-primary mt-4",
                 }}
               />
-              <button
-                className={`border-2 text-white font-medium rounded-lg 
-                            px-3 md:px-4 py-2 text-center w-fit uppercase text-base mt-4
-                            ${
-                              document
-                                ? "hover:ring-2 hover:ring-blue-300 border-[var(--primary-clr)]"
-                                : "border-[var(--border-clr)] text-[var(--input-clr)]"
-                            }`}
-                onClick={previewDocument}
-                type="button"
-                disabled={document ? false : true}
-              >
-                Preview
-              </button>
+              <Button
+                params={{
+                  content: t("submitAssignment:submitFile.block.submitBtn"),
+                  onClickFunction: submitDocument,
+                  className: `border-2 mt-4 ${
+                    file
+                      ? "hover:ring-2 hover:ring-blue-300 border-[var(--primary-clr)]"
+                      : "border-[var(--border-clr)] text-[var(--input-clr)] hover:none"
+                  }`,
+                  disabled: file ? false : true,
+                }}
+              />
             </div>
             <input
               ref={inputRef}
               id="file"
               type="file"
               hidden
-              accept=".pdf"
               onChange={selectDocument}
             />
           </div>
-          {document && (
+          {file && (
             <div
               className="w-full rounded-xl border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)]
                           flex flex-row p-6 gap-6 mt-6 items-center justify-between"
@@ -156,14 +221,13 @@ export default function UploadFile() {
                     className="bi bi-file-earmark-pdf-fill w-8 h-8 fill-[var(--yellow-clr)]"
                     viewBox="0 0 16 16"
                   >
-                    <path d="M5.523 12.424q.21-.124.459-.238a8 8 0 0 1-.45.606c-.28.337-.498.516-.635.572l-.035.012a.3.3 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548m2.455-1.647q-.178.037-.356.078a21 21 0 0 0 .5-1.05 12 12 0 0 0 .51.858q-.326.048-.654.114m2.525.939a4 4 0 0 1-.435-.41q.344.007.612.054c.317.057.466.147.518.209a.1.1 0 0 1 .026.064.44.44 0 0 1-.06.2.3.3 0 0 1-.094.124.1.1 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256M8.278 6.97c-.04.244-.108.524-.2.829a5 5 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.5.5 0 0 1 .145-.04c.013.03.028.092.032.198q.008.183-.038.465z" />
-                    <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.7 11.7 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.86.86 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.84.84 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.8 5.8 0 0 0-1.335-.05 11 11 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.24 1.24 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a20 20 0 0 1-1.062 2.227 7.7 7.7 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103" />
+                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z" />
                   </svg>
                 </div>
                 <div className="flex flex-row gap-2">
-                  <p>{document.name}</p>
+                  <p>{file.name}</p>
                   <p className="text-[var(--input-text-clr)]">
-                    ({Math.round((document.size / 1000000) * 100) / 100} MB)
+                    ({Math.round((file.size / 1000000) * 100) / 100} MB)
                   </p>
                 </div>
               </div>
@@ -177,8 +241,18 @@ export default function UploadFile() {
               />
             </div>
           )}
+
+          <Textarea
+            params={{
+              ref: commentRef,
+              handleChangeFunction: handleTextareaChange,
+              value: comment,
+              type: "file",
+              placeholder: t("submitAssignment:submitFile.block.comment"),
+            }}
+          />
         </section>
-      </div>
+      </motion.div>
     </div>
   );
 }

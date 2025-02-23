@@ -1,0 +1,44 @@
+{
+  "mainPage": {
+    "title": "Submit your assignment",
+    "description": "Submit your assignment as a file or text and get detailed analysis conducted by the AI Assistant.",
+    "blocks": {
+      "file": {
+        "header": "Submit assignment as a file",
+        "description": "Files supported: PDF, DOCX, DOC, PY"
+      },
+      "text": {
+        "header": "Submit assignment as a text message",
+        "description": "Provide your answer in the input"
+      }
+    }
+  },
+  "submitFile": {
+    "title": "Upload a File",
+    "description": "Upload your hometask in one of the provided formats and get analysis from the AI Assistant. Leave a comment for the professor if needed.",
+    "block": {
+      "header": "Select a file from your device",
+      "description": "Files supported: PDF, DOCX, DOC, PY",
+      "uploadBtn": "Upload a file",
+      "errorBtn": "Got it!",
+      "submitBtn": "Submit",
+      "comment": "Leave a comment"
+    },
+    "popup": "Selected file format is not supported. Choose a different one."
+  },
+  "submitText": {
+    "title": "Upload text answer",
+    "description": "Submit your hometask as a text answer and get analysis from the AI Assistant. Leave a comment for the professor if needed.",
+    "block": {
+      "answer": "Leave an answer",
+      "comment": "Leave a comment"
+    },
+    "submitBtn": "Submit",
+    "popup": "You cannot send blank form. Please, provide an answer."
+  },
+  "summary": {
+    "title": "AI Summary",
+    "description": "Your task has been successfully submitted for the review. For now, view the summary of the AI Assistant. It may take a while for the analysis to be ready.",
+    "btn": "Retun to home page"
+  }
+}

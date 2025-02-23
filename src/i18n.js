@@ -11,7 +11,7 @@ i18next
     debug: false,
     fallbackLng: "en",
     returnObjects: true,
-    ns: ["common", "translation", "account"],
+    ns: ["common", "translation", "account", "submitAssignment"],
     defaultNS: "translation",
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",

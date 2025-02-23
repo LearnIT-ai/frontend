@@ -99,7 +99,7 @@ export default function CoursesSection() {
           transition: { duration: 0.3, ease: "easeOut" },
         }}
         viewport={{ once: true }}
-        className="flex flex-col items-center gap-12 md:gap-16"
+        className="flex flex-col items-center w-full gap-12 md:gap-16"
       >
         <div className="flex flex-col w-full md:w-fit md:flex-row">
           {tabs.map((tabNav) => {

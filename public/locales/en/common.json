@@ -7,9 +7,30 @@
   "navbarLinks": {
     "services": "Our Services",
     "aboutUs": "About Us",
-    "documents": "Academic Years & Courses",
-    "upload": "Upload Files",
+    "documents": "Courses",
+    "upload": "Submit Assignment",
+    "check": "Check Assignment",
+    "chatbot": "Chatbot",
     "contacts": "Contacts"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "login": "Log In",
+    "signup": "Sign up",
+    "personal-profile": "Personal Profile",
+    "our-services": "Our Services",
+    "about-us": "About Us",
+    "contacts": "Contacts",
+    "academic-years": "Academic Years",
+    "chatbot": "Chatbot",
+    "check-assignment": "Check Assignment",
+    "submit-assignment": "Submit Assignment",
+    "summary": "Summary",
+    "upload-file": "Upload File",
+    "upload-text": "Upload Text",
+    "first-year": "First Year",
+    "second-year": "Second Year",
+    "third-year": "Third Year"
   },
   "footerLinks": {
     "info": "Information",
