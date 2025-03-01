@@ -8,6 +8,7 @@ interface CourseCardProps {
     decoration: string;
     link: string;
     className?: string;
+    type: "lectures" | "assignments";
   };
 }
 
@@ -18,18 +19,35 @@ export default function CourseCard({ params }: CourseCardProps) {
                     rounded-xl border-2 border-[var(--border-clr)] overflow-hidden
                     ${params.className}`}
     >
-      <Link
-        to={`/academic-years/${params.year}/${params.link}`}
-        className="flex flex-col items-start text-left h-full w-full"
-      >
-        <div
-          className="decoration text-white p-4 lg:p-6 text-[80px] md:text-[100px]
+      {params.type === "lectures" && (
+        <Link
+          to={`/academic-years/${params.year}/${params.link}`}
+          className="flex flex-col items-start text-left h-full w-full"
+        >
+          <div
+            className="decoration text-white p-4 lg:p-6 text-[80px] md:text-[100px]
         lg:text-[65px] xl:text-[95px] leading-[80%] font-black uppercase h-48 flex items-end w-full
         break-all"
+          >
+            {params.decoration}
+          </div>
+        </Link>
+      )}
+      {params.type === "assignments" && (
+        <Link
+          to={`/all-assignments/${params.link}`}
+          className="flex flex-col items-start text-left h-full w-full"
         >
-          {params.decoration}
-        </div>
-      </Link>
+          <div
+            className="decoration text-white p-4 lg:p-6 text-[80px] md:text-[100px]
+        lg:text-[65px] xl:text-[95px] leading-[80%] font-black uppercase h-48 flex items-end w-full
+        break-all"
+          >
+            {params.decoration}
+          </div>
+        </Link>
+      )}
+
       <div className="h-full flex flex-col gap-2 items-start justify-start text-left p-4 lg:p-6">
         <p className="uppercase font-semibold">{params.heading}</p>
         <p className="text-xs">{params.semester}</p>

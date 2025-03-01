@@ -5,6 +5,7 @@ export default function DocViewer() {
   const { docName } = useParams();
 
   const fileUrl = `http://localhost:5050/file/${docName}`;
+  console.log(fileUrl);
 
   return (
     <motion.iframe

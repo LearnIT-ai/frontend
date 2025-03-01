@@ -4,15 +4,19 @@ interface DocumentLinkTypes {
   params: {
     content: string;
     link: string;
+    state?: string;
   };
 }
 
 export default function DocumentLink({ params }: DocumentLinkTypes) {
   return (
-    <Link to={`${location.pathname}/${params.link}`}>
+    <Link
+      to={`${location.pathname}/${params.link}`}
+      state={{ name: params.state }}
+    >
       <li
-        className="document-link flex flex-row gap-4 items-center 
-                    p-2 pl-0"
+        className="document-link w-full rounded-xl border-2 border-[var(--border-clr)] 
+                        bg-[var(--navbar-clr)] flex flex-row p-4 gap-6 cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

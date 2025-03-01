@@ -127,6 +127,7 @@ export default function CoursesSection() {
                   year: tab,
                   semester: `${subject.semester} semester`,
                   decoration: subject.name,
+                  type: "lectures",
                   link: subject.fullName.toLowerCase().split(" ").join("-"),
                   className: `${bounce ? "animate-custom-bounce" : ""}`,
                 }}

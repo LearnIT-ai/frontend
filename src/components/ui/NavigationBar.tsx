@@ -44,8 +44,8 @@ export default function NavigationBar() {
     },
     {
       id: 4,
-      content: t("common:navbarLinks.check"),
-      link: "/check-assignment",
+      content: "All assignments",
+      link: "/all-assignments",
     },
     {
       id: 5,
@@ -73,7 +73,7 @@ export default function NavigationBar() {
             } invert-[1] w-8 h-8 cursor-pointer`}
             onClick={() => setSidebarVisibility(!sidebarVisibility)}
           ></img>
-          <div className="flex gap-4 flew-row">
+          <div className="hidden md:flex gap-4 flew-row">
             <button
               onClick={() => changeLanguage("en")}
               className={`${
@@ -122,6 +122,29 @@ export default function NavigationBar() {
               />
             ))}
           </ul>
+          <div className="md:hidden border-b-2 border-[var(--border-clr)] w-[16rem]"></div>
+          <div className="md:hidden flex gap-4 flew-row">
+            <button
+              onClick={() => changeLanguage("en")}
+              className={`${
+                i18n.language === "en"
+                  ? "bg-[var(--yellow-clr)] text-black"
+                  : "border-2 border-white text-white"
+              } flex font-semibold justify-center items-center text-xs w-7 h-7 rounded-lg`}
+            >
+              en
+            </button>
+            <button
+              onClick={() => changeLanguage("ua")}
+              className={`${
+                i18n.language === "ua"
+                  ? "bg-[var(--yellow-clr)] text-black"
+                  : "border-2 border-white text-white"
+              } flex font-semibold justify-center items-center text-xs w-7 h-7 rounded-lg`}
+            >
+              ua
+            </button>
+          </div>
           <div className="border-b-2 border-[var(--border-clr)] w-[16rem]"></div>
           {token && (
             <Button
@@ -157,6 +180,7 @@ export default function NavigationBar() {
             </ul>
           )}
         </div>
+
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">
             <img

@@ -12,7 +12,6 @@ import DocViewer from "./DocViewer";
 
 export default function TestDocumentPreview() {
   // const url = import.meta.env.URL;
-
   const buttonsRef = useRef<HTMLInputElement>(null);
   const toggleChatRef = useRef<HTMLButtonElement>(null);
 

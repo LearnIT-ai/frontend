@@ -49,10 +49,7 @@ export default function CoursePage() {
             content: "Course: " + courseName?.split("-").join(" ") || "",
           }}
         />
-        <ul
-          className="text-left flex flex-col gap-4 p-4 pl-6 rounded-xl w-full
-                      border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)]"
-        >
+        <ul className="flex flex-col gap-4 w-full">
           {content
             .filter(
               (document) => document.filename.split("\\")[2] === folderName

@@ -22,8 +22,11 @@ import TestDocumentPreview from "./pages/layouts/Topic/Topic";
 import "./App.css";
 import PersonalProfile from "./pages/PersonalProfile";
 import UploadText from "./pages/UploadDocs/UploadText";
-import CheckAssignment from "./pages/CheckAssignment/CheckAssignment";
+import CheckAssignment from "./pages/AllAssignments.tsx/CheckAssignment/CheckAssignment";
 import ChatBot from "./pages/ChatBot.tsx/ChatBot";
+import AllAssignments from "./pages/AllAssignments.tsx/AllAssignments";
+import AssignmentsByCourse from "./pages/AllAssignments.tsx/AssignmentsByCourse";
+import AssignmentPage from "./pages/AllAssignments.tsx/AssignmentPage";
 
 function App() {
   const [isErrorPage, setIsErrorPage] = useState<boolean>(false);
@@ -71,7 +74,19 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/academic-years" element={<AcademicYears />} />
           <Route path="/chatbot" element={<ChatBot />} />
-          <Route path="/check-assignment" element={<CheckAssignment />} />
+          <Route path="/all-assignments" element={<AllAssignments />} />
+          <Route
+            path="/all-assignments/:courseName"
+            element={<AssignmentsByCourse />}
+          />
+          <Route
+            path="/all-assignments/:courseName/:id"
+            element={<AssignmentPage />}
+          />
+          <Route
+            path="/all-assignments/:courseName/:id/:student"
+            element={<CheckAssignment />}
+          />
           <Route path="/submit-assignment" element={<SubmitAssignment />} />
           <Route
             path="/submit-assignment/upload-file"
