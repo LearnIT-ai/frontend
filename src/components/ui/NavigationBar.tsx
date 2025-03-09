@@ -37,8 +37,22 @@ export default function NavigationBar() {
       content: t("common:navbarLinks.documents"),
       link: "/academic-years",
     },
-    { id: 3, content: t("common:navbarLinks.upload"), link: "/upload-file" },
-    { id: 4, content: t("common:navbarLinks.contacts"), link: "/contacts" },
+    {
+      id: 3,
+      content: t("common:navbarLinks.upload"),
+      link: "/submit-assignment",
+    },
+    {
+      id: 4,
+      content: "All assignments",
+      link: "/all-assignments",
+    },
+    {
+      id: 5,
+      content: t("common:navbarLinks.chatbot"),
+      link: "/chatbot",
+    },
+    { id: 6, content: t("common:navbarLinks.contacts"), link: "/contacts" },
   ];
 
   return (
@@ -59,7 +73,7 @@ export default function NavigationBar() {
             } invert-[1] w-8 h-8 cursor-pointer`}
             onClick={() => setSidebarVisibility(!sidebarVisibility)}
           ></img>
-          <div className="flex gap-4 flew-row">
+          <div className="hidden md:flex gap-4 flew-row">
             <button
               onClick={() => changeLanguage("en")}
               className={`${
@@ -108,6 +122,29 @@ export default function NavigationBar() {
               />
             ))}
           </ul>
+          <div className="md:hidden border-b-2 border-[var(--border-clr)] w-[16rem]"></div>
+          <div className="md:hidden flex gap-4 flew-row">
+            <button
+              onClick={() => changeLanguage("en")}
+              className={`${
+                i18n.language === "en"
+                  ? "bg-[var(--yellow-clr)] text-black"
+                  : "border-2 border-white text-white"
+              } flex font-semibold justify-center items-center text-xs w-7 h-7 rounded-lg`}
+            >
+              en
+            </button>
+            <button
+              onClick={() => changeLanguage("ua")}
+              className={`${
+                i18n.language === "ua"
+                  ? "bg-[var(--yellow-clr)] text-black"
+                  : "border-2 border-white text-white"
+              } flex font-semibold justify-center items-center text-xs w-7 h-7 rounded-lg`}
+            >
+              ua
+            </button>
+          </div>
           <div className="border-b-2 border-[var(--border-clr)] w-[16rem]"></div>
           {token && (
             <Button
@@ -143,6 +180,7 @@ export default function NavigationBar() {
             </ul>
           )}
         </div>
+
         <div className="text-lg font-bold flex-1 justify-center hover:text-xl duration-300 ease-in-out">
           <Link to="/">
             <img

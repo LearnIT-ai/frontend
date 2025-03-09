@@ -7,9 +7,30 @@
   "navbarLinks": {
     "services": "Наші Послуги",
     "aboutUs": "Про нас",
-    "documents": "Академічні роки і курси",
+    "documents": "Курси",
     "upload": "Завантажте роботу",
+    "check": "Перевірка робіт",
+    "chatbot": "Чат Бот",
     "contacts": "Контакти"
+  },
+  "breadcrumbs": {
+    "home": "Головна",
+    "login": "Увійти",
+    "signup": "Зареєструватися",
+    "personal-profile": "Особистий Кабінет",
+    "our-services": "Наші Послуги",
+    "about-us": "Про Нас",
+    "contacts": "Контакти",
+    "academic-years": "Академічні Роки",
+    "chatbot": "Чат Бот",
+    "check-assignment": "Перевірка завдання",
+    "submit-assignment": "Здача завдання",
+    "summary": "Аналіз",
+    "upload-file": "Завантажити файл",
+    "upload-text": "Завантажити текст",
+    "first-year": "Перший Курс",
+    "second-year": "Другий Курс",
+    "third-year": "Третій Курс"
   },
   "footerLinks": {
     "info": "Інформація",

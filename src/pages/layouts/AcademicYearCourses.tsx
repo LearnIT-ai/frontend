@@ -48,6 +48,7 @@ export default function AcademicYearCourses() {
                     year: academicYear,
                     semester: `${subject.semester} semester`,
                     decoration: subject.name,
+                    type: "lectures",
                     link: subject.fullName.toLowerCase().split(" ").join("-"),
                   }}
                 />

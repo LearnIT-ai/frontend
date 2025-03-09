@@ -1,5 +1,5 @@
 export interface contentType {
-  id: string;
+  _id: string;
   filename: string;
   metadata: {
     path: string;
