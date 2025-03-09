@@ -7,6 +7,7 @@ export default function ReviewList() {
         params={{
           content: "Test Student",
           date: "18.02.2025 00:00 AM",
+          grade: "-/10",
         }}
       />
     </div>

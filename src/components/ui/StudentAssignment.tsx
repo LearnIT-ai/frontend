@@ -5,6 +5,7 @@ interface StudentAssignmentTypes {
   params: {
     content: string;
     date: string;
+    grade: string;
     state?: string;
   };
 }
@@ -17,7 +18,10 @@ export default function StudentAssignment({ params }: StudentAssignmentTypes) {
                   bg-[var(--navbar-clr)] flex flex-row p-4 justify-between items-center"
     >
       <p className="flex-1">{params.content}</p>
-      <p className="flex flex-1 justify-center">{params.date}</p>
+      <div className="flex flex-[1.4] justify-between">
+        <p>{params.date}</p>
+        <p>{params.grade}</p>
+      </div>
       <div className="flex flex-1 justify-end">
         <Button
           params={{
