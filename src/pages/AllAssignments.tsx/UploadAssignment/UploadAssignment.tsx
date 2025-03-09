@@ -1,28 +1,39 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import Breadcrumbs from "../../../components/ui/Breadcrumbs";
+import Button from "../../../components/ui/Button";
+import SectionHeading from "../../../components/ui/SectionHeading";
+import SectionDescription from "../../../components/ui/SectionDescription";
+// import { t } from "i18next";
+import ChatButton from "../../../components/ui/chat_ui/ChatButton";
+import Textarea from "../../../components/ui/Textarea";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Popup from "../../../components/ui/Popup";
 
-import Breadcrumbs from "../../components/ui/Breadcrumbs";
-import SectionHeading from "../../components/ui/SectionHeading";
-import SectionDescription from "../../components/ui/SectionDescription";
-import Button from "../../components/ui/Button";
-import ChatButton from "../../components/ui/chat_ui/ChatButton";
-import Textarea from "../../components/ui/Textarea";
-import Popup from "../../components/ui/Popup";
-
-export default function UploadFile() {
-  const { t } = useTranslation();
+export default function UploadAssignment() {
   const navigate = useNavigate();
 
-  const [comment, setComment] = useState<string>("");
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const { t } = useTranslation();
 
-  const commentRef = useRef<HTMLTextAreaElement>(null);
+  const [assignmentName, setAssignmentName] = useState<string>("");
+  const [assignmentDescription, setAssignmentDescription] =
+    useState<string>("");
 
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
+  const [showErrorPopup, setShowErrorPopup] = useState<boolean>(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState<boolean>(false);
+
+  const nameRef = useRef<HTMLTextAreaElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setAssignmentName(e.target.value);
+  };
+
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setAssignmentDescription(e.target.value);
   };
 
   const allowedFormats = ["pdf", "docx", "doc", "py"];
@@ -40,7 +51,7 @@ export default function UploadFile() {
       const selectedDocumentFormat =
         e.target.files[0]?.name.split(".").pop()?.toLowerCase() || "";
       if (!allowedFormats.includes(selectedDocumentFormat)) {
-        setShowPopup(true);
+        setShowErrorPopup(true);
       } else {
         setFile(e.target.files[0]);
       }
@@ -51,7 +62,7 @@ export default function UploadFile() {
     const topContainer = document.getElementById("app-container");
 
     if (topContainer) {
-      if (showPopup) {
+      if (showErrorPopup || showSuccessPopup) {
         topContainer.style.height = "100vh";
       } else {
         topContainer.style.height = "auto";
@@ -61,7 +72,7 @@ export default function UploadFile() {
     return () => {
       if (topContainer) topContainer.style.height = "auto";
     };
-  }, [showPopup]);
+  }, [showErrorPopup, showSuccessPopup]);
 
   function deleteDocument() {
     setFile(null);
@@ -69,33 +80,35 @@ export default function UploadFile() {
 
   function submitDocument() {
     // axios post request
-    // await axios
-    //   .post(`http://localhost:5050/`, {
-    //     file: file,
-    //     comment: comment,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     navigate("/submit-assignment/summary");
-    //   })
-    //   .catch((e) => {
-    //     console.error(e.message);
-    //   });
 
-    navigate("/submit-assignment/summary");
+    setShowSuccessPopup(true);
   }
 
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      {showPopup && (
+      {showErrorPopup && (
         <Popup
           params={{
             type: "error",
             content: t("submitAssignment:submitFile.popup"),
-            onClickFunction: () => setShowPopup(false),
+            onClickFunction: () => setShowErrorPopup(false),
           }}
         />
       )}
+
+      {showSuccessPopup && (
+        <Popup
+          params={{
+            type: "success",
+            content: "The assignment was successfully uploaded to the system.",
+            onClickFunction: () => {
+              navigate(-1);
+              setShowSuccessPopup(false);
+            },
+          }}
+        />
+      )}
+
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{
@@ -111,19 +124,20 @@ export default function UploadFile() {
         <section className="w-full flex flex-col items-start">
           <SectionHeading
             params={{
-              content: t("submitAssignment:submitFile.title"),
+              content: "Upload new assignment",
             }}
           />
           <SectionDescription
             params={{
-              content: t("submitAssignment:submitFile.description"),
+              content:
+                "Please upload your homework file in one of the following formats: PDF, DOC, DOCX, or PY. This ensures compatibility for review and grading.",
               alignment: "text-left",
               className: "mb-16",
             }}
           />
           <div
             className="w-full rounded-xl border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)]
-                          flex justify-center items-center flex-col p-10 lg:p-20 gap-6"
+                                    flex justify-center items-center flex-col p-10 lg:p-20 gap-6"
           >
             <div>
               <svg
@@ -157,11 +171,11 @@ export default function UploadFile() {
                   content: t("submitAssignment:submitFile.block.submitBtn"),
                   onClickFunction: submitDocument,
                   className: `border-2 mt-4 ${
-                    file
+                    file && assignmentName
                       ? "hover:ring-2 hover:ring-blue-300 border-[var(--primary-clr)]"
                       : "border-[var(--border-clr)] text-[var(--input-clr)] hover:none"
                   }`,
-                  disabled: file ? false : true,
+                  disabled: file && assignmentName ? false : true,
                 }}
               />
             </div>
@@ -176,7 +190,7 @@ export default function UploadFile() {
           {file && (
             <div
               className="w-full rounded-xl border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)]
-                          flex flex-row p-6 gap-6 mt-6 items-center justify-between"
+                                    flex flex-row p-6 gap-6 mt-6 items-center justify-between"
             >
               <div className="flex flex-row gap-6 items-center">
                 <div>
@@ -211,13 +225,28 @@ export default function UploadFile() {
 
           <Textarea
             params={{
-              ref: commentRef,
-              handleChangeFunction: handleTextareaChange,
-              value: comment,
+              ref: nameRef,
+              handleChangeFunction: handleNameChange,
+              value: assignmentName,
               type: "file",
-              placeholder: t("submitAssignment:submitFile.block.comment"),
+              placeholder: "Leave a name (required)",
             }}
           />
+
+          <Textarea
+            params={{
+              ref: descriptionRef,
+              handleChangeFunction: handleDescriptionChange,
+              value: assignmentDescription,
+              type: "file",
+              placeholder: "Leave a description",
+            }}
+          />
+
+          <div className="flex flex-row gap-6 mt-8 items-center">
+            <input type="checkbox" className="w-4 h-4" />
+            <p>Anti-plagiarism check</p>
+          </div>
         </section>
       </motion.div>
     </div>

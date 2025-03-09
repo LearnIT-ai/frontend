@@ -27,6 +27,7 @@ import ChatBot from "./pages/ChatBot.tsx/ChatBot";
 import AllAssignments from "./pages/AllAssignments.tsx/AllAssignments";
 import AssignmentsByCourse from "./pages/AllAssignments.tsx/AssignmentsByCourse";
 import AssignmentPage from "./pages/AllAssignments.tsx/AssignmentPage";
+import UploadAssignment from "./pages/AllAssignments.tsx/UploadAssignment/UploadAssignment";
 
 function App() {
   const [isErrorPage, setIsErrorPage] = useState<boolean>(false);
@@ -78,6 +79,10 @@ function App() {
           <Route
             path="/all-assignments/:courseName"
             element={<AssignmentsByCourse />}
+          />
+          <Route
+            path="/all-assignments/:courseName/upload-assignment"
+            element={<UploadAssignment />}
           />
           <Route
             path="/all-assignments/:courseName/:id"

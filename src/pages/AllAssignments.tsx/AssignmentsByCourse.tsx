@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "motion/react";
 import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import SectionHeading from "../../components/ui/SectionHeading";
 import DocumentLink from "../../components/ui/DocumentLink";
+import Button from "../../components/ui/Button";
 
 export default function AssignmentsByCourse() {
   const { courseName } = useParams();
+  const navigate = useNavigate();
 
   const taskName = "Practical Work #1";
 
@@ -27,6 +29,13 @@ export default function AssignmentsByCourse() {
           <SectionHeading
             params={{
               content: `All assignments: ${courseName?.split("-").join(" ")}`,
+            }}
+          />
+          <Button
+            params={{
+              content: "Upload assignment",
+              className: "btn-primary mb-6",
+              onClickFunction: () => navigate("upload-assignment"),
             }}
           />
           <div className="flex flex-col gap-4 w-full">
