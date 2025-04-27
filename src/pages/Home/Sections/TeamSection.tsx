@@ -9,7 +9,11 @@ import SectionHeading from "../../../components/ui/SectionHeading";
 import SectionDescription from "../../../components/ui/SectionDescription";
 import { useTranslation } from "react-i18next";
 
-export default function TeamSection() {
+interface TeamSectionProps {
+  showButton: boolean;
+}
+
+export default function TeamSection({ showButton }: TeamSectionProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -176,13 +180,15 @@ export default function TeamSection() {
             }}
           />
         </div>
-        <Button
-          params={{
-            content: t("TeamSection.button"),
-            className: "mt-12 md:mt-16 btn-primary",
-            onClickFunction: () => navigate("about-us"),
-          }}
-        />
+        {showButton && (
+          <Button
+            params={{
+              content: t("TeamSection.button"),
+              className: "mt-12 md:mt-16 btn-primary",
+              onClickFunction: () => navigate("about-us"),
+            }}
+          />
+        )}
       </motion.div>
     </section>
   );

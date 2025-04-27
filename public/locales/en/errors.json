@@ -1,0 +1,20 @@
+{
+  "login": {
+    "email": "Enter your email",
+    "invalidEmail": "Email is not valid",
+    "password": "Enter your password"
+  },
+  "signup": {
+    "additionalError": "Your passwords don't match!",
+    "firstName": "Enter your first name",
+    "lastName": "Enter your last name",
+    "fatherName": "Enter your father name",
+    "city": "Select your city",
+    "profileType": "Select your profile type",
+    "email": "Enter your email",
+    "invalidEmail": "Email is not valid",
+    "password": "Enter and confirm your password",
+    "confirmPassword": "Enter and confirm your password",
+    "phoneNumber": "Enter your phone number"
+  }
+}

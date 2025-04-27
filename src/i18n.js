@@ -10,8 +10,12 @@ i18next
   .init({
     debug: false,
     fallbackLng: "en",
+    lng: "en",
+    interpolation: {
+      escapeValue: false,
+    },
     returnObjects: true,
-    ns: ["common", "translation", "account", "submitAssignment"],
+    ns: ["common", "translation", "account", "submitAssignment", "errors"],
     defaultNS: "translation",
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",

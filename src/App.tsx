@@ -1,3 +1,5 @@
+import "./i18n";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
