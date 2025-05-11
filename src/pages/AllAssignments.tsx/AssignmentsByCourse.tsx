@@ -4,8 +4,10 @@ import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import SectionHeading from "../../components/ui/SectionHeading";
 import DocumentLink from "../../components/ui/DocumentLink";
 import Button from "../../components/ui/Button";
+import { useTranslation } from "react-i18next";
 
 export default function AssignmentsByCourse() {
+  const { t } = useTranslation();
   const { courseName } = useParams();
   const navigate = useNavigate();
 
@@ -28,7 +30,9 @@ export default function AssignmentsByCourse() {
         <section className="w-full flex flex-col items-start">
           <SectionHeading
             params={{
-              content: `All assignments: ${courseName?.split("-").join(" ")}`,
+              content: `${t("common:breadcrumbs.all-assignments")}: ${courseName
+                ?.split("-")
+                .join(" ")}`,
             }}
           />
           <Button

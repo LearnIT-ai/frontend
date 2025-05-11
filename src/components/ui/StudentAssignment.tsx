@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useTranslation } from "react-i18next";
 
 interface StudentAssignmentTypes {
   params: {
@@ -12,6 +13,7 @@ interface StudentAssignmentTypes {
 
 export default function StudentAssignment({ params }: StudentAssignmentTypes) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <li
       className="w-full rounded-xl border-2 border-[var(--border-clr)] 
@@ -25,7 +27,7 @@ export default function StudentAssignment({ params }: StudentAssignmentTypes) {
       <div className="flex flex-1 justify-end">
         <Button
           params={{
-            content: "Grade",
+            content: t("common:assignment.grade"),
             className: "btn-primary",
             onClickFunction: () => navigate(params.content),
           }}

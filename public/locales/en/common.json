@@ -10,6 +10,7 @@
     "documents": "Courses",
     "upload": "Submit Assignment",
     "check": "Check Assignment",
+    "all-assignments": "All assignments",
     "chatbot": "Chatbot",
     "contacts": "Contacts"
   },
@@ -22,6 +23,7 @@
     "about-us": "About Us",
     "contacts": "Contacts",
     "academic-years": "Academic Years",
+    "all-assignments": "All assignments",
     "chatbot": "Chatbot",
     "check-assignment": "Check Assignment",
     "submit-assignment": "Submit Assignment",
@@ -31,6 +33,19 @@
     "first-year": "First Year",
     "second-year": "Second Year",
     "third-year": "Third Year"
+  },
+  "assignment": {
+    "assigned": "Assigned",
+    "deadline": "Deadline",
+    "plagiarism": "Anti-plagiarism check",
+    "review": "Review",
+    "close": "Close",
+    "grade": "Grade"
+  },
+  "chat": {
+    "common-chatbot-message": "Hi, I am Learn.it bot 😎. How can I assist you?",
+    "doc-preview-chatbot-message": "Hi, I am Learn.it bot 😎. How can I assist you with the document?",
+    "placeholder": "Ask something..."
   },
   "footerLinks": {
     "info": "Information",

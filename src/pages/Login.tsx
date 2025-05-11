@@ -1,17 +1,21 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
+import { FormEvent, useEffect, useState } from "react";
 import { motion } from "motion/react";
-
-import SocialAppButton from "../components/ui/SocialAppButton";
+import axios from "axios";
 
 import google from "../assets/icons/google_login.svg";
 import facebook from "../assets/icons/facebook_login.svg";
 import instagram from "../assets/icons/instagram_login.svg";
-
+import SocialAppButton from "../components/ui/SocialAppButton";
 import LoginForm from "../components/LoginForm";
+import Popup from "../components/ui/Popup";
 
-import { LoginUserDataTypes } from "../interfaces/loginContentTypes";
+import {
+  LoginErrors,
+  LoginUserDataTypes,
+} from "../interfaces/loginContentTypes";
+
+import { validateLoginData } from "../methods/inputsValidation";
 
 import bot from "../assets/images/bot.png";
 import { useTranslation, Trans } from "react-i18next";
@@ -19,7 +23,7 @@ import { useTranslation, Trans } from "react-i18next";
 export default function Login() {
   const navigate = useNavigate();
 
-  // const url = import.meta.env.URL;
+  const url = import.meta.env.VITE_LOGIN_URL;
   const { t } = useTranslation();
 
   const [inputsData, setInputsData] = useState<LoginUserDataTypes>({
@@ -27,27 +31,53 @@ export default function Login() {
     password: "",
   });
 
+  const [validationErrors, setValidationErrors] = useState<LoginErrors>({});
+  const [loginError, setLoginError] = useState<string>("");
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputsData((data) => ({ ...data, [name]: value }));
-    console.log(inputsData);
+    setValidationErrors((data) => ({ ...data, [name]: "" }));
   };
 
-  const handleLogIn = async () => {
+  const handleLogIn = async (e: FormEvent) => {
+    e.preventDefault();
+    const errors = validateLoginData(inputsData, t);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
     await axios
-      .post(`http://localhost:5050/api/users/login`, {
+      .post(url, {
         email: inputsData.email,
         password: inputsData.password,
       })
       .then((res) => {
-        console.log(res.data);
         document.cookie = `token=${JSON.stringify(res.data.token)}; path=/`;
         navigate("/");
       })
       .catch((e) => {
-        console.error(e.message);
+        setLoginError(e.message);
+        setShowPopup(true);
       });
   };
+
+  useEffect(() => {
+    const topContainer = document.getElementById("app-container");
+
+    if (topContainer) {
+      if (showPopup) {
+        topContainer.style.height = "100vh";
+      } else {
+        topContainer.style.height = "auto";
+      }
+    }
+
+    return () => {
+      if (topContainer) topContainer.style.height = "auto";
+    };
+  }, [showPopup]);
 
   return (
     <motion.div
@@ -79,17 +109,26 @@ export default function Login() {
           />
         </div>
       </div>
-
       <div
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]"
       >
+        {showPopup && (
+          <Popup
+            params={{
+              type: "error",
+              content: loginError,
+              onClickFunction: () => setShowPopup(false),
+            }}
+          />
+        )}
         <h1 className="text-4xl">{t("account:login.title")}</h1>
         <LoginForm
           params={{
             inputsData: inputsData,
             handleLogIn: handleLogIn,
             handleChange: handleInputChange,
+            loginErrors: validationErrors,
           }}
         />
         <p className="text-[var(--input-text-clr)]">

@@ -55,15 +55,25 @@ export default function Footer() {
                 <Link to="/">{t("common:navbarLinks.services")}</Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
-                <Link to="/">{t("common:navbarLinks.aboutUs")}</Link>
+                <Link to="/about-us">{t("common:navbarLinks.aboutUs")}</Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
-                <Link to="/">{t("common:navbarLinks.documents")}</Link>
+                <Link to="/academic-years">
+                  {t("common:navbarLinks.documents")}
+                </Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
                 <Link to="/submit-assignment">
                   {t("common:navbarLinks.upload")}
                 </Link>
+              </li>
+              <li className="hover:text-white text-[var(--grey-clr)]">
+                <Link to="/all-assignments">
+                  {t("common:navbarLinks.all-assignments")}
+                </Link>
+              </li>
+              <li className="hover:text-white text-[var(--grey-clr)]">
+                <Link to="/chatbot">{t("common:navbarLinks.chatbot")}</Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
                 <Link to="/">{t("common:navbarLinks.contacts")}</Link>

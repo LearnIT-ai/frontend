@@ -5,11 +5,13 @@ interface SelectProps {
   params: {
     id: string;
     value: string;
+    ariaLabel: string;
     selectName?: string;
     functionName: (e: ChangeEvent<HTMLSelectElement>) => void;
     selectClassName?: string;
     isRequired: boolean;
     optionsContent: selectContentType[];
+    error?: string;
   };
 }
 
@@ -17,11 +19,13 @@ export default function Select({ params }: SelectProps) {
   const {
     id,
     value,
+    ariaLabel,
     selectName,
     functionName,
     selectClassName,
     isRequired,
     optionsContent,
+    error,
   } = params;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -46,12 +50,14 @@ export default function Select({ params }: SelectProps) {
       <select
         onFocus={handleFocus}
         onBlur={handleBlur}
+        aria-label={ariaLabel}
         id={id}
         value={value}
         name={selectName}
         onChange={functionName}
         className={`${selectClassName} bg-[var(--input-clr)] border-2 border-[var(--bg-clr)] outline-none focus:border-[var(--input-focus-clr)]
-                text-[var(--input-text-clr)] text-sm rounded-2xl block w-full p-3 duration-300`}
+                text-[var(--input-text-clr)] text-sm rounded-2xl block w-full p-3 duration-300
+                ${error ? "border-2 border-[var(--error-clr)]" : ""}`}
         required={isRequired}
       >
         <option value="">None</option>

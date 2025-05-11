@@ -1,4 +1,12 @@
-import { SignUpUserDataTypes } from "../interfaces/signupContentType";
+import {
+  SignUpErrors,
+  SignUpUserDataTypes,
+} from "../interfaces/signupContentType";
+
+import {
+  LoginErrors,
+  LoginUserDataTypes,
+} from "../interfaces/loginContentTypes";
 
 export const inputsValidation = (
   name: string,
@@ -30,19 +38,47 @@ export const inputsValidation = (
   }
 };
 
-export const validateData = (inputsData: SignUpUserDataTypes) => {
-  if (inputsData.confirmPassword !== inputsData.password) {
-    return "Паролі не збігаються!";
-  }
-  if (
-    !inputsData.firstName ||
-    !inputsData.lastName ||
-    !inputsData.fatherName ||
-    !inputsData.city ||
-    !inputsData.profileType ||
-    !inputsData.email ||
-    !inputsData.phoneNumber
-  ) {
-    return "Заповніть усі поля!";
-  }
+const validateEmail = (email: string) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+export const validateSignupData = (
+  inputsData: SignUpUserDataTypes,
+  t: (key: string) => string
+): SignUpErrors => {
+  const errors: SignUpErrors = {};
+  if (inputsData.confirmPassword !== inputsData.password)
+    errors.additionalError = t("errors:signup.additionalError");
+  if (!inputsData.firstName) errors.firstName = t("errors:signup.firstName");
+  if (!inputsData.lastName) errors.lastName = t("errors:signup.lastName");
+  if (!inputsData.fatherName) errors.fatherName = t("errors:signup.fatherName");
+  if (!inputsData.city) errors.city = t("errors:signup.city");
+  if (!inputsData.profileType)
+    errors.profileType = t("errors:signup.profileType");
+  if (!inputsData.email) errors.email = t("errors:signup.email");
+  if (inputsData.email && !validateEmail(inputsData.email))
+    errors.email = t("errors:signup.invalidEmail");
+  if (!inputsData.password) errors.password = t("errors:signup.password");
+  if (!inputsData.confirmPassword)
+    errors.confirmPassword = t("errors:signup.confirmPassword");
+  if (!inputsData.phoneNumber)
+    errors.phoneNumber = t("errors:signup.phoneNumber");
+
+  return errors;
+};
+
+export const validateLoginData = (
+  inputsData: LoginUserDataTypes,
+  t: (key: string) => string
+): LoginErrors => {
+  const errors: LoginErrors = {};
+
+  if (!inputsData.email) errors.email = t("errors:login.email");
+  if (inputsData.email && !validateEmail(inputsData.email))
+    errors.email = t("errors:login.invalidEmail");
+  if (!inputsData.password) errors.password = t("errors:login.password");
+
+  return errors;
 };

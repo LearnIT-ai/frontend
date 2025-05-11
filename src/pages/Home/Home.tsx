@@ -90,7 +90,7 @@ export default function Home() {
 
       <FeaturesSection />
       <CoursesSection />
-      <TeamSection />
+      <TeamSection showButton={true} />
       <ContactsSection />
     </div>
   );

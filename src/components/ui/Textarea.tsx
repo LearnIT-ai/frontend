@@ -4,6 +4,7 @@ interface TextareaProps {
   params: {
     ref: RefObject<HTMLTextAreaElement>;
     type?: "file" | "text";
+    disabled?: true | false;
     handleChangeFunction: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     value: string;
     placeholder: string;
@@ -37,7 +38,8 @@ export default function Textarea({ params }: TextareaProps) {
                     params.type === "file"
                       ? "h-[75px] min-h-[75px]"
                       : "h-[300px] min-h-[300px]"
-                  }`}
+                  } ${params.disabled ? "bg-[var(--border-clr)]" : ""}`}
+      disabled={params.disabled}
       placeholder={params.placeholder}
       ref={params.ref}
       onChange={params.handleChangeFunction}

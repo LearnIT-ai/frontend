@@ -9,9 +9,13 @@ i18next
   .use(Backend)
   .init({
     debug: false,
-    fallbackLng: "en",
+    fallbackLng: "ua",
+    lng: "ua",
+    interpolation: {
+      escapeValue: false,
+    },
     returnObjects: true,
-    ns: ["common", "translation", "account", "submitAssignment"],
+    ns: ["common", "translation", "account", "submitAssignment", "errors"],
     defaultNS: "translation",
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",

@@ -4,8 +4,10 @@ import SectionHeading from "../../components/ui/SectionHeading";
 
 import { subjects } from "../../lib/subjects";
 import CourseCard from "../../components/CourseCard";
+import { useTranslation } from "react-i18next";
 
 export default function AllAssignments() {
+  const { t } = useTranslation();
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
       <motion.div
@@ -23,7 +25,7 @@ export default function AllAssignments() {
         <section className="w-full flex flex-col items-start">
           <SectionHeading
             params={{
-              content: "All assignments",
+              content: t("common:breadcrumbs.all-assignments"),
             }}
           />
           <div className="courses w-full grid grid-rows-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-4 lg:gap-10">

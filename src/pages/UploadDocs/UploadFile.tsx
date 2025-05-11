@@ -1,33 +1,29 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 
+import ReactLoading from "react-loading";
 import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import SectionHeading from "../../components/ui/SectionHeading";
 import SectionDescription from "../../components/ui/SectionDescription";
 import Button from "../../components/ui/Button";
 import ChatButton from "../../components/ui/chat_ui/ChatButton";
-import Textarea from "../../components/ui/Textarea";
 import Popup from "../../components/ui/Popup";
+import axios from "axios";
 
 export default function UploadFile() {
+  const url = import.meta.env.VITE_SEND_FILE_URL;
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
-  const [comment, setComment] = useState<string>("");
-  const [showPopup, setShowPopup] = useState<boolean>(false);
-
-  const commentRef = useRef<HTMLTextAreaElement>(null);
-
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
-  };
+  const [showPopup, setShowPopup] = useState<
+    [boolean, string: "error" | "success" | null]
+  >([false, null]);
 
   const allowedFormats = ["pdf", "docx", "doc", "py"];
 
   const [file, setFile] = useState<File | null>(null);
+  const [isWaiting, setIsWaiting] = useState<boolean>(false);
+  const [response, setResponse] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   function triggerInput() {
@@ -40,7 +36,7 @@ export default function UploadFile() {
       const selectedDocumentFormat =
         e.target.files[0]?.name.split(".").pop()?.toLowerCase() || "";
       if (!allowedFormats.includes(selectedDocumentFormat)) {
-        setShowPopup(true);
+        setShowPopup([true, "error"]);
       } else {
         setFile(e.target.files[0]);
       }
@@ -51,7 +47,7 @@ export default function UploadFile() {
     const topContainer = document.getElementById("app-container");
 
     if (topContainer) {
-      if (showPopup) {
+      if (showPopup[0]) {
         topContainer.style.height = "100vh";
       } else {
         topContainer.style.height = "auto";
@@ -67,32 +63,35 @@ export default function UploadFile() {
     setFile(null);
   }
 
-  function submitDocument() {
-    // axios post request
-    // await axios
-    //   .post(`http://localhost:5050/`, {
-    //     file: file,
-    //     comment: comment,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     navigate("/submit-assignment/summary");
-    //   })
-    //   .catch((e) => {
-    //     console.error(e.message);
-    //   });
+  const submitDocument = async () => {
+    if (file) {
+      setIsWaiting(true);
+      const formData = new FormData();
+      formData.append("homework", file);
 
-    navigate("/submit-assignment/summary");
-  }
+      try {
+        const response = await axios.post(url, formData);
+        setResponse(response.data.response);
+        setShowPopup([true, "success"]);
+      } catch (error) {
+        alert(error);
+      } finally {
+        setIsWaiting(false);
+      }
+    }
+  };
 
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
-      {showPopup && (
+      {showPopup[0] && (
         <Popup
           params={{
-            type: "error",
-            content: t("submitAssignment:submitFile.popup"),
-            onClickFunction: () => setShowPopup(false),
+            type: showPopup[1] === "error" ? "error" : "success",
+            content:
+              showPopup[1] === "error"
+                ? t("submitAssignment:submitFile.popup")
+                : response,
+            onClickFunction: () => setShowPopup([false, null]),
           }}
         />
       )}
@@ -144,12 +143,17 @@ export default function UploadFile() {
             <p className="text-[var(--input-text-clr)]">
               {t("submitAssignment:submitFile.block.description")}
             </p>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-4 items-center">
               <Button
                 params={{
                   content: t("submitAssignment:submitFile.block.uploadBtn"),
                   onClickFunction: triggerInput,
-                  className: "btn-primary mt-4",
+                  className: `border-2 mt-4 ${
+                    !isWaiting
+                      ? "hover:ring-2 hover:ring-blue-300 border-[var(--primary-clr)] bg-[var(--primary-clr)]"
+                      : "border-[var(--border-clr)] text-[var(--input-clr)] bg-[var(--border-clr)] hover:none"
+                  }`,
+                  disabled: isWaiting,
                 }}
               />
               <Button
@@ -157,12 +161,20 @@ export default function UploadFile() {
                   content: t("submitAssignment:submitFile.block.submitBtn"),
                   onClickFunction: submitDocument,
                   className: `border-2 mt-4 ${
-                    file
+                    file && !isWaiting
                       ? "hover:ring-2 hover:ring-blue-300 border-[var(--primary-clr)]"
                       : "border-[var(--border-clr)] text-[var(--input-clr)] hover:none"
                   }`,
-                  disabled: file ? false : true,
+                  disabled: !file || isWaiting,
                 }}
+              />
+              <ReactLoading
+                className={`${isWaiting ? "" : "hidden"}`}
+                type={"bars"}
+                color={"white"}
+                height={30}
+                width={50}
+                delay={0}
               />
             </div>
             <input
@@ -203,21 +215,12 @@ export default function UploadFile() {
                   size: 24,
                   onClickFunction: deleteDocument,
                   className: "w-6 lg:w-4 xl:w-6",
+                  disabled: isWaiting,
                   path: "M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0",
                 }}
               />
             </div>
           )}
-
-          <Textarea
-            params={{
-              ref: commentRef,
-              handleChangeFunction: handleTextareaChange,
-              value: comment,
-              type: "file",
-              placeholder: t("submitAssignment:submitFile.block.comment"),
-            }}
-          />
         </section>
       </motion.div>
     </div>

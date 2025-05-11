@@ -10,11 +10,15 @@ import facebook from "../assets/icons/facebook_login.svg";
 import instagram from "../assets/icons/instagram_login.svg";
 
 import SignUpForm from "../components/SignUpForm";
+import Popup from "../components/ui/Popup";
 
-import { SignUpUserDataTypes } from "../interfaces/signupContentType";
+import {
+  SignUpUserDataTypes,
+  SignUpErrors,
+} from "../interfaces/signupContentType";
 
 import { inputsValidation } from "../methods/inputsValidation";
-import { validateData } from "../methods/inputsValidation";
+import { validateSignupData } from "../methods/inputsValidation";
 
 import bot from "../assets/images/baby_bot.png";
 import triangle from "../assets/icons/polygon.svg";
@@ -25,7 +29,7 @@ export default function Signup() {
 
   const { t } = useTranslation();
 
-  // const url = import.meta.env.URL;
+  const url = import.meta.env.VITE_SIGNUP_URL;
 
   const [inputsData, setInputsData] = useState<SignUpUserDataTypes>({
     lastName: "",
@@ -39,44 +43,64 @@ export default function Signup() {
     confirmPassword: "",
   });
 
+  const [validationErrors, setValidationErrors] = useState<SignUpErrors>({});
+  const [signupError, setSignupError] = useState<string>("");
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     inputsValidation(name, value, setInputsData);
+    setValidationErrors((data) => ({ ...data, [name]: "" }));
   };
 
-  useEffect(() => {}, [inputsData]);
+  useEffect(() => {
+    const topContainer = document.getElementById("app-container");
+
+    if (topContainer) {
+      if (showPopup) {
+        topContainer.style.height = "100vh";
+      } else {
+        topContainer.style.height = "auto";
+      }
+    }
+
+    return () => {
+      if (topContainer) topContainer.style.height = "auto";
+    };
+  }, [inputsData, showPopup]);
 
   const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
-    const error = validateData(inputsData);
-    if (error) {
-      alert(error);
-    } else {
-      axios
-        .post(`http://localhost:5050/api/users/register`, {
-          email: inputsData.email,
-          password: inputsData.password,
-          full_name:
-            inputsData.lastName +
-            " " +
-            inputsData.firstName +
-            " " +
-            inputsData.fatherName,
-          city: inputsData.city,
-          role: inputsData.profileType,
-          phone_number: inputsData.phoneNumber,
-        })
-        .then((res) => {
-          console.log(res.data);
-          document.cookie = `token=${JSON.stringify(res.data.token)}; path=/`;
-          navigate("/");
-        })
-        .catch((e) => {
-          console.error(e.message);
-        });
+    const errors = validateSignupData(inputsData, t);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
     }
+    await axios
+      .post(url, {
+        email: inputsData.email,
+        password: inputsData.password,
+        full_name:
+          inputsData.lastName +
+          " " +
+          inputsData.firstName +
+          " " +
+          inputsData.fatherName,
+        city: inputsData.city,
+        role: inputsData.profileType,
+        phone_number: inputsData.phoneNumber,
+      })
+      .then((res) => {
+        console.log(res.data);
+        document.cookie = `token=${JSON.stringify(res.data.token)}; path=/`;
+        navigate("/");
+      })
+      .catch((e) => {
+        setSignupError(e.message);
+        setShowPopup(true);
+      });
   };
 
   return (
@@ -94,15 +118,24 @@ export default function Signup() {
         className="flex flex-1 flex-col gap-10 justify-center items-center w-full
                   px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)] mt-[var(--navbar-height)]"
       >
+        {showPopup && (
+          <Popup
+            params={{
+              type: "error",
+              content: signupError,
+              onClickFunction: () => setShowPopup(false),
+            }}
+          />
+        )}
         <h1 className="text-4xl">{t("account:signup.title")}</h1>
         <SignUpForm
           params={{
             inputsData: inputsData,
             handleSignUp: handleSignUp,
             handleChange: handleInputChange,
+            signupErrors: validationErrors,
           }}
         />
-
         <div className="flex flex-row gap-6 mx-auto mt-4">
           <SocialAppButton params={{ content: google }} />
           <SocialAppButton params={{ content: facebook }} />

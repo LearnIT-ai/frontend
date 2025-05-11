@@ -5,6 +5,7 @@ interface InputProps {
     id: string;
     type: string;
     value: string;
+    ariaLabel: string;
     inputName: string;
     functionName: ChangeEventHandler<HTMLInputElement>;
     inputClassName?: string;
@@ -12,6 +13,7 @@ interface InputProps {
     placeholderText?: string;
     ref?: RefObject<HTMLInputElement>;
     length?: number;
+    error?: string;
   };
 }
 
@@ -20,6 +22,7 @@ export default function Input({ params }: InputProps) {
     id,
     type,
     value,
+    ariaLabel,
     inputName,
     functionName,
     inputClassName,
@@ -27,6 +30,7 @@ export default function Input({ params }: InputProps) {
     placeholderText,
     ref,
     length,
+    error,
   } = params;
 
   return (
@@ -35,9 +39,13 @@ export default function Input({ params }: InputProps) {
       id={id}
       name={inputName}
       value={value}
+      aria-label={ariaLabel}
       onChange={functionName}
       className={`${inputClassName} bg-[var(--input-clr)] border-2 border-[var(--bg-clr)] outline-none focus:border-[var(--input-focus-clr)]
-                text-[var(--input-text-clr)] focus:text-[var(--input-text-focus-clr)] placeholder-[var(--input-text-clr)] text-sm rounded-2xl w-full duration-300 p-3`}
+                text-[var(--input-text-clr)] focus:text-[var(--input-text-focus-clr)] placeholder-[var(--input-text-clr)] text-sm rounded-2xl w-full 
+                duration-300 p-3 ${
+                  error ? "border-2 border-[var(--error-clr)]" : ""
+                }`}
       required={isRequired}
       placeholder={placeholderText}
       ref={ref}

@@ -154,6 +154,7 @@ export default function TestDocumentPreview() {
 
           <Chat
             params={{
+              type: "docPreview",
               toggleChatBot: toggleChatBot,
               isWaitingForResponse: isWaitingForResponse,
               messages: messagesArray,

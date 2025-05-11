@@ -12,9 +12,9 @@
     "nextButton": "Next",
     "backButton": "Go Back",
     "form": {
-      "lastName": "Last Name",
-      "firstName": "First Name",
-      "fatherName": "Father Name",
+      "lastName": "Last Name (in Ukrainian)",
+      "firstName": "First Name (in Ukrainian)",
+      "fatherName": "Father Name (in Ukrainian)",
       "password": "Password",
       "confirmPassword": "Confirm Password"
     },

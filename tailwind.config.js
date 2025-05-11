@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -32,7 +32,16 @@ export default {
         "svyat-img": "url('assets/images/team/svyat.jpg')",
         "oleksandr-img": "url('assets/images/team/oleksandr.jpg')",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            p: {
+              fontSize: "16px",
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
