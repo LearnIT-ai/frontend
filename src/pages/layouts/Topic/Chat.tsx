@@ -4,12 +4,14 @@ import { motion } from "motion/react";
 import ChatButton from "../../../components/ui/chat_ui/ChatButton";
 import ChatBotMessage from "../../../components/ui/chat_ui/ChatBotMessage";
 import UserMessage from "../../../components/ui/chat_ui/UserMessage";
+import { useTranslation } from "react-i18next";
 
 import { messagesArrayTypes } from "../../../interfaces/messagesArrayTypes";
 
 interface ChatProps {
   params: {
-    toggleChatBot: boolean;
+    toggleChatBot?: boolean;
+    type: "docPreview" | "chatBot";
     isWaitingForResponse: boolean;
     messages: messagesArrayTypes;
     messageData: string;
@@ -21,12 +23,15 @@ interface ChatProps {
 export default function Chat({ params }: ChatProps) {
   const {
     toggleChatBot,
+    type,
     isWaitingForResponse,
     messages,
     messageData,
     textareaChange,
     handleMessageSubmit,
   } = params;
+
+  const { t } = useTranslation();
 
   const chatRef = useRef<HTMLInputElement>(null);
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
@@ -54,11 +59,13 @@ export default function Chat({ params }: ChatProps) {
       }}
       viewport={{ once: true }}
       animate={{
-        display: toggleChatBot ? "" : "none",
+        display: type === "docPreview" ? (toggleChatBot ? "" : "none") : "",
       }}
       transition={{ duration: 0.35 }}
-      className="chat relative w-full lg:w-[80%] h-[80vh] lg:h-full bg-[var(--dark-clr)] border-2 border-[var(--border-clr)] 
-          flex flex-col justify-end rounded-2xl z-0 gap-4 overflow-hidden"
+      className={`chat relative w-full ${
+        type === "chatBot" ? "lg:w-full" : "lg:w-[80%]"
+      } h-[80vh] lg:h-full bg-[var(--dark-clr)] border-2 border-[var(--border-clr)] 
+          flex flex-col justify-end rounded-2xl z-0 gap-4 overflow-hidden`}
       ref={chatRef}
     >
       <div className="messages-container p-4 pb-20 w-full h-full flex flex-col gap-4 overflow-y-auto rounded-2xl">
@@ -87,28 +94,33 @@ export default function Chat({ params }: ChatProps) {
         })}
       </div>
       <div
-        className="absolute px-4 pb-4 bg-[var(--dark-clr)] w-full flex flex-row justify-center items-end gap-4
-            "
+        className="absolute p-4 bg-[var(--dark-clr)] w-full border-t-2 border-[var(--border-clr)]
+"
       >
-        <textarea
-          onInput={autoResize}
-          value={messageData}
-          className={`chat-textarea resize-none top- h-12 min-h-12 transition-none overflow-hidden bg-[var(--input-clr)] border-2 border-[var(--border-clr)] outline-none focus:border-[var(--input-focus-clr)]
+        <div
+          className="mx-auto flex flex-row justify-center items-center gap-4 
+                        w-full md:w-[80%] lg:w-[70%] xl:w-[60%]"
+        >
+          <textarea
+            onInput={autoResize}
+            value={messageData}
+            className={`chat-textarea resize-none top- h-12 min-h-12 transition-none overflow-hidden bg-[var(--input-clr)] border-2 border-[var(--border-clr)] outline-none focus:border-[var(--input-focus-clr)]
                 text-[var(--input-text-clr)] focus:text-[var(--input-text-focus-clr)] placeholder-[var(--input-text-clr)] text-sm rounded-xl block w-full duration-300 p-3`}
-          placeholder="Ask something..."
-          ref={chatInputRef}
-          onChange={textareaChange}
-        />
-        <ChatButton
-          params={{
-            size: isWaitingForResponse ? 10 : 16,
-            onClickFunction: handleMessageSubmit,
-            className: "transition-none",
-            path: isWaitingForResponse
-              ? "M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z"
-              : "m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z",
-          }}
-        />
+            placeholder={t("common:chat.placeholder")}
+            ref={chatInputRef}
+            onChange={textareaChange}
+          />
+          <ChatButton
+            params={{
+              size: isWaitingForResponse ? 10 : 16,
+              onClickFunction: handleMessageSubmit,
+              className: "transition-none",
+              path: isWaitingForResponse
+                ? "M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z"
+                : "m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z",
+            }}
+          />
+        </div>
       </div>
     </motion.div>
   );

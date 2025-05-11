@@ -24,9 +24,7 @@ export default function NavigationBar() {
   const { i18n, t } = useTranslation();
 
   function changeLanguage(lang: string) {
-    i18n.changeLanguage(lang).then(() => {
-      window.location.reload();
-    });
+    i18n.changeLanguage(lang);
   }
 
   const navLinks: navLinkTypes[] = [
@@ -44,7 +42,7 @@ export default function NavigationBar() {
     },
     {
       id: 4,
-      content: "All assignments",
+      content: t("common:navbarLinks.all-assignments"),
       link: "/all-assignments",
     },
     {

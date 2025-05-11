@@ -4,8 +4,10 @@ import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import SectionHeading from "../../components/ui/SectionHeading";
 import Button from "../../components/ui/Button";
 import ReviewList from "./ReviewList";
+import { useTranslation } from "react-i18next";
 
 export default function AssignmentPage() {
+  const { t } = useTranslation();
   const { courseName } = useParams();
   const navigate = useNavigate();
 
@@ -30,7 +32,9 @@ export default function AssignmentPage() {
         <section className="w-full flex flex-col items-start">
           <SectionHeading
             params={{
-              content: `All assignments: ${courseName?.split("-").join(" ")}`,
+              content: `${t("common:breadcrumbs.all-assignments")}: ${courseName
+                ?.split("-")
+                .join(" ")}`,
             }}
           />
           <div className="flex flex-col gap-6">
@@ -51,19 +55,19 @@ export default function AssignmentPage() {
               <div className="flex flex-col gap-2">
                 <p className="text-[var(--input-text-clr)]">
                   <span className="font-bold text-[var(--input-text-clr)]">
-                    Assigned:
+                    {t("common:assignment.assigned")}:
                   </span>{" "}
                   Monday 3 February 2025 00:00 AM
                 </p>
                 <p className="text-[var(--input-text-clr)]">
                   <span className="font-bold text-[var(--input-text-clr)]">
-                    Deadline:
+                    {t("common:assignment.deadline")}:
                   </span>{" "}
                   Tuesday 18 February 2025 00:00 AM
                 </p>
               </div>
               <p className="text-[var(--input-text-clr)] font-bold">
-                ✅ Anti-plagiarism check
+                ✅ {t("common:assignment.plagiarism")}
               </p>
               <hr className="mt-4 border-[1.5px] border-[var(--border-clr)] w-full" />
               <div className="flex flex-row gap-6 items-center">
@@ -84,7 +88,10 @@ export default function AssignmentPage() {
             </div>
             <Button
               params={{
-                content: action === "review" ? "Close" : "Review",
+                content:
+                  action === "review"
+                    ? t("common:assignment.close")
+                    : t("common:assignment.review"),
                 className: "btn-primary mx-auto",
                 onClickFunction: () => {
                   const currentParams = new URLSearchParams(location.search);

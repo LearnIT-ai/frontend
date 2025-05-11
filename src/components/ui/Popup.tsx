@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import Button from "./Button";
 import { t } from "i18next";
+import ReactMarkdown from "react-markdown";
 
 interface PopupTypes {
   params: {
@@ -58,7 +59,7 @@ export default function Popup({ params }: PopupTypes) {
             </>
           )}
         </svg>
-        {params.content}
+        <ReactMarkdown>{params.content}</ReactMarkdown>
         <Button
           params={{
             content: t("submitAssignment:submitFile.block.errorBtn"),

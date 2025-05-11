@@ -5,7 +5,7 @@
     "blocks": {
       "file": {
         "header": "Submit assignment as a file",
-        "description": "Files supported: PDF, DOCX, DOC, PY"
+        "description": "Files supported: PDF, DOCX, DOC"
       },
       "text": {
         "header": "Submit assignment as a text message",
@@ -15,10 +15,10 @@
   },
   "submitFile": {
     "title": "Upload a File",
-    "description": "Upload your hometask in one of the provided formats and get analysis from the AI Assistant. Leave a comment for the professor if needed.",
+    "description": "Upload your hometask in one of the provided formats and get analysis from the AI Assistant.",
     "block": {
       "header": "Select a file from your device",
-      "description": "Files supported: PDF, DOCX, DOC, PY",
+      "description": "Files supported: PDF, DOCX, DOC",
       "uploadBtn": "Upload a file",
       "errorBtn": "Got it!",
       "submitBtn": "Submit",
@@ -28,10 +28,10 @@
   },
   "submitText": {
     "title": "Upload text answer",
-    "description": "Submit your hometask as a text answer and get analysis from the AI Assistant. Leave a comment for the professor if needed.",
+    "description": "Submit your hometask as a text answer and get analysis from the AI Assistant.",
     "block": {
       "answer": "Leave an answer",
-      "comment": "Leave a comment"
+      "task": "Specify the task"
     },
     "submitBtn": "Submit",
     "popup": "You cannot send blank form. Please, provide an answer."

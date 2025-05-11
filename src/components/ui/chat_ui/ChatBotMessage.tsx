@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 interface ChatBotMessageProps {
   params: {
     id: number;
@@ -12,10 +14,11 @@ export default function ChatBotMessage({ params }: ChatBotMessageProps) {
   return (
     <div className="w-full h-fit flex justify-start" key={id}>
       <div
-        className={`${className} p-3 bg-[var(--bg-clr)] rounded-xl text-sm lg:text-xs xl:text-sm
-            border-2 border-[var(--border-clr)] w-fit max-w-[75%] font-medium`}
+        className={`${className} p-3 bg-[var(--bg-clr)] rounded-xl
+            border-2 border-[var(--border-clr)] w-fit max-w-[75%] font-medium
+            prose text-sm prose-invert`}
       >
-        {content}
+        <ReactMarkdown>{content}</ReactMarkdown>
       </div>
     </div>
   );

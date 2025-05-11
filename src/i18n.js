@@ -9,8 +9,8 @@ i18next
   .use(Backend)
   .init({
     debug: false,
-    fallbackLng: "en",
-    lng: "en",
+    fallbackLng: "ua",
+    lng: "ua",
     interpolation: {
       escapeValue: false,
     },

@@ -12,7 +12,6 @@ import Signup from "./pages/Signup";
 import OurServices from "./pages/OurServices";
 import AboutUs from "./pages/AboutUs";
 import UploadFile from "./pages/UploadDocs/UploadFile";
-import SummaryPage from "./pages/UploadDocs/SummaryPage";
 import SubmitAssignment from "./pages/UploadDocs/SubmitAssignment";
 import Contacts from "./pages/Contacts";
 import AcademicYears from "./pages/AcademicYears";
@@ -103,7 +102,6 @@ function App() {
             path="/submit-assignment/upload-text"
             element={<UploadText />}
           />
-          <Route path="/submit-assignment/summary" element={<SummaryPage />} />
           <Route
             path="/academic-years/:academicYear"
             element={<AcademicYearCourses />}

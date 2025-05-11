@@ -29,7 +29,7 @@ export default function Signup() {
 
   const { t } = useTranslation();
 
-  // const url = import.meta.env.URL;
+  const url = import.meta.env.VITE_SIGNUP_URL;
 
   const [inputsData, setInputsData] = useState<SignUpUserDataTypes>({
     lastName: "",
@@ -79,7 +79,7 @@ export default function Signup() {
       return;
     }
     await axios
-      .post(`http://localhost:5050/api/users/register`, {
+      .post(url, {
         email: inputsData.email,
         password: inputsData.password,
         full_name:

@@ -1,14 +1,12 @@
 import { useNavigate, Link } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
-import axios from "axios";
 import { motion } from "motion/react";
-
-import SocialAppButton from "../components/ui/SocialAppButton";
+import axios from "axios";
 
 import google from "../assets/icons/google_login.svg";
 import facebook from "../assets/icons/facebook_login.svg";
 import instagram from "../assets/icons/instagram_login.svg";
-
+import SocialAppButton from "../components/ui/SocialAppButton";
 import LoginForm from "../components/LoginForm";
 import Popup from "../components/ui/Popup";
 
@@ -25,7 +23,7 @@ import { useTranslation, Trans } from "react-i18next";
 export default function Login() {
   const navigate = useNavigate();
 
-  // const url = import.meta.env.URL;
+  const url = import.meta.env.VITE_LOGIN_URL;
   const { t } = useTranslation();
 
   const [inputsData, setInputsData] = useState<LoginUserDataTypes>({
@@ -51,12 +49,11 @@ export default function Login() {
       return;
     }
     await axios
-      .post(`http://localhost:5050/api/users/login`, {
+      .post(url, {
         email: inputsData.email,
         password: inputsData.password,
       })
       .then((res) => {
-        console.log(res.data);
         document.cookie = `token=${JSON.stringify(res.data.token)}; path=/`;
         navigate("/");
       })
