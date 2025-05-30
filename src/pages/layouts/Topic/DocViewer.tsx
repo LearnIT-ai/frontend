@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 export default function DocViewer() {
   const { docName } = useParams();
 
-  const fileUrl = `http://localhost:5050/file/${docName}`;
+  const fileUrl = `http://localhost:5000/file/${docName}`;
   console.log(fileUrl);
 
   return (

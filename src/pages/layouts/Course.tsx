@@ -22,7 +22,7 @@ export default function CoursePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5050/files/${academicYear}`)
+      .get(`http://localhost:5000/files/${academicYear}`)
       .then((res) => {
         setContent(res.data);
       })

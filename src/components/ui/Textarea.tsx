@@ -31,14 +31,16 @@ export default function Textarea({ params }: TextareaProps) {
     <textarea
       onInput={autoResize}
       value={params.value}
-      className={`w-full rounded-xl border-2 border-[var(--border-clr)] bg-[var(--navbar-clr)] p-6 gap-6 mt-6 items-center justify-between chat-textarea resize-none 
+      className={`w-full rounded-xl border-2 border-[var(--border-clr)] p-6 gap-6 mt-6 items-center justify-between chat-textarea resize-none 
                   transition-none overflow-hidden outline-none focus:border-[var(--input-focus-clr)] text-[var(--input-text-clr)] focus:text-[var(--input-text-focus-clr)] 
                   placeholder-[var(--input-text-clr)] text-sm duration-300
                   ${
                     params.type === "file"
                       ? "h-[75px] min-h-[75px]"
                       : "h-[300px] min-h-[300px]"
-                  } ${params.disabled ? "bg-[var(--border-clr)]" : ""}`}
+                  } ${
+        params.disabled ? "bg-[var(--border-clr)]" : "bg-[var(--navbar-clr)]"
+      }`}
       disabled={params.disabled}
       placeholder={params.placeholder}
       ref={params.ref}
