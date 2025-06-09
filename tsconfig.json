@@ -10,5 +10,5 @@
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "typeRoots": ["./node_modules/@types"],
-  "include": ["src/global.d.ts"]
+  "include": ["src", "src/global.d.ts", "src/vite-env.d.ts"]
 }

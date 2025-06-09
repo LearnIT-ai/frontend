@@ -17,18 +17,22 @@ import Contacts from "./pages/Contacts";
 import AcademicYears from "./pages/AcademicYears";
 import AcademicYearCourses from "./pages/layouts/AcademicYearCourses";
 import PageNotFound from "./pages/PageNotFound";
-import TestCoursePage from "./pages/layouts/Course";
-import TestDocumentPreview from "./pages/layouts/Topic/Topic";
+import CoursePage from "./pages/layouts/Course";
+import DocumentPreview from "./pages/layouts/Topic/Topic";
+import AssignmentFeedback from "./pages/AssignmentFeedback";
 
 import "./App.css";
 import PersonalProfile from "./pages/PersonalProfile";
 import UploadText from "./pages/UploadDocs/UploadText";
 import CheckAssignment from "./pages/AllAssignments.tsx/CheckAssignment/CheckAssignment";
-import ChatBot from "./pages/ChatBot.tsx/ChatBot";
+import ChatBot from "./pages/Chatbot/ChatBot";
 import AllAssignments from "./pages/AllAssignments.tsx/AllAssignments";
 import AssignmentsByCourse from "./pages/AllAssignments.tsx/AssignmentsByCourse";
 import AssignmentPage from "./pages/AllAssignments.tsx/AssignmentPage";
 import UploadAssignment from "./pages/AllAssignments.tsx/UploadAssignment/UploadAssignment";
+import CheckSimilarity from "./pages/CheckSimilarity/CheckSimilarity";
+import UploadTexts from "./pages/CheckSimilarity/UploadText";
+import UploadFiles from "./pages/CheckSimilarity/UploadFile";
 
 function App() {
   const [isErrorPage, setIsErrorPage] = useState<boolean>(false);
@@ -102,17 +106,27 @@ function App() {
             path="/submit-assignment/upload-text"
             element={<UploadText />}
           />
+          <Route path="/check-similarity" element={<CheckSimilarity />} />
+          <Route
+            path="/check-similarity/upload-file"
+            element={<UploadFiles />}
+          />
+          <Route
+            path="/check-similarity/upload-text"
+            element={<UploadTexts />}
+          />
+          <Route path="/assignment-feedback" element={<AssignmentFeedback />} />
           <Route
             path="/academic-years/:academicYear"
             element={<AcademicYearCourses />}
           />
           <Route
             path="/academic-years/:academicYear/:courseName"
-            element={<TestCoursePage />}
+            element={<CoursePage />}
           />
           <Route
             path="/academic-years/:academicYear/:courseName/:docName"
-            element={<TestDocumentPreview />}
+            element={<DocumentPreview />}
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

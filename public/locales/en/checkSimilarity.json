@@ -1,0 +1,40 @@
+{
+  "mainPage": {
+    "title": "Compare two assignments",
+    "description": "Submit assignments as files or texts and get detailed analysis conducted by the AI Assistant.",
+    "blocks": {
+      "file": {
+        "header": "Compare two files",
+        "description": "Files supported: PDF, DOCX, DOC"
+      },
+      "text": {
+        "header": "Compare two texts",
+        "description": "Provide assignments as texts"
+      }
+    }
+  },
+  "submitFile": {
+    "title": "Upload two files",
+    "description": "Upload two assignments in one of the provided formats and get analysis from the AI Assistant.",
+    "block": {
+      "header": "Select two files from your device",
+      "description": "Files supported: PDF, DOCX, DOC",
+      "uploadFirstBtn": "Upload first file",
+      "uploadSecondBtn": "Upload second file",
+      "errorBtn": "Got it!",
+      "submitBtn": "Submit",
+      "comment": "Leave a comment"
+    },
+    "popup": "Selected file format is not supported. Choose a different one."
+  },
+  "submitText": {
+    "title": "Upload two text answers",
+    "description": "Submit two assignments as text answers and get analysis from the AI Assistant.",
+    "block": {
+      "answerFirst": "Leave first answer",
+      "answerSecond": "Leave second answer"
+    },
+    "submitBtn": "Submit",
+    "popup": "You cannot send blank form. Please, provide an answer."
+  }
+}

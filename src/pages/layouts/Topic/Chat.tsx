@@ -68,7 +68,7 @@ export default function Chat({ params }: ChatProps) {
           flex flex-col justify-end rounded-2xl z-0 gap-4 overflow-hidden`}
       ref={chatRef}
     >
-      <div className="messages-container p-4 pb-20 w-full h-full flex flex-col gap-4 overflow-y-auto rounded-2xl">
+      <div className="messages-container p-4 pb-24 w-full h-full flex flex-col gap-4 overflow-y-auto rounded-2xl">
         {messages.map((msgObject) => {
           if (msgObject.type === "bot") {
             return (

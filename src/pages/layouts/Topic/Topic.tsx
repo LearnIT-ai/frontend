@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
-// import axios from "axios";
+import axios from "axios";
 
 import Breadcrumbs from "../../../components/ui/Breadcrumbs";
 import ChatButton from "../../../components/ui/chat_ui/ChatButton";
@@ -9,25 +10,27 @@ import { messagesArrayTypes } from "../../../interfaces/messagesArrayTypes";
 
 import Chat from "./Chat";
 import DocViewer from "./DocViewer";
+import { useParams } from "react-router-dom";
 
 export default function TestDocumentPreview() {
-  // const url = import.meta.env.URL;
+  const url = import.meta.env.VITE_LECTURE_URL;
+
+  const { docName } = useParams();
+  const fileUrl = `http://localhost:5000/file/${docName}`;
+
+  const { t } = useTranslation();
+
   const buttonsRef = useRef<HTMLInputElement>(null);
   const toggleChatRef = useRef<HTMLButtonElement>(null);
-
   const [toggleChatBot, setToggleChatBot] = useState<boolean>(true);
 
-  const [isWaitingForResponse, setIsWaitingForResponse] =
-    useState<boolean>(false);
-  const [clicked, setClicked] = useState<boolean>(false);
-
+  const [isWaiting, setIsWaiting] = useState<boolean>(false);
   const [messageData, setMessageData] = useState<string>("");
   const [messagesArray, setMessagesArray] = useState<messagesArrayTypes>([
     {
       id: 0,
       type: "bot",
-      message:
-        "Hi, I am Learn.it bot 😎. How can I assist you with the document?",
+      message: t("common:chat.doc-preview-chatbot-message"),
     },
   ]);
 
@@ -44,64 +47,49 @@ export default function TestDocumentPreview() {
     setMessageData(e.target.value);
   };
 
-  // ================== MESSAGING LOGIC =============================
-
-  const handleMessageSubmit = async () => {
-    // Submit student message (simulation)
-
+  const handleSendMessage = async () => {
     if (!messageData.trim()) return;
     else {
-      setMessagesArray((prev) => [
-        ...prev,
-        { id: prev.length, type: "student", message: messageData },
-      ]);
-
-      setMessageData("");
-      setIsWaitingForResponse(true);
-      setClicked(true);
-    }
-
-    // Submit student message (using axios)
-
-    // else {
-    //   await axios
-    //     .post(`${url}`, {
-    //       message: messageData,
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-
-    //       setMessagesArray((prev) => [
-    //         ...prev,
-    //         { id: prev.length, type: "student", message: messageData },
-    //       ]);
-
-    //       setMessageData("");
-    //       setIsWaitingForResponse(true);
-    //     })
-    //     .catch((e) => {
-    //       console.error(e.message);
-    //     });
-    // }
-  };
-
-  // Fetch messages (simulation)
-
-  useEffect(() => {
-    if (clicked) {
-      // Simulate waiting for a response
-      setTimeout(() => {
+      try {
         setMessagesArray((prev) => [
           ...prev,
-          { id: prev.length, type: "bot", message: "Test response" },
+          { id: prev.length, type: "student", message: messageData },
         ]);
-        setClicked(false);
-        setIsWaitingForResponse(false);
-      }, 1000);
-    }
-  }, [clicked]);
 
-  // ==========================================================================
+        setMessageData("");
+        setIsWaiting(true);
+
+        const formData = new FormData();
+
+        const file = await fetch(fileUrl);
+        const blob = await file.blob();
+
+        formData.append(
+          "file",
+          new File([blob], "test.pdf", { type: blob.type })
+        );
+
+        formData.append("question", messageData);
+        const response = await axios.post(url, formData);
+
+        const formattedResponse = response.data.response
+          .replace(/---/g, "\n\n\n")
+          .replace(/###/g, "\n\n\n")
+          .replace(/\*/g, "");
+
+        setMessagesArray((prev) => [
+          ...prev,
+          { id: prev.length, type: "bot", message: formattedResponse },
+        ]);
+
+        console.log("Response from server:", response.data);
+      } catch (error) {
+        console.error("Error sending message:", error);
+      } finally {
+        setIsWaiting(false);
+      }
+    }
+  };
 
   return (
     <div className="px-[var(--sm-px)] md:px-[var(--md-px)] lg:px-[var(--lg-px)]">
@@ -156,11 +144,11 @@ export default function TestDocumentPreview() {
             params={{
               type: "docPreview",
               toggleChatBot: toggleChatBot,
-              isWaitingForResponse: isWaitingForResponse,
+              isWaitingForResponse: isWaiting,
               messages: messagesArray,
               messageData: messageData,
               textareaChange: handleTextareaChange,
-              handleMessageSubmit: handleMessageSubmit,
+              handleMessageSubmit: handleSendMessage,
             }}
           />
           <DocViewer />

@@ -28,22 +28,26 @@ export default function NavigationBar() {
   }
 
   const navLinks: navLinkTypes[] = [
-    { id: 0, content: t("common:navbarLinks.services"), link: "/our-services" },
-    { id: 1, content: t("common:navbarLinks.aboutUs"), link: "/about-us" },
+    { id: 0, content: t("common:navbarLinks.aboutUs"), link: "/about-us" },
     {
-      id: 2,
+      id: 1,
       content: t("common:navbarLinks.documents"),
       link: "/academic-years",
     },
     {
-      id: 3,
+      id: 2,
       content: t("common:navbarLinks.upload"),
       link: "/submit-assignment",
     },
     {
+      id: 3,
+      content: t("common:navbarLinks.assignment-feedback"),
+      link: "/assignment-feedback",
+    },
+    {
       id: 4,
-      content: t("common:navbarLinks.all-assignments"),
-      link: "/all-assignments",
+      content: t("common:navbarLinks.check-similarity"),
+      link: "/check-similarity",
     },
     {
       id: 5,

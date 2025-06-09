@@ -11,6 +11,8 @@
     "upload": "Submit Assignment",
     "check": "Check Assignment",
     "all-assignments": "All assignments",
+    "assignment-feedback": "Assignment Feedback",
+    "check-similarity": "Check Similarity",
     "chatbot": "Chatbot",
     "contacts": "Contacts"
   },
@@ -27,6 +29,8 @@
     "chatbot": "Chatbot",
     "check-assignment": "Check Assignment",
     "submit-assignment": "Submit Assignment",
+    "assignment-feedback": "Assignment Feedback",
+    "check-similarity": "Check Similarity",
     "summary": "Summary",
     "upload-file": "Upload File",
     "upload-text": "Upload Text",
@@ -45,7 +49,8 @@
   "chat": {
     "common-chatbot-message": "Hi, I am Learn.it bot 😎. How can I assist you?",
     "doc-preview-chatbot-message": "Hi, I am Learn.it bot 😎. How can I assist you with the document?",
-    "placeholder": "Ask something..."
+    "placeholder": "Ask something...",
+    "syllabus": "Generate syllabus"
   },
   "footerLinks": {
     "info": "Information",

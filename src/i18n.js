@@ -15,7 +15,14 @@ i18next
       escapeValue: false,
     },
     returnObjects: true,
-    ns: ["common", "translation", "account", "submitAssignment", "errors"],
+    ns: [
+      "common",
+      "translation",
+      "account",
+      "submitAssignment",
+      "errors",
+      "checkSimilarity",
+    ],
     defaultNS: "translation",
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",

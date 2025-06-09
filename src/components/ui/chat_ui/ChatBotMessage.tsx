@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ChatBotMessageProps {
   params: {
@@ -18,7 +19,7 @@ export default function ChatBotMessage({ params }: ChatBotMessageProps) {
             border-2 border-[var(--border-clr)] w-fit max-w-[75%] font-medium
             prose text-sm prose-invert`}
       >
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
       </div>
     </div>
   );

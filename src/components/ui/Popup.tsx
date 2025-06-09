@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 interface PopupTypes {
   params: {
     type: "error" | "success";
+    feedback?: boolean;
     content: string;
     onClickFunction: () => void;
   };
@@ -28,8 +29,10 @@ export default function Popup({ params }: PopupTypes) {
           transition: { duration: 0.4, ease: "easeInOut" },
         }}
         viewport={{ once: true }}
-        className="w-[40vw] h-fit bg-[var(--bg-clr)] text-white rounded-xl border-2 border-[var(--border-clr)] 
-                            overflow-hidden relative p-6 text-center flex flex-col gap-6 items-center"
+        className={`${
+          params.feedback ? "w-[80vw]" : "w-[40vw]"
+        } h-fit bg-[var(--bg-clr)] text-white rounded-xl border-2 border-[var(--border-clr)] 
+                            overflow-hidden relative p-6 text-center flex flex-col gap-6 items-center`}
       >
         <div
           className={`absolute w-full h-2 top-0 left-0 ${

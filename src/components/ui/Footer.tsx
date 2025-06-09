@@ -52,9 +52,6 @@ export default function Footer() {
             </h3>
             <ul className="list-none text-sm flex flex-col items-start gap-2">
               <li className="hover:text-white text-[var(--grey-clr)]">
-                <Link to="/">{t("common:navbarLinks.services")}</Link>
-              </li>
-              <li className="hover:text-white text-[var(--grey-clr)]">
                 <Link to="/about-us">{t("common:navbarLinks.aboutUs")}</Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
@@ -68,8 +65,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
-                <Link to="/all-assignments">
-                  {t("common:navbarLinks.all-assignments")}
+                <Link to="/assignment-feedback">
+                  {t("common:navbarLinks.assignment-feedback")}
+                </Link>
+              </li>
+              <li className="hover:text-white text-[var(--grey-clr)]">
+                <Link to="/check-similarity">
+                  {t("common:navbarLinks.check-similarity")}
                 </Link>
               </li>
               <li className="hover:text-white text-[var(--grey-clr)]">
